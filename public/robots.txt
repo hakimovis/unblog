@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://unblog.ikito.ru/sitemap.xml 
