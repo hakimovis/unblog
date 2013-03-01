@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: habrahabr | Unblog]]></title>
+  <link href="http://unblog.ikito.ru/blog/categories/habrahabr/atom.xml" rel="self"/>
+  <link href="http://unblog.ikito.ru/"/>
+  <updated>2013-03-01T14:11:11+06:00</updated>
+  <id>http://unblog.ikito.ru/</id>
+  <author>
+    <name><![CDATA[Hakimovis]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Про деплой с Github на сервер]]></title>
+    <link href="http://unblog.ikito.ru/blog/pro-dieploi-s-github-na-siervier"/>
+    <updated>2013-03-01T14:07:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/pro-dieploi-s-github-na-siervier</id>
+    <content type="html"><![CDATA[<p>На Habrahabr есть статья, где презентуется <a href="http://habrahabr.ru/post/171195/">скрипт для легкой настройки деплоя через гитхаб на сервер</a>. На всякий случай, запомним.</p>
+]]></content>
+  </entry>
+  
+</feed>
