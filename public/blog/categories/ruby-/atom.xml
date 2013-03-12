@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ruby, | Unblog]]></title>
+  <link href="http://unblog.ikito.ru/blog/categories/ruby-/atom.xml" rel="self"/>
+  <link href="http://unblog.ikito.ru/"/>
+  <updated>2013-03-12T17:49:35+06:00</updated>
+  <id>http://unblog.ikito.ru/</id>
+  <author>
+    <name><![CDATA[Hakimovis]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Интересное]]></title>
+    <link href="http://unblog.ikito.ru/blog/something-strange"/>
+    <updated>2013-03-12T17:47:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/something-strange</id>
+    <content type="html"><![CDATA[<p>Интересный паттерн чтобы пометить, что исключения принадлежат к определенной группе. Выглядит шаманством, но работает.</p>
+
+<pre><code>irb(main):001:0&gt; module SomeException; end
+=&gt; nil
+irb(main):002:0&gt; class InterruptCaught      &lt; SystemExit;          include SomeException end
+=&gt; InterruptCaught
+irb(main):003:0&gt;
+irb(main):004:0* begin
+irb(main):005:1*   raise InterruptCaught
+irb(main):006:1&gt; rescue SomeException =&gt; e
+irb(main):007:1&gt;   puts "exception #{e.inspect}"
+irb(main):008:1&gt; end
+exception #&lt;InterruptCaught: InterruptCaught&gt;
+=&gt; nil
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

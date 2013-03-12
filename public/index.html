@@ -9,8 +9,7 @@
   <meta name="author" content="Hakimovis">
 
   
-  <meta name="description" content="На Habrahabr есть статья, где презентуется скрипт для легкой настройки деплоя через гитхаб на сервер. На всякий случай, запомним.
-">
+  <meta name="description" content="Интересный паттерн чтобы пометить, что исключения принадлежат к определенной группе. Выглядит шаманством, но работает. irb(main):001:0&gt; module &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +64,58 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/something-strange">Интересное</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-12T17:47:00+06:00" pubdate data-updated="true">12.03.2013</time>
+        
+         | <a href="/blog/something-strange#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Интересный паттерн чтобы пометить, что исключения принадлежат к определенной группе. Выглядит шаманством, но работает.</p>
+
+<pre><code>irb(main):001:0&gt; module SomeException; end
+=&gt; nil
+irb(main):002:0&gt; class InterruptCaught      &lt; SystemExit;          include SomeException end
+=&gt; InterruptCaught
+irb(main):003:0&gt;
+irb(main):004:0* begin
+irb(main):005:1*   raise InterruptCaught
+irb(main):006:1&gt; rescue SomeException =&gt; e
+irb(main):007:1&gt;   puts "exception #{e.inspect}"
+irb(main):008:1&gt; end
+exception #&lt;InterruptCaught: InterruptCaught&gt;
+=&gt; nil
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -208,6 +259,10 @@ Invalid gemspec in [/Users/hakimovis/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.
     <section>
   <h2>В предыдущих сериях</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/something-strange">Интересное</a>
+      </li>
     
       <li class="post">
         <a href="/blog/pro-dieploi-s-github-na-siervier">Про деплой с Github на сервер</a>

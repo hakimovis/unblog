@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: deploy - Unblog</title>
+  <title>Интересное - Unblog</title>
   <meta name="author" content="Hakimovis">
 
   
-  <meta name="description" content="Category: deploy">
+  <meta name="description" content="Интересный паттерн чтобы пометить, что исключения принадлежат к определенной группе. Выглядит шаманством, но работает. irb(main):001:0&gt; module &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://unblog.ikito.ru/blog/categories/deploy/">
+  <link rel="canonical" href="http://unblog.ikito.ru/blog/something-strange">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -63,36 +63,107 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Deploy</h1>
+    
+      <h1 class="entry-title">Интересное</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-12T17:47:00+06:00" pubdate data-updated="true">12.03.2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>Интересный паттерн чтобы пометить, что исключения принадлежат к определенной группе. Выглядит шаманством, но работает.</p>
 
-  
-  <h2>2013</h2>
-
-<article>
-  
-<h1><a href="/blog/pro-dieploi-s-github-na-siervier">Про деплой с Github на сервер</a></h1>
-<time datetime="2013-03-01T14:07:00+06:00" pubdate><span class='month'>Mar</span> <span class='day'>01</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/deploy/'>deploy</a>, <a class='category' href='/blog/categories/github/'>github</a>, <a class='category' href='/blog/categories/habrahabr/'>habrahabr</a></span>
-</footer>
-
-
-</article>
-
+<pre><code>irb(main):001:0&gt; module SomeException; end
+=&gt; nil
+irb(main):002:0&gt; class InterruptCaught      &lt; SystemExit;          include SomeException end
+=&gt; InterruptCaught
+irb(main):003:0&gt;
+irb(main):004:0* begin
+irb(main):005:1*   raise InterruptCaught
+irb(main):006:1&gt; rescue SomeException =&gt; e
+irb(main):007:1&gt;   puts "exception #{e.inspect}"
+irb(main):008:1&gt; end
+exception #&lt;InterruptCaught: InterruptCaught&gt;
+=&gt; nil
+</code></pre>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Автор: <span class="fn">Hakimovis</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-12T17:47:00+06:00" pubdate data-updated="true">12.03.2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/exceptions/'>exceptions</a>, <a class='category' href='/blog/categories/pattern-/'>pattern,</a>, <a class='category' href='/blog/categories/ruby-/'>ruby,</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://unblog.ikito.ru/blog/something-strange" data-via="hakimovis" data-counturl="http://unblog.ikito.ru/blog/something-strange" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/pro-dieploi-s-github-na-siervier" title="Previous Post: Про деплой с Github на сервер">&laquo; Про деплой с Github на сервер</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Надо включить JavaScript, ато не увидите <a href="http://disqus.com/?ref_noscript">комментарии от Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -160,7 +231,10 @@
       var disqus_shortname = 'unblog-ikito';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://unblog.ikito.ru/blog/something-strange';
+        var disqus_url = 'http://unblog.ikito.ru/blog/something-strange';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
