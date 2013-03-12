@@ -3,7 +3,7 @@ layout: post
 title: "Интересное"
 date: 2013-03-12 17:47
 comments: true
-categories: ruby, pattern, exceptions
+categories: ruby pattern exceptions
 ---
 Интересный паттерн чтобы пометить, что исключения принадлежат к определенной группе. Выглядит шаманством, но работает.
 

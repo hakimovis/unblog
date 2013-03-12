@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: ruby, | Unblog]]></title>
-  <link href="http://unblog.ikito.ru/blog/categories/ruby-/atom.xml" rel="self"/>
+  <title><![CDATA[Category: ruby | Unblog]]></title>
+  <link href="http://unblog.ikito.ru/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://unblog.ikito.ru/"/>
-  <updated>2013-03-12T17:49:35+06:00</updated>
+  <updated>2013-03-12T17:52:52+06:00</updated>
   <id>http://unblog.ikito.ru/</id>
   <author>
     <name><![CDATA[Hakimovis]]></name>
