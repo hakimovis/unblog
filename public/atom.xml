@@ -4,7 +4,7 @@
   <title><![CDATA[Unblog]]></title>
   <link href="http://unblog.ikito.ru/atom.xml" rel="self"/>
   <link href="http://unblog.ikito.ru/"/>
-  <updated>2013-03-12T18:08:14+06:00</updated>
+  <updated>2013-03-13T01:36:53+06:00</updated>
   <id>http://unblog.ikito.ru/</id>
   <author>
     <name><![CDATA[Hakimovis]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Stash: pull request из консоли]]></title>
+    <link href="http://unblog.ikito.ru/blog/stash-pull-requests-from-the-command-line"/>
+    <updated>2013-03-13T01:23:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/stash-pull-requests-from-the-command-line</id>
+    <content type="html"><![CDATA[<p>Вот такой способ делать пулл-реквесты с консоли для Atlassian Stash: <a href="http://blogs.atlassian.com/2012/11/stash-pull-requests-from-the-command-line/">http://blogs.atlassian.com/2012/11/stash-pull-requests-from-the-command-line/</a></p>
+
+<p>И если кратко:</p>
+
+<pre><code>$ gem install atlassian-stash
+$ stash pull-request myBranch master @michael
+</code></pre>
+
+<p>создает pull request из ветки myBranch в master с ревьюером &#8220;michael&#8221;. Или</p>
+
+<pre><code>$ stash pull-request master
+</code></pre>
+
+<p>создает pull request из текущей ветки в master. И после небольших шаманств можно будет писать:</p>
+
+<pre><code>$ git create-pull-request master
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Интересное]]></title>

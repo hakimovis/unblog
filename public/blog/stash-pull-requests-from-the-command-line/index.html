@@ -7,11 +7,11 @@
   <meta name='yandex-verification' content='488cc353f829f8cf' />
 
   <meta charset="utf-8">
-  <title>Интересное - Unblog</title>
+  <title>Stash: pull request из консоли - Unblog</title>
   <meta name="author" content="Hakimovis">
 
   
-  <meta name="description" content="Интересный паттерн чтобы пометить, что исключения принадлежат к определенной группе. Выглядит шаманством, но работает. irb(main):001:0&gt; module &hellip;">
+  <meta name="description" content="Вот такой способ делать пулл-реквесты с консоли для Atlassian Stash: http://blogs.atlassian.com/2012/11/stash-pull-requests-from-the-command-line/ И &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://unblog.ikito.ru/blog/something-strange">
+  <link rel="canonical" href="http://unblog.ikito.ru/blog/stash-pull-requests-from-the-command-line">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -69,7 +69,7 @@
   
   <header>
     
-      <h1 class="entry-title">Интересное</h1>
+      <h1 class="entry-title">Stash: Pull Request из консоли</h1>
     
     
       <p class="meta">
@@ -85,7 +85,7 @@
   
 
 
-<time datetime="2013-03-12T17:47:00+06:00" pubdate data-updated="true">12.03.2013</time>
+<time datetime="2013-03-13T01:23:00+06:00" pubdate data-updated="true">13.03.2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -94,20 +94,22 @@
   </header>
 
 
-<div class="entry-content"><p>Интересный паттерн чтобы пометить, что исключения принадлежат к определенной группе. Выглядит шаманством, но работает.</p>
+<div class="entry-content"><p>Вот такой способ делать пулл-реквесты с консоли для Atlassian Stash: <a href="http://blogs.atlassian.com/2012/11/stash-pull-requests-from-the-command-line/">http://blogs.atlassian.com/2012/11/stash-pull-requests-from-the-command-line/</a></p>
 
-<pre><code>irb(main):001:0&gt; module SomeException; end
-=&gt; nil
-irb(main):002:0&gt; class InterruptCaught      &lt; SystemExit;          include SomeException end
-=&gt; InterruptCaught
-irb(main):003:0&gt;
-irb(main):004:0* begin
-irb(main):005:1*   raise InterruptCaught
-irb(main):006:1&gt; rescue SomeException =&gt; e
-irb(main):007:1&gt;   puts "exception #{e.inspect}"
-irb(main):008:1&gt; end
-exception #&lt;InterruptCaught: InterruptCaught&gt;
-=&gt; nil
+<p>И если кратко:</p>
+
+<pre><code>$ gem install atlassian-stash
+$ stash pull-request myBranch master @michael
+</code></pre>
+
+<p>создает pull request из ветки myBranch в master с ревьюером &#8220;michael&#8221;. Или</p>
+
+<pre><code>$ stash pull-request master
+</code></pre>
+
+<p>создает pull request из текущей ветки в master. И после небольших шаманств можно будет писать:</p>
+
+<pre><code>$ git create-pull-request master
 </code></pre>
 </div>
 
@@ -131,12 +133,12 @@ exception #&lt;InterruptCaught: InterruptCaught&gt;
   
 
 
-<time datetime="2013-03-12T17:47:00+06:00" pubdate data-updated="true">12.03.2013</time>
+<time datetime="2013-03-13T01:23:00+06:00" pubdate data-updated="true">13.03.2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/exceptions/'>exceptions</a>, <a class='category' href='/blog/categories/pattern/'>pattern</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+    <a class='category' href='/blog/categories/atlassian/'>atlassian</a>, <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/pull-request/'>pull-request</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/stash/'>stash</a>
   
 </span>
 
@@ -145,7 +147,7 @@ exception #&lt;InterruptCaught: InterruptCaught&gt;
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://unblog.ikito.ru/blog/something-strange" data-via="hakimovis" data-counturl="http://unblog.ikito.ru/blog/something-strange" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://unblog.ikito.ru/blog/stash-pull-requests-from-the-command-line" data-via="hakimovis" data-counturl="http://unblog.ikito.ru/blog/stash-pull-requests-from-the-command-line" >Tweet</a>
   
   
   
@@ -154,10 +156,8 @@ exception #&lt;InterruptCaught: InterruptCaught&gt;
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/pro-dieploi-s-github-na-siervier" title="Previous Post: Про деплой с Github на сервер">&laquo; Про деплой с Github на сервер</a>
+        <a class="basic-alignment left" href="/blog/something-strange" title="Previous Post: Интересное">&laquo; Интересное</a>
       
-      
-        <a class="basic-alignment right" href="/blog/stash-pull-requests-from-the-command-line" title="Next Post: Stash: pull request из консоли">Stash: pull request из консоли &raquo;</a>
       
     </p>
   </footer>
@@ -240,8 +240,8 @@ exception #&lt;InterruptCaught: InterruptCaught&gt;
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://unblog.ikito.ru/blog/something-strange';
-        var disqus_url = 'http://unblog.ikito.ru/blog/something-strange';
+        var disqus_identifier = 'http://unblog.ikito.ru/blog/stash-pull-requests-from-the-command-line';
+        var disqus_url = 'http://unblog.ikito.ru/blog/stash-pull-requests-from-the-command-line';
         var disqus_script = 'embed.js';
       
     (function () {
