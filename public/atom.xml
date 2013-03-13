@@ -4,7 +4,7 @@
   <title><![CDATA[Unblog]]></title>
   <link href="http://unblog.ikito.ru/atom.xml" rel="self"/>
   <link href="http://unblog.ikito.ru/"/>
-  <updated>2013-03-13T01:36:53+06:00</updated>
+  <updated>2013-03-14T01:04:41+06:00</updated>
   <id>http://unblog.ikito.ru/</id>
   <author>
     <name><![CDATA[Hakimovis]]></name>
@@ -12,6 +12,28 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Странная проблема с исключением Encoding::CompatibilityError]]></title>
+    <link href="http://unblog.ikito.ru/blog/strannaia-probliema-s-iskliuchieniiem-encoding-compatibilityerror"/>
+    <updated>2013-03-14T00:59:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/strannaia-probliema-s-iskliuchieniiem-encoding-compatibilityerror</id>
+    <content type="html"><![CDATA[<p>Странная штука. Вот такой код:</p>
+
+<pre><code>xml_document = Nokogiri::XML(xml_body.strip)
+if xml_document.errors.present?
+  raise ServiceError.new("Invalid XML: #{xml_document.errors.map(&amp;:to_s)}. XML: #{xml_body}")
+end
+</code></pre>
+
+<p>Вызывает ошибку</p>
+
+<pre><code>Encoding::CompatibilityError (incompatible character encodings: UTF-8 and ASCII-8BIT)
+</code></pre>
+
+<p>если в xml_body приходит невалидный XML с русскими буквами. Точнее, ошибку вызывает &#8220;XML: #{xml_body}&#8221; в тексте исключения. Если ее убрать (а она там и правда не нужна), то ошибка не возникает.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Stash: pull request из консоли]]></title>
