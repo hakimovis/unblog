@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | Unblog]]></title>
   <link href="http://unblog.ikito.ru/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://unblog.ikito.ru/"/>
-  <updated>2013-03-14T01:04:41+06:00</updated>
+  <updated>2013-03-15T22:50:44+06:00</updated>
   <id>http://unblog.ikito.ru/</id>
   <author>
     <name><![CDATA[Hakimovis]]></name>
@@ -12,6 +12,74 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Узнайте bundler лучше]]></title>
+    <link href="http://unblog.ikito.ru/blog/uznaitie-bundler-luchshie"/>
+    <updated>2013-03-15T22:27:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/uznaitie-bundler-luchshie</id>
+    <content type="html"><![CDATA[<p>Статья про bundler, много интересного: (http://habrahabr.ru/company/engineyard/blog/172807/)</p>
+
+<p>Вкратце:</p>
+
+<p><strong>bundle outdated</strong> показывает список гемов, которые можно обновить.</p>
+
+<p><strong>bundle show</strong> показывает путь, куда установлен гем.</p>
+
+<p><strong>bundle open</strong> открывает код гема в редакторе:</p>
+
+<pre><code>$ bundle open json
+To open a bundled gem, set $EDITOR or $BUNDLER_EDITOR
+$ export EDITOR=vim
+$ bundle open json
+</code></pre>
+
+<p><strong>bundle prestine</strong> восстанавливает код указанного гема, если мы его подправляли редактором (используя bundle open)</p>
+
+<p><strong>bundle show --path</strong> показывает список путей, где установлены все гемы проекта. Вроде, так можно найти файлы, где определяются интересные нам классы:</p>
+
+<pre><code>grep -R ActionDispatch::RemoteIp `bundle show --paths`
+</code></pre>
+
+<p><strong>bundle init</strong> создает пустой Gemfile</p>
+
+<p>Гемы можно брать из локального репозитория:</p>
+
+<pre><code>$ echo "gem 'rack', :github =&gt; 'rack/rack', :branch =&gt; 'master'" &gt;&gt; Gemfile
+$ bundle config local.rack ~/sw/gems/rack
+$ bundle show rack
+/Users/andre/sw/gems/rack
+</code></pre>
+
+<p>В bundler 1.2 прямо в Gemfile можно объявить версию ruby. Если текущая версия не будет совпадать, получим исключение:</p>
+
+<pre><code>ruby '1.9.3'
+</code></pre>
+
+<p>Можно построить визуальную схему зависимостей гемов:</p>
+
+<pre><code>$ brew install graphviz
+$ gem install ruby-graphviz
+$ bundle viz
+</code></pre>
+
+<p><strong>bundle console</strong> запустит ruby-консоль, но со всеми загруженными гемами, указанными в Gemfile. Удобно, если нам не нужен гем rails.</p>
+
+<p>Создание заготовки для своего гема, установка его в систему и публикация на rubygems.org:</p>
+
+<pre><code>bundle gem my\_super\_gem
+rake install
+rake release
+</code></pre>
+
+<p>Вот так можно запускать rake-таски без полного написания bundle exec rspec spec:</p>
+
+<pre><code>$ bundle binstubs rspec-core
+$ bin/rspec spec
+No examples found.
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Странная проблема с исключением Encoding::CompatibilityError]]></title>

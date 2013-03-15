@@ -7,11 +7,11 @@
   <meta name='yandex-verification' content='488cc353f829f8cf' />
 
   <meta charset="utf-8">
-  <title>Category: pull-request - Unblog</title>
+  <title>Узнайте bundler лучше - Unblog</title>
   <meta name="author" content="Hakimovis">
 
   
-  <meta name="description" content="Category: pull-request">
+  <meta name="description" content="Статья про bundler, много интересного: (http://habrahabr.ru/company/engineyard/blog/172807/) Вкратце: bundle outdated показывает список гемов, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://unblog.ikito.ru/blog/categories/pull-request/">
+  <link rel="canonical" href="http://unblog.ikito.ru/blog/uznaitie-bundler-luchshie">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -65,36 +65,152 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Pull-request</h1>
+    
+      <h1 class="entry-title">Узнайте Bundler лучше</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-15T22:27:00+06:00" pubdate data-updated="true">15.03.2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>Статья про bundler, много интересного: (http://habrahabr.ru/company/engineyard/blog/172807/)</p>
 
-  
-  <h2>2013</h2>
+<p>Вкратце:</p>
 
-<article>
-  
-<h1><a href="/blog/stash-pull-requests-from-the-command-line">Stash: pull request из консоли</a></h1>
-<time datetime="2013-03-13T01:23:00+06:00" pubdate><span class='month'>Mar</span> <span class='day'>13</span> <span class='year'>2013</span></time>
+<p><strong>bundle outdated</strong> показывает список гемов, которые можно обновить.</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/atlassian/'>atlassian</a>, <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/pull-request/'>pull-request</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/stash/'>stash</a></span>
-</footer>
+<p><strong>bundle show</strong> показывает путь, куда установлен гем.</p>
 
+<p><strong>bundle open</strong> открывает код гема в редакторе:</p>
 
-</article>
+<pre><code>$ bundle open json
+To open a bundled gem, set $EDITOR or $BUNDLER_EDITOR
+$ export EDITOR=vim
+$ bundle open json
+</code></pre>
 
+<p><strong>bundle prestine</strong> восстанавливает код указанного гема, если мы его подправляли редактором (используя bundle open)</p>
+
+<p><strong>bundle show &#8211;path</strong> показывает список путей, где установлены все гемы проекта. Вроде, так можно найти файлы, где определяются интересные нам классы:</p>
+
+<pre><code>grep -R ActionDispatch::RemoteIp `bundle show --paths`
+</code></pre>
+
+<p><strong>bundle init</strong> создает пустой Gemfile</p>
+
+<p>Гемы можно брать из локального репозитория:</p>
+
+<pre><code>$ echo "gem 'rack', :github =&gt; 'rack/rack', :branch =&gt; 'master'" &gt;&gt; Gemfile
+$ bundle config local.rack ~/sw/gems/rack
+$ bundle show rack
+/Users/andre/sw/gems/rack
+</code></pre>
+
+<p>В bundler 1.2 прямо в Gemfile можно объявить версию ruby. Если текущая версия не будет совпадать, получим исключение:</p>
+
+<pre><code>ruby '1.9.3'
+</code></pre>
+
+<p>Можно построить визуальную схему зависимостей гемов:</p>
+
+<pre><code>$ brew install graphviz
+$ gem install ruby-graphviz
+$ bundle viz
+</code></pre>
+
+<p><strong>bundle console</strong> запустит ruby-консоль, но со всеми загруженными гемами, указанными в Gemfile. Удобно, если нам не нужен гем rails.</p>
+
+<p>Создание заготовки для своего гема, установка его в систему и публикация на rubygems.org:</p>
+
+<pre><code>bundle gem my\_super\_gem
+rake install
+rake release
+</code></pre>
+
+<p>Вот так можно запускать rake-таски без полного написания bundle exec rspec spec:</p>
+
+<pre><code>$ bundle binstubs rspec-core
+$ bin/rspec spec
+No examples found.
+</code></pre>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Автор: <span class="fn">Hakimovis</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-15T22:27:00+06:00" pubdate data-updated="true">15.03.2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/bundler/'>bundler</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://unblog.ikito.ru/blog/uznaitie-bundler-luchshie" data-via="hakimovis" data-counturl="http://unblog.ikito.ru/blog/uznaitie-bundler-luchshie" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/strannaia-probliema-s-iskliuchieniiem-encoding-compatibilityerror" title="Previous Post: Странная проблема с исключением Encoding::CompatibilityError">&laquo; Странная проблема с исключением Encoding::CompatibilityError</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Надо включить JavaScript, ато не увидите <a href="http://disqus.com/?ref_noscript">комментарии от Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -166,7 +282,10 @@
       var disqus_shortname = 'unblog-ikito';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://unblog.ikito.ru/blog/uznaitie-bundler-luchshie';
+        var disqus_url = 'http://unblog.ikito.ru/blog/uznaitie-bundler-luchshie';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
