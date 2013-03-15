@@ -11,7 +11,8 @@
   <meta name="author" content="Hakimovis">
 
   
-  <meta name="description" content="Статья про bundler, много интересного: (http://habrahabr.ru/company/engineyard/blog/172807/) Вкратце: bundle outdated показывает список гемов, &hellip;">
+  <meta name="description" content="Статья про bundler, много интересного: http://habrahabr.ru/company/engineyard/blog/172807/ Вкратце:
+bundle outdated показывает список гемов, которые &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,15 +95,12 @@
   </header>
 
 
-<div class="entry-content"><p>Статья про bundler, много интересного: (http://habrahabr.ru/company/engineyard/blog/172807/)</p>
+<div class="entry-content"><p>Статья про bundler, много интересного: <a href="http://habrahabr.ru/company/engineyard/blog/172807/">http://habrahabr.ru/company/engineyard/blog/172807/</a></p>
 
-<p>Вкратце:</p>
-
-<p><strong>bundle outdated</strong> показывает список гемов, которые можно обновить.</p>
-
-<p><strong>bundle show</strong> показывает путь, куда установлен гем.</p>
-
-<p><strong>bundle open</strong> открывает код гема в редакторе:</p>
+<p>Вкратце:<br/>
+<strong>bundle outdated</strong> показывает список гемов, которые можно обновить.<br/>
+<strong>bundle show</strong> показывает путь, куда установлен гем.<br/>
+<strong>bundle open</strong> открывает код гема в редакторе:</p>
 
 <pre><code>$ bundle open json
 To open a bundled gem, set $EDITOR or $BUNDLER_EDITOR
@@ -110,16 +108,14 @@ $ export EDITOR=vim
 $ bundle open json
 </code></pre>
 
-<p><strong>bundle prestine</strong> восстанавливает код указанного гема, если мы его подправляли редактором (используя bundle open)</p>
-
-<p><strong>bundle show &#8211;path</strong> показывает список путей, где установлены все гемы проекта. Вроде, так можно найти файлы, где определяются интересные нам классы:</p>
+<p><strong>bundle prestine</strong> восстанавливает код указанного гема, если мы его подправляли редактором (используя bundle open)<br/>
+<strong>bundle show &#8211;path</strong> показывает список путей, где установлены все гемы проекта. Вроде, так можно найти файлы, где определяются интересные нам классы:</p>
 
 <pre><code>grep -R ActionDispatch::RemoteIp `bundle show --paths`
 </code></pre>
 
-<p><strong>bundle init</strong> создает пустой Gemfile</p>
-
-<p>Гемы можно брать из локального репозитория:</p>
+<p><strong>bundle init</strong> создает пустой Gemfile<br/>
+Гемы можно брать из локального репозитория:</p>
 
 <pre><code>$ echo "gem 'rack', :github =&gt; 'rack/rack', :branch =&gt; 'master'" &gt;&gt; Gemfile
 $ bundle config local.rack ~/sw/gems/rack
