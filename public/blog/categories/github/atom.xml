@@ -4,7 +4,7 @@
   <title><![CDATA[Category: github | Unblog]]></title>
   <link href="http://unblog.ikito.ru/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://unblog.ikito.ru/"/>
-  <updated>2013-03-15T22:55:51+06:00</updated>
+  <updated>2013-03-15T23:00:42+06:00</updated>
   <id>http://unblog.ikito.ru/</id>
   <author>
     <name><![CDATA[Hakimovis]]></name>
@@ -19,6 +19,28 @@
     <updated>2013-03-01T14:07:00+06:00</updated>
     <id>http://unblog.ikito.ru/blog/pro-dieploi-s-github-na-siervier</id>
     <content type="html"><![CDATA[<p>На Habrahabr есть статья, где презентуется <a href="http://habrahabr.ru/post/171195/">скрипт для легкой настройки деплоя через гитхаб на сервер</a>. На всякий случай, запомним.</p>
+
+<p>Сам я пользуюсь простым как мыло способом:</p>
+
+<pre><code>#!/bin/sh
+echo "--- Generating static pages"
+bundle exec rake generate
+echo "--- Indexing changes"
+git add -A
+echo "--- Making commit: $1"
+git commit -m"deploy $1"
+echo "--- Pushing to master"
+git push origin master
+echo "--- Executing remote pull"
+ssh server.host.name /path/to/project/deploy_unblog.sh
+</code></pre>
+
+<p>И сам deploy_unblog.sh на сервере:</p>
+
+<pre><code>#!/bin/bash
+cd /path/to/project
+git pull
+</code></pre>
 ]]></content>
   </entry>
   

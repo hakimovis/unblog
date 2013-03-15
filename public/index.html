@@ -348,6 +348,28 @@ exception #&lt;InterruptCaught: InterruptCaught&gt;
 
 
   <div class="entry-content"><p>На Habrahabr есть статья, где презентуется <a href="http://habrahabr.ru/post/171195/">скрипт для легкой настройки деплоя через гитхаб на сервер</a>. На всякий случай, запомним.</p>
+
+<p>Сам я пользуюсь простым как мыло способом:</p>
+
+<pre><code>#!/bin/sh
+echo "--- Generating static pages"
+bundle exec rake generate
+echo "--- Indexing changes"
+git add -A
+echo "--- Making commit: $1"
+git commit -m"deploy $1"
+echo "--- Pushing to master"
+git push origin master
+echo "--- Executing remote pull"
+ssh server.host.name /path/to/project/deploy_unblog.sh
+</code></pre>
+
+<p>И сам deploy_unblog.sh на сервере:</p>
+
+<pre><code>#!/bin/bash
+cd /path/to/project
+git pull
+</code></pre>
 </div>
   
   
