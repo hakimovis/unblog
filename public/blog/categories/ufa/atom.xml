@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ufa | Unblog]]></title>
+  <link href="http://unblog.ikito.ru/blog/categories/ufa/atom.xml" rel="self"/>
+  <link href="http://unblog.ikito.ru/"/>
+  <updated>2013-03-20T14:17:27+06:00</updated>
+  <id>http://unblog.ikito.ru/</id>
+  <author>
+    <name><![CDATA[Hakimovis]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Концерт Юлдашева и Курайсы]]></title>
+    <link href="http://unblog.ikito.ru/blog/kontsiert-iuldashieva-i-kuraisy"/>
+    <updated>2013-03-20T14:07:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/kontsiert-iuldashieva-i-kuraisy</id>
+    <content type="html"><![CDATA[<p>Надо постараться попасть на концерт Роберта Юлдашева с группой Курайсы 27 марта (<a href="http://www.ufaconcert.ru/node/129636">ДК Нефтяник, 19-00</a>).</p>
+
+<p><img src="http://dkneftyanik-ufa.ru/images/afisha/yuldashev_0313.jpg" alt="афиша концерта" /></p>
+
+<p>Upd: купили 3 билета на 15 ряд!</p>
+]]></content>
+  </entry>
+  
+</feed>
