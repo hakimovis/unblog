@@ -4,7 +4,7 @@
   <title><![CDATA[Unblog]]></title>
   <link href="http://unblog.ikito.ru/atom.xml" rel="self"/>
   <link href="http://unblog.ikito.ru/"/>
-  <updated>2013-03-25T16:28:20+06:00</updated>
+  <updated>2013-03-25T16:39:34+06:00</updated>
   <id>http://unblog.ikito.ru/</id>
   <author>
     <name><![CDATA[Hakimovis]]></name>
@@ -12,6 +12,19 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Думай как Git]]></title>
+    <link href="http://unblog.ikito.ru/blog/dumai-kak-git"/>
+    <updated>2013-03-25T16:34:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/dumai-kak-git</id>
+    <content type="html"><![CDATA[<p>Перевод книги <a href="http://think-like-a-git.net/">Think like a Git</a> на русский язык <a href="http://git.geekjob.ru/">http://git.geekjob.ru/</a> от хабрапользователя <a href="http://habrahabr.ru/users/Gangsta/">Gangsta</a>:</p>
+
+<blockquote><p>Когда вы только начинаете работать с Git, что-нибудь очень простое, вроде команды merge, может показаться ужасно сложным. Может оказаться, что вам потребуется очень много времени для того, чтобы изучить все фичи Git, и чувствовать себя при этом достаточно уверенно. (Автору этих строк потребовалось около года или двух).
+В один момент, когда некоторые люди достигнут особого просветления в Git, они стремятся делать заявления вроде “Git становится легче, когда ты поймешь X” — но к сожалению это никак не помогает тем, кто только начинает осваивать Git.
+Моя цель помочь тебе, Дорогой Читатель, понять о чем говорят те зазнайки</p></blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Удаление дубликатов по двум полям]]></title>

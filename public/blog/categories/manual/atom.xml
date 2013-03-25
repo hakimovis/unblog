@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: git | Unblog]]></title>
-  <link href="http://unblog.ikito.ru/blog/categories/git/atom.xml" rel="self"/>
+  <title><![CDATA[Category: manual | Unblog]]></title>
+  <link href="http://unblog.ikito.ru/blog/categories/manual/atom.xml" rel="self"/>
   <link href="http://unblog.ikito.ru/"/>
   <updated>2013-03-25T16:39:34+06:00</updated>
   <id>http://unblog.ikito.ru/</id>
@@ -23,31 +23,6 @@
 <blockquote><p>Когда вы только начинаете работать с Git, что-нибудь очень простое, вроде команды merge, может показаться ужасно сложным. Может оказаться, что вам потребуется очень много времени для того, чтобы изучить все фичи Git, и чувствовать себя при этом достаточно уверенно. (Автору этих строк потребовалось около года или двух).
 В один момент, когда некоторые люди достигнут особого просветления в Git, они стремятся делать заявления вроде “Git становится легче, когда ты поймешь X” — но к сожалению это никак не помогает тем, кто только начинает осваивать Git.
 Моя цель помочь тебе, Дорогой Читатель, понять о чем говорят те зазнайки</p></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Stash: pull request из консоли]]></title>
-    <link href="http://unblog.ikito.ru/blog/stash-pull-requests-from-the-command-line"/>
-    <updated>2013-03-13T01:23:00+06:00</updated>
-    <id>http://unblog.ikito.ru/blog/stash-pull-requests-from-the-command-line</id>
-    <content type="html"><![CDATA[<p>Вот такой способ делать пулл-реквесты с консоли для Atlassian Stash: <a href="http://blogs.atlassian.com/2012/11/stash-pull-requests-from-the-command-line/">http://blogs.atlassian.com/2012/11/stash-pull-requests-from-the-command-line/</a></p>
-
-<p>И если кратко:</p>
-
-<pre><code>$ gem install atlassian-stash
-$ stash pull-request myBranch master @michael
-</code></pre>
-
-<p>создает pull request из ветки myBranch в master с ревьюером "michael". Или</p>
-
-<pre><code>$ stash pull-request master
-</code></pre>
-
-<p>создает pull request из текущей ветки в master. И после небольших шаманств можно будет писать:</p>
-
-<pre><code>$ git create-pull-request master
-</code></pre>
 ]]></content>
   </entry>
   
