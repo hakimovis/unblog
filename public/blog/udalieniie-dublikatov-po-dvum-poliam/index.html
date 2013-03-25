@@ -7,11 +7,11 @@
   <meta name='yandex-verification' content='488cc353f829f8cf' />
 
   <meta charset="utf-8">
-  <title>Category: habrahabr - Unblog</title>
+  <title>Удаление дубликатов по двум полям - Unblog</title>
   <meta name="author" content="Hakimovis">
 
   
-  <meta name="description" content="Category: habrahabr">
+  <meta name="description" content="Если забыть вовремя добавить составной уникальный индекс в таблицу, там обязательно образуются дубликаты, после которых добавить такой индекс уже &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://unblog.ikito.ru/blog/categories/habrahabr/">
+  <link rel="canonical" href="http://unblog.ikito.ru/blog/udalieniie-dublikatov-po-dvum-poliam">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -65,36 +65,101 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Habrahabr</h1>
+    
+      <h1 class="entry-title">Удаление дубликатов по двум полям</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-25T16:16:00+06:00" pubdate data-updated="true">25.03.2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>Если забыть вовремя добавить составной уникальный индекс в таблицу, там обязательно образуются дубликаты, после которых добавить такой индекс уже будет нельзя. Например, для таблицы favorites добавляем уникальный индекс на поля user_id и name. Получим подобное:</p>
 
-  
-  <h2>2013</h2>
+<pre><code>PG::Error: ERROR:  could not create unique index "index_favorites_on_user_id_and_name"
+DETAIL:  Key (user_id, name)=(1, foo) is duplicated.
+: CREATE UNIQUE INDEX "index_favorites_on_user_id_and_name" ON "favorites" ("user_id", "name")
+</code></pre>
 
-<article>
-  
-<h1><a href="/blog/pro-dieploi-s-github-na-siervier">Про деплой с Github на сервер</a></h1>
-<time datetime="2013-03-01T14:07:00+06:00" pubdate><span class='month'>Mar</span> <span class='day'>01</span> <span class='year'>2013</span></time>
+<p>Чтобы все-таки добавить этот индекс, придется руками удалить дубликаты. Скорее всего, удалять их все не стоит, оставим только по одному. Это делается примерно таким запросом:</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/deploy/'>deploy</a>, <a class='category' href='/blog/categories/github/'>github</a>, <a class='category' href='/blog/categories/habrahabr/'>habrahabr</a></span>
-</footer>
+<pre><code>DELETE FROM favorites WHERE id NOT IN (
+  SELECT MIN(id) FROM favorites GROUP BY (name, user_id)
+);
+</code></pre>
 
-
-</article>
-
+<p>Делается выборка каждого первого id из групп name + user_id. Их мы как раз оставляем, а удаляем все, которые не попали в выборку.</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Автор: <span class="fn">Hakimovis</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-25T16:16:00+06:00" pubdate data-updated="true">25.03.2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://unblog.ikito.ru/blog/udalieniie-dublikatov-po-dvum-poliam" data-via="hakimovis" data-counturl="http://unblog.ikito.ru/blog/udalieniie-dublikatov-po-dvum-poliam" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/trieilier-mul%27tfil%27ma-ku-kin-dza-dza" title="Previous Post: Трейлер мультфильма Ку! Кин-дза-дза">&laquo; Трейлер мультфильма Ку! Кин-дза-дза</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Надо включить JavaScript, ато не увидите <a href="http://disqus.com/?ref_noscript">комментарии от Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -166,7 +231,10 @@
       var disqus_shortname = 'unblog-ikito';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://unblog.ikito.ru/blog/udalieniie-dublikatov-po-dvum-poliam';
+        var disqus_url = 'http://unblog.ikito.ru/blog/udalieniie-dublikatov-po-dvum-poliam';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

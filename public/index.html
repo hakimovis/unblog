@@ -11,7 +11,7 @@
   <meta name="author" content="Hakimovis">
 
   
-  <meta name="description" content="Трейлер мультфильма &#8220;Ку! Кин-дза-дза&#8221; И блог ЖЖ одного из художников, работающих над фильмом. Официальный сайт мультфильма тут. Приятно &hellip;">
+  <meta name="description" content="Если забыть вовремя добавить составной уникальный индекс в таблицу, там обязательно образуются дубликаты, после которых добавить такой индекс уже &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,58 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/udalieniie-dublikatov-po-dvum-poliam">Удаление дубликатов по двум полям</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-25T16:16:00+06:00" pubdate data-updated="true">25.03.2013</time>
+        
+         | <a href="/blog/udalieniie-dublikatov-po-dvum-poliam#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Если забыть вовремя добавить составной уникальный индекс в таблицу, там обязательно образуются дубликаты, после которых добавить такой индекс уже будет нельзя. Например, для таблицы favorites добавляем уникальный индекс на поля user_id и name. Получим подобное:</p>
+
+<pre><code>PG::Error: ERROR:  could not create unique index "index_favorites_on_user_id_and_name"
+DETAIL:  Key (user_id, name)=(1, foo) is duplicated.
+: CREATE UNIQUE INDEX "index_favorites_on_user_id_and_name" ON "favorites" ("user_id", "name")
+</code></pre>
+
+<p>Чтобы все-таки добавить этот индекс, придется руками удалить дубликаты. Скорее всего, удалять их все не стоит, оставим только по одному. Это делается примерно таким запросом:</p>
+
+<pre><code>DELETE FROM favorites WHERE id NOT IN (
+  SELECT MIN(id) FROM favorites GROUP BY (name, user_id)
+);
+</code></pre>
+
+<p>Делается выборка каждого первого id из групп name + user_id. Их мы как раз оставляем, а удаляем все, которые не попали в выборку.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -573,6 +625,10 @@ Invalid gemspec in [/Users/hakimovis/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/udalieniie-dublikatov-po-dvum-poliam">Удаление дубликатов по двум полям</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/trieilier-mul%27tfil%27ma-ku-kin-dza-dza">Трейлер мультфильма Ку! Кин-дза-дза</a>
       </li>
     
@@ -586,10 +642,6 @@ Invalid gemspec in [/Users/hakimovis/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.
     
       <li class="post">
         <a href="/blog/strannaia-probliema-s-iskliuchieniiem-encoding-compatibilityerror">Странная проблема с исключением Encoding::CompatibilityError</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/stash-pull-requests-from-the-command-line">Stash: pull request из консоли</a>
       </li>
     
   </ul>
