@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: sublime | Unblog]]></title>
+  <link href="http://unblog.ikito.ru/blog/categories/sublime/atom.xml" rel="self"/>
+  <link href="http://unblog.ikito.ru/"/>
+  <updated>2013-04-19T11:22:53+06:00</updated>
+  <id>http://unblog.ikito.ru/</id>
+  <author>
+    <name><![CDATA[Hakimovis]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Старое: и еще несколько ссылок]]></title>
+    <link href="http://unblog.ikito.ru/blog/staroie-i-ieshchie-nieskol%27ko-ssylok"/>
+    <updated>2013-04-19T11:16:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/staroie-i-ieshchie-nieskol'ko-ssylok</id>
+    <content type="html"><![CDATA[<p>Всякие полезные советы по редактору Sublime Text 2 <a href="http://whiletruecode.com/post/7-handy-text-manipulation-tricks-sublime-text-2">http://whiletruecode.com</a></p>
+
+<p>Гайд по git-у. Бобук одобряе! <a href="http://rogerdudler.github.com/git-guide/">http://rogerdudler.github.com/git-guide/</a></p>
+
+<p>Просто игрушка - можно посмотреть как перезагружалась какая-нибудь старенькая ОС <a href="http://www.therestartpage.com/">http://www.therestartpage.com</a></p>
+
+<p>Забавный сервис, добавляешь небольшой код к себе на сайт и можешь вешать со всех сторон всякие украшательства - <a href="http://makeuptor.com">http://makeuptor.com</a></p>
+]]></content>
+  </entry>
+  
+</feed>

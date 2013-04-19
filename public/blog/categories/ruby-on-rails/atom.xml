@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby-on-rails | Unblog]]></title>
   <link href="http://unblog.ikito.ru/blog/categories/ruby-on-rails/atom.xml" rel="self"/>
   <link href="http://unblog.ikito.ru/"/>
-  <updated>2013-03-28T18:54:32+06:00</updated>
+  <updated>2013-04-19T11:22:53+06:00</updated>
   <id>http://unblog.ikito.ru/</id>
   <author>
     <name><![CDATA[Hakimovis]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Старое: несколько ссылок про Ruby]]></title>
+    <link href="http://unblog.ikito.ru/blog/staroie-nieskol%27ko-ssylok-pro-ruby"/>
+    <updated>2013-04-19T10:57:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/staroie-nieskol'ko-ssylok-pro-ruby</id>
+    <content type="html"><![CDATA[<p>Несколько ссылок, касающихся Ruby и рельсов из старого unblog.ikito.ru.</p>
+
+<ul>
+<li>Презентация про отличия ruby1.9 от ruby1.8.6 <a href="http://slideshow.rubyforge.org/ruby19.html">http://slideshow.rubyforge.org/ruby19.html</a></li>
+<li>Небольшое, но понятное руководство по созданию DSL на Ruby <a href="http://habrahabr.ru/post/48754/">http://habrahabr.ru/post/48754</a></li>
+<li>Про деплой рельсов <a href="http://linux.vsevteme.ru/2010/08/17/blog/nastroyka-rails-servera-na-ubuntu-10-04-server-edition">http://linux.vsevteme.ru</a></li>
+<li>Интерактивный учебник по руби <a href="https://github.com/edgecase/ruby_koans">https://github.com/edgecase/ruby_koans</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Странная проблема с исключением Encoding::CompatibilityError]]></title>

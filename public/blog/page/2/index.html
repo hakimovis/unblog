@@ -11,7 +11,8 @@
   <meta name="author" content="Hakimovis">
 
   
-  <meta name="description" content="Внимательные читатели, наверное, обратили внимание, что весь этот текст нужен только чтобы было на что смотреть, любоваться пустыми страницами нет &hellip;">
+  <meta name="description" content="Надо постараться попасть на концерт Роберта Юлдашева с группой Курайсы 27 марта (ДК Нефтяник, 19-00). Upd: купили 3 билета на 15 ряд!
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +67,357 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/kontsiert-iuldashieva-i-kuraisy">Концерт Юлдашева и Курайсы</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-20T14:07:00+06:00" pubdate data-updated="true">20.03.2013</time>
+        
+         | <a href="/blog/kontsiert-iuldashieva-i-kuraisy#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Надо постараться попасть на концерт Роберта Юлдашева с группой Курайсы 27 марта (<a href="http://www.ufaconcert.ru/node/129636">ДК Нефтяник, 19-00</a>).</p>
+
+<p><img src="http://dkneftyanik-ufa.ru/images/afisha/yuldashev_0313.jpg" alt="афиша концерта" /></p>
+
+<p>Upd: купили 3 билета на 15 ряд!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/uznaitie-bundler-luchshie">Узнайте Bundler лучше</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-15T22:27:00+06:00" pubdate data-updated="true">15.03.2013</time>
+        
+         | <a href="/blog/uznaitie-bundler-luchshie#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Статья про bundler, много интересного: <a href="http://habrahabr.ru/company/engineyard/blog/172807/">http://habrahabr.ru/company/engineyard/blog/172807/</a></p>
+
+<p>Вкратце:<br/>
+<strong>bundle outdated</strong> показывает список гемов, которые можно обновить.<br/>
+<strong>bundle show</strong> показывает путь, куда установлен гем.<br/>
+<strong>bundle open</strong> открывает код гема в редакторе:</p>
+
+<pre><code>$ bundle open json
+To open a bundled gem, set $EDITOR or $BUNDLER_EDITOR
+$ export EDITOR=vim
+$ bundle open json
+</code></pre>
+
+<p><strong>bundle prestine</strong> восстанавливает код указанного гема, если мы его подправляли редактором (используя bundle open)<br/>
+<strong>bundle show &#8211;path</strong> показывает список путей, где установлены все гемы проекта. Вроде, так можно найти файлы, где определяются интересные нам классы:</p>
+
+<pre><code>grep -R ActionDispatch::RemoteIp `bundle show --paths`
+</code></pre>
+
+<p><strong>bundle init</strong> создает пустой Gemfile<br/>
+Гемы можно брать из локального репозитория:</p>
+
+<pre><code>$ echo "gem 'rack', :github =&gt; 'rack/rack', :branch =&gt; 'master'" &gt;&gt; Gemfile
+$ bundle config local.rack ~/sw/gems/rack
+$ bundle show rack
+/Users/andre/sw/gems/rack
+</code></pre>
+
+<p>В bundler 1.2 прямо в Gemfile можно объявить версию ruby. Если текущая версия не будет совпадать, получим исключение:</p>
+
+<pre><code>ruby '1.9.3'
+</code></pre>
+
+<p>Можно построить визуальную схему зависимостей гемов:</p>
+
+<pre><code>$ brew install graphviz
+$ gem install ruby-graphviz
+$ bundle viz
+</code></pre>
+
+<p><strong>bundle console</strong> запустит ruby-консоль, но со всеми загруженными гемами, указанными в Gemfile. Удобно, если нам не нужен гем rails.</p>
+
+<p>Создание заготовки для своего гема, установка его в систему и публикация на rubygems.org:</p>
+
+<pre><code>bundle gem my\_super\_gem
+rake install
+rake release
+</code></pre>
+
+<p>Вот так можно запускать rake-таски без полного написания bundle exec rspec spec:</p>
+
+<pre><code>$ bundle binstubs rspec-core
+$ bin/rspec spec
+No examples found.
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/strannaia-probliema-s-iskliuchieniiem-encoding-compatibilityerror">Странная проблема с исключением Encoding::CompatibilityError</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-14T00:59:00+06:00" pubdate data-updated="true">14.03.2013</time>
+        
+         | <a href="/blog/strannaia-probliema-s-iskliuchieniiem-encoding-compatibilityerror#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Странная штука. Вот такой код:</p>
+
+<pre><code>xml_document = Nokogiri::XML(xml_body.strip)
+if xml_document.errors.present?
+  raise ServiceError.new("Invalid XML: #{xml_document.errors.map(&amp;:to_s)}. XML: #{xml_body}")
+end
+</code></pre>
+
+<p>Вызывает ошибку</p>
+
+<pre><code>Encoding::CompatibilityError (incompatible character encodings: UTF-8 and ASCII-8BIT)
+</code></pre>
+
+<p>если в xml_body приходит невалидный XML с русскими буквами. Точнее, ошибку вызывает &#8220;XML: #{xml_body}&#8221; в тексте исключения. Если ее убрать (а она там и правда не нужна), то ошибка не возникает.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/stash-pull-requests-from-the-command-line">Stash: Pull Request из консоли</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-13T01:23:00+06:00" pubdate data-updated="true">13.03.2013</time>
+        
+         | <a href="/blog/stash-pull-requests-from-the-command-line#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Вот такой способ делать пулл-реквесты с консоли для Atlassian Stash: <a href="http://blogs.atlassian.com/2012/11/stash-pull-requests-from-the-command-line/">http://blogs.atlassian.com/2012/11/stash-pull-requests-from-the-command-line/</a></p>
+
+<p>И если кратко:</p>
+
+<pre><code>$ gem install atlassian-stash
+$ stash pull-request myBranch master @michael
+</code></pre>
+
+<p>создает pull request из ветки myBranch в master с ревьюером &#8220;michael&#8221;. Или</p>
+
+<pre><code>$ stash pull-request master
+</code></pre>
+
+<p>создает pull request из текущей ветки в master. И после небольших шаманств можно будет писать:</p>
+
+<pre><code>$ git create-pull-request master
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/something-strange">Интересное</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-12T17:47:00+06:00" pubdate data-updated="true">12.03.2013</time>
+        
+         | <a href="/blog/something-strange#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Интересный паттерн чтобы пометить, что исключения принадлежат к определенной группе. Выглядит шаманством, но работает.</p>
+
+<pre><code>irb(main):001:0&gt; module SomeException; end
+=&gt; nil
+irb(main):002:0&gt; class InterruptCaught      &lt; SystemExit;          include SomeException end
+=&gt; InterruptCaught
+irb(main):003:0&gt;
+irb(main):004:0* begin
+irb(main):005:1*   raise InterruptCaught
+irb(main):006:1&gt; rescue SomeException =&gt; e
+irb(main):007:1&gt;   puts "exception #{e.inspect}"
+irb(main):008:1&gt; end
+exception #&lt;InterruptCaught: InterruptCaught&gt;
+=&gt; nil
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/pro-dieploi-s-github-na-siervier">Про деплой с Github на сервер</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-01T14:07:00+06:00" pubdate data-updated="true">01.03.2013</time>
+        
+         | <a href="/blog/pro-dieploi-s-github-na-siervier#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>На Habrahabr есть статья, где презентуется <a href="http://habrahabr.ru/post/171195/">скрипт для легкой настройки деплоя через гитхаб на сервер</a>. На всякий случай, запомним.</p>
+
+<p>Сам я пользуюсь простым как мыло способом:</p>
+
+<pre><code>#!/bin/sh
+echo "--- Generating static pages"
+bundle exec rake generate
+echo "--- Indexing changes"
+git add -A
+echo "--- Making commit: $1"
+git commit -m"deploy $1"
+echo "--- Pushing to master"
+git push origin master
+echo "--- Executing remote pull"
+ssh server.host.name /path/to/project/deploy_unblog.sh
+</code></pre>
+
+<p>И сам deploy_unblog.sh на сервере:</p>
+
+<pre><code>#!/bin/bash
+cd /path/to/project
+git pull
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -175,23 +527,23 @@ Invalid gemspec in [/Users/hakimovis/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/kontsiert-robierta-iuldashieva">Концерт Роберта Юлдашева</a>
+        <a href="/blog/staroie-obzor-fil%27ma-zhielieznoie-niebo">Старое: Обзор фильма &#8220;Железное небо&#8221;</a>
       </li>
     
       <li class="post">
-        <a href="/blog/dumai-kak-git">Думай как Git</a>
+        <a href="/blog/staroie-i-ieshchie-nieskol%27ko-ssylok">Старое: и еще несколько ссылок</a>
       </li>
     
       <li class="post">
-        <a href="/blog/udalieniie-dublikatov-po-dvum-poliam">Удаление дубликатов по двум полям</a>
+        <a href="/blog/staroie-khoroshii-tielievizor">Старое: хороший телевизор</a>
       </li>
     
       <li class="post">
-        <a href="/blog/trieilier-mul%27tfil%27ma-ku-kin-dza-dza">Трейлер мультфильма Ку! Кин-дза-дза</a>
+        <a href="/blog/staroie-kitaitsy-i-kirpichi">Старое: китайцы и кирпичи</a>
       </li>
     
       <li class="post">
-        <a href="/blog/kontsiert-iuldashieva-i-kuraisy">Концерт Юлдашева и Курайсы</a>
+        <a href="/blog/staroie-istoriia-pro-noski">Старое: история про носки</a>
       </li>
     
   </ul>
