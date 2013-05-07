@@ -4,7 +4,7 @@
   <title><![CDATA[Category: deploy | Unblog]]></title>
   <link href="http://unblog.ikito.ru/blog/categories/deploy/atom.xml" rel="self"/>
   <link href="http://unblog.ikito.ru/"/>
-  <updated>2013-04-19T11:22:53+06:00</updated>
+  <updated>2013-05-07T13:29:54+06:00</updated>
   <id>http://unblog.ikito.ru/</id>
   <author>
     <name><![CDATA[Hakimovis]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Еще один способ деплоя с помощью Git]]></title>
+    <link href="http://unblog.ikito.ru/blog/ieshchie-odin-sposob-dieploia-s-pomoshch%27iu-git"/>
+    <updated>2013-05-07T13:27:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/ieshchie-odin-sposob-dieploia-s-pomoshch'iu-git</id>
+    <content type="html"><![CDATA[<p>Собственно, <a href="http://habrahabr.ru/post/178965/">сабж на хабре</a>. Надо будет попробовать соорудить такой же хук для этого бложика.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Про деплой с Github на сервер]]></title>
