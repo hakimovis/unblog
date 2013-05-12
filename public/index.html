@@ -11,8 +11,10 @@
   <meta name="author" content="Hakimovis">
 
   
-  <meta name="description" content="Даже не подозревал, что прикрутить аплоад картинок на амазоновый S3 окажется так просто. Добавляем гемы в Gemfile: gem 'paperclip'
-gem 'aws-sdk' &hellip;">
+  <meta name="description" content="Даже не подозревал, что прикрутить аплоад картинок на амазоновый S3 окажется так просто. Добавляем гемы в Gemfile: 1
+2
+gem &#39;paperclip&#39;
+gem &# &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,62 +102,103 @@ gem 'aws-sdk' &hellip;">
 
   <div class="entry-content"><p>Даже не подозревал, что прикрутить аплоад картинок на амазоновый S3 окажется так просто. Добавляем гемы в Gemfile:</p>
 
-<pre><code>gem 'paperclip'
-gem 'aws-sdk'
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;paperclip&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;aws-sdk&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Делаем миграцию:</p>
 
-<pre><code>class CreatePhotos &lt; ActiveRecord::Migration
-  def self.up
-    create_table :photos do |t|
-      t.boolean :enabled, null: false, default: true
-      t.timestamps
-    end
-    add_attachment :photos, :image
-  end
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">CreatePhotos</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Migration</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">up</span>
+</span><span class='line'>    <span class="n">create_table</span> <span class="ss">:photos</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">t</span><span class="o">.</span><span class="n">boolean</span> <span class="ss">:enabled</span><span class="p">,</span> <span class="ss">null</span><span class="p">:</span> <span class="kp">false</span><span class="p">,</span> <span class="ss">default</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'>      <span class="n">t</span><span class="o">.</span><span class="n">timestamps</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="n">add_attachment</span> <span class="ss">:photos</span><span class="p">,</span> <span class="ss">:image</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">down</span>
+</span><span class='line'>    <span class="n">drop_table</span> <span class="ss">:photos</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
-  def self.down
-    drop_table :photos
-  end
-end
-</code></pre>
 
 <p>Тут у модели Photo будет только два поля - image и enabled (КО). Теперь модель:</p>
 
-<pre><code>class Photo &lt; ActiveRecord::Base
-  attr_accessible :enabled, :image
-  has_attached_file(
-    :image,
-    styles: {medium: "500x500&gt;", small: "50x50&gt;"},
-    storage: :s3,
-    s3_credentials: "#{Rails.root}/config/s3.yml",
-    bucket: 'bucket_name',
-    s3_protocol: 'https',
-    s3_host_name: 's3-eu-west-1.amazonaws.com'
-  )
-end
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Photo</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">attr_accessible</span> <span class="ss">:enabled</span><span class="p">,</span> <span class="ss">:image</span>
+</span><span class='line'>  <span class="n">has_attached_file</span><span class="p">(</span>
+</span><span class='line'>    <span class="ss">:image</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">styles</span><span class="p">:</span> <span class="p">{</span><span class="ss">medium</span><span class="p">:</span> <span class="s2">&quot;500x500&gt;&quot;</span><span class="p">,</span> <span class="ss">small</span><span class="p">:</span> <span class="s2">&quot;50x50&gt;&quot;</span><span class="p">},</span>
+</span><span class='line'>    <span class="ss">storage</span><span class="p">:</span> <span class="ss">:s3</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">s3_credentials</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="si">}</span><span class="s2">/config/s3.yml&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">bucket</span><span class="p">:</span> <span class="s1">&#39;bucket_name&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">s3_protocol</span><span class="p">:</span> <span class="s1">&#39;https&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">s3_host_name</span><span class="p">:</span> <span class="s1">&#39;s3-eu-west-1.amazonaws.com&#39;</span>
+</span><span class='line'>  <span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Тут все в принципе ясно. Изображение будет храниться еще в двух размерах - medium (500x500) и small (50x50). Пришлось немного почесать голову над последними двумя опциями, без них Амазон будет ругаться XML-кой с просьбой указать endpoint. В s3.yml пишем свои ключи отсюда <a href="https://portal.aws.amazon.com/gp/aws/securityCredentials#account_identifiers">portal.aws.amazon.com</a> (не забывая добавить этот конфиг в .gitignore):</p>
 
-<pre><code>access_key_id: *****
-secret_access_key: ******
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">access_key_id</span><span class="p">:</span> <span class="o">*****</span>
+</span><span class='line'><span class="n">secret_access_key</span><span class="p">:</span> <span class="o">******</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Вот и вся магия. Теперь в форме загрузки будем писать так:</p>
 
-<pre><code>= form_for @photo, url: photos_path, html: {id: "photo_form", multipart: true} do |f|
-  = f.file_field :image
-  = f.check_box :enabled
-  .actions
-    = f.submit 'Сохранить'
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='haml'><span class='line'><span class="p">=</span> <span class="n">form_for</span> <span class="vi">@photo</span><span class="p">,</span> <span class="ss">url</span><span class="p">:</span> <span class="n">photos_path</span><span class="p">,</span> <span class="ss">html</span><span class="p">:</span> <span class="p">{</span><span class="nb">id</span><span class="p">:</span> <span class="s2">&quot;photo_form&quot;</span><span class="p">,</span> <span class="ss">multipart</span><span class="p">:</span> <span class="kp">true</span><span class="p">}</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
+</span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">file_field</span> <span class="ss">:image</span>
+</span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">check_box</span> <span class="ss">:enabled</span>
+</span><span class='line'>  <span class="nc">.actions</span>
+</span><span class='line'>    <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">submit</span> <span class="s1">&#39;Сохранить&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>И чтобы показать нашу картинку в среднем размере со ссылкой на оригинал в шаблонах пишем:</p>
 
-<pre><code>%a{href: @photo.image.url}= image_tag @photo.image.url :medium
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='haml'><span class='line'><span class="nt">%a</span><span class="p">{</span><span class="ss">href</span><span class="p">:</span> <span class="vi">@photo</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">url</span><span class="p">}=</span> <span class="n">image_tag</span> <span class="vi">@photo</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">url</span> <span class="ss">:medium</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Ну не радость ли?</p>
 </div>
