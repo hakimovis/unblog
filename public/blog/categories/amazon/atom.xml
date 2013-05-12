@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: amazon | Unblog]]></title>
+  <link href="http://unblog.ikito.ru/blog/categories/amazon/atom.xml" rel="self"/>
+  <link href="http://unblog.ikito.ru/"/>
+  <updated>2013-05-12T23:56:49+06:00</updated>
+  <id>http://unblog.ikito.ru/</id>
+  <author>
+    <name><![CDATA[Hakimovis]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby On Rails и загрузка изображений на Amazon S3 Storage]]></title>
+    <link href="http://unblog.ikito.ru/blog/ruby-on-rails-i-zaghruzka-izobrazhienii-na-amazon-s3-storage"/>
+    <updated>2013-05-12T23:23:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/ruby-on-rails-i-zaghruzka-izobrazhienii-na-amazon-s3-storage</id>
+    <content type="html"><![CDATA[<p>Даже не подозревал, что прикрутить аплоад картинок на амазоновый S3 окажется так просто. Добавляем гемы в Gemfile:</p>
+
+<pre><code>gem 'paperclip'
+gem 'aws-sdk'
+</code></pre>
+
+<p>Делаем миграцию:</p>
+
+<pre><code>class CreatePhotos &lt; ActiveRecord::Migration
+  def self.up
+    create_table :photos do |t|
+      t.boolean :enabled, null: false, default: true
+      t.timestamps
+    end
+    add_attachment :photos, :image
+  end
+
+  def self.down
+    drop_table :photos
+  end
+end
+</code></pre>
+
+<p>Тут у модели Photo будет только два поля - image и enabled (КО). Теперь модель:</p>
+
+<pre><code>class Photo &lt; ActiveRecord::Base
+  attr_accessible :enabled, :image
+  has_attached_file(
+    :image,
+    styles: {medium: "500x500&gt;", small: "50x50&gt;"},
+    storage: :s3,
+    s3_credentials: "#{Rails.root}/config/s3.yml",
+    bucket: 'bucket_name',
+    s3_protocol: 'https',
+    s3_host_name: 's3-eu-west-1.amazonaws.com'
+  )
+end
+</code></pre>
+
+<p>Тут все в принципе ясно. Изображение будет храниться еще в двух размерах - medium (500x500) и small (50x50). Пришлось немного почесать голову над последними двумя опциями, без них Амазон будет ругаться XML-кой с просьбой указать endpoint. В s3.yml пишем свои ключи отсюда <a href="https://portal.aws.amazon.com/gp/aws/securityCredentials#account_identifiers">portal.aws.amazon.com</a> (не забывая добавить этот конфиг в .gitignore):</p>
+
+<pre><code>access_key_id: *****
+secret_access_key: ******
+</code></pre>
+
+<p>Вот и вся магия. Теперь в форме загрузки будем писать так:</p>
+
+<pre><code>= form_for @photo, url: photos_path, html: {id: "photo_form", multipart: true} do |f|
+  = f.file_field :image
+  = f.check_box :enabled
+  .actions
+    = f.submit 'Сохранить'
+</code></pre>
+
+<p>И чтобы показать нашу картинку в среднем размере со ссылкой на оригинал в шаблонах пишем:</p>
+
+<pre><code>%a{href: @photo.image.url}= image_tag @photo.image.url :medium
+</code></pre>
+
+<p>Ну не радость ли?</p>
+]]></content>
+  </entry>
+  
+</feed>

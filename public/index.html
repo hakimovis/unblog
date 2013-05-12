@@ -11,8 +11,8 @@
   <meta name="author" content="Hakimovis">
 
   
-  <meta name="description" content="Собственно, сабж на хабре. Надо будет попробовать соорудить такой же хук для этого бложика.
-">
+  <meta name="description" content="Даже не подозревал, что прикрутить аплоад картинок на амазоновый S3 окажется так просто. Добавляем гемы в Gemfile: gem 'paperclip'
+gem 'aws-sdk' &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -73,7 +73,104 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/ieshchie-odin-sposob-dieploia-s-pomoshch%27iu-git">Еще один способ деплоя с помощью Git</a></h1>
+      <h2 class="entry-title"><a href="/blog/ruby-on-rails-i-zaghruzka-izobrazhienii-na-amazon-s3-storage">Ruby on Rails и загрузка изображений на Amazon S3 Storage</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-12T23:23:00+06:00" pubdate data-updated="true">12.05.2013</time>
+        
+         | <a href="/blog/ruby-on-rails-i-zaghruzka-izobrazhienii-na-amazon-s3-storage#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Даже не подозревал, что прикрутить аплоад картинок на амазоновый S3 окажется так просто. Добавляем гемы в Gemfile:</p>
+
+<pre><code>gem 'paperclip'
+gem 'aws-sdk'
+</code></pre>
+
+<p>Делаем миграцию:</p>
+
+<pre><code>class CreatePhotos &lt; ActiveRecord::Migration
+  def self.up
+    create_table :photos do |t|
+      t.boolean :enabled, null: false, default: true
+      t.timestamps
+    end
+    add_attachment :photos, :image
+  end
+
+  def self.down
+    drop_table :photos
+  end
+end
+</code></pre>
+
+<p>Тут у модели Photo будет только два поля - image и enabled (КО). Теперь модель:</p>
+
+<pre><code>class Photo &lt; ActiveRecord::Base
+  attr_accessible :enabled, :image
+  has_attached_file(
+    :image,
+    styles: {medium: "500x500&gt;", small: "50x50&gt;"},
+    storage: :s3,
+    s3_credentials: "#{Rails.root}/config/s3.yml",
+    bucket: 'bucket_name',
+    s3_protocol: 'https',
+    s3_host_name: 's3-eu-west-1.amazonaws.com'
+  )
+end
+</code></pre>
+
+<p>Тут все в принципе ясно. Изображение будет храниться еще в двух размерах - medium (500x500) и small (50x50). Пришлось немного почесать голову над последними двумя опциями, без них Амазон будет ругаться XML-кой с просьбой указать endpoint. В s3.yml пишем свои ключи отсюда <a href="https://portal.aws.amazon.com/gp/aws/securityCredentials#account_identifiers">portal.aws.amazon.com</a> (не забывая добавить этот конфиг в .gitignore):</p>
+
+<pre><code>access_key_id: *****
+secret_access_key: ******
+</code></pre>
+
+<p>Вот и вся магия. Теперь в форме загрузки будем писать так:</p>
+
+<pre><code>= form_for @photo, url: photos_path, html: {id: "photo_form", multipart: true} do |f|
+  = f.file_field :image
+  = f.check_box :enabled
+  .actions
+    = f.submit 'Сохранить'
+</code></pre>
+
+<p>И чтобы показать нашу картинку в среднем размере со ссылкой на оригинал в шаблонах пишем:</p>
+
+<pre><code>%a{href: @photo.image.url}= image_tag @photo.image.url :medium
+</code></pre>
+
+<p>Ну не радость ли?</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h2 class="entry-title"><a href="/blog/ieshchie-odin-sposob-dieploia-s-pomoshch%27iu-git">Еще один способ деплоя с помощью Git</a></h1>
     
     
       <p class="meta">
@@ -111,7 +208,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/staroie-obzor-fil%27ma-zhielieznoie-niebo">Старое: Обзор фильма &#8220;Железное небо&#8221;</a></h1>
+      <h2 class="entry-title"><a href="/blog/staroie-obzor-fil%27ma-zhielieznoie-niebo">Старое: Обзор фильма &#8220;Железное небо&#8221;</a></h1>
     
     
       <p class="meta">
@@ -161,7 +258,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/staroie-i-ieshchie-nieskol%27ko-ssylok">Старое: и еще несколько ссылок</a></h1>
+      <h2 class="entry-title"><a href="/blog/staroie-i-ieshchie-nieskol%27ko-ssylok">Старое: и еще несколько ссылок</a></h1>
     
     
       <p class="meta">
@@ -205,7 +302,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/staroie-khoroshii-tielievizor">Старое: хороший телевизор</a></h1>
+      <h2 class="entry-title"><a href="/blog/staroie-khoroshii-tielievizor">Старое: хороший телевизор</a></h1>
     
     
       <p class="meta">
@@ -247,7 +344,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/staroie-kitaitsy-i-kirpichi">Старое: китайцы и кирпичи</a></h1>
+      <h2 class="entry-title"><a href="/blog/staroie-kitaitsy-i-kirpichi">Старое: китайцы и кирпичи</a></h1>
     
     
       <p class="meta">
@@ -291,7 +388,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/staroie-istoriia-pro-noski">Старое: история про носки</a></h1>
+      <h2 class="entry-title"><a href="/blog/staroie-istoriia-pro-noski">Старое: история про носки</a></h1>
     
     
       <p class="meta">
@@ -344,7 +441,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/staroie-nieskol%27ko-ssylok-pro-ruby">Старое: несколько ссылок про Ruby</a></h1>
+      <h2 class="entry-title"><a href="/blog/staroie-nieskol%27ko-ssylok-pro-ruby">Старое: несколько ссылок про Ruby</a></h1>
     
     
       <p class="meta">
@@ -390,7 +487,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/kontsiert-robierta-iuldashieva">Концерт Роберта Юлдашева</a></h1>
+      <h2 class="entry-title"><a href="/blog/kontsiert-robierta-iuldashieva">Концерт Роберта Юлдашева</a></h1>
     
     
       <p class="meta">
@@ -442,7 +539,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/dumai-kak-git">Думай как Git</a></h1>
+      <h2 class="entry-title"><a href="/blog/dumai-kak-git">Думай как Git</a></h1>
     
     
       <p class="meta">
@@ -479,58 +576,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/udalieniie-dublikatov-po-dvum-poliam">Удаление дубликатов по двум полям</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-25T16:16:00+06:00" pubdate data-updated="true">25.03.2013</time>
-        
-         | <a href="/blog/udalieniie-dublikatov-po-dvum-poliam#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Если забыть вовремя добавить составной уникальный индекс в таблицу, там обязательно образуются дубликаты, после которых добавить такой индекс уже будет нельзя. Например, для таблицы favorites добавляем уникальный индекс на поля user_id и name. Получим подобное:</p>
-
-<pre><code>PG::Error: ERROR:  could not create unique index "index_favorites_on_user_id_and_name"
-DETAIL:  Key (user_id, name)=(1, foo) is duplicated.
-: CREATE UNIQUE INDEX "index_favorites_on_user_id_and_name" ON "favorites" ("user_id", "name")
-</code></pre>
-
-<p>Чтобы все-таки добавить этот индекс, придется руками удалить дубликаты. Скорее всего, удалять их все не стоит, оставим только по одному. Это делается примерно таким запросом:</p>
-
-<pre><code>DELETE FROM favorites WHERE id NOT IN (
-  SELECT MIN(id) FROM favorites GROUP BY (name, user_id)
-);
-</code></pre>
-
-<p>Делается выборка каждого первого id из групп name + user_id. Их мы как раз оставляем, а удаляем все, которые не попали в выборку.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Старше</a>
@@ -546,6 +591,10 @@ DETAIL:  Key (user_id, name)=(1, foo) is duplicated.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/ruby-on-rails-i-zaghruzka-izobrazhienii-na-amazon-s3-storage">Ruby On Rails и загрузка изображений на Amazon S3 Storage</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/ieshchie-odin-sposob-dieploia-s-pomoshch%27iu-git">Еще один способ деплоя с помощью Git</a>
       </li>
     
@@ -559,10 +608,6 @@ DETAIL:  Key (user_id, name)=(1, foo) is duplicated.
     
       <li class="post">
         <a href="/blog/staroie-khoroshii-tielievizor">Старое: хороший телевизор</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/staroie-kitaitsy-i-kirpichi">Старое: китайцы и кирпичи</a>
       </li>
     
   </ul>
