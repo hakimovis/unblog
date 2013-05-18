@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | Unblog]]></title>
   <link href="http://unblog.ikito.ru/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://unblog.ikito.ru/"/>
-  <updated>2013-05-13T00:37:49+06:00</updated>
+  <updated>2013-05-18T12:54:35+06:00</updated>
   <id>http://unblog.ikito.ru/</id>
   <author>
     <name><![CDATA[Hakimovis]]></name>
@@ -12,6 +12,65 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Использование и тестирование моделей ActiveRecord в своем геме]]></title>
+    <link href="http://unblog.ikito.ru/blog/ispol%27zovaniie-i-tiestirovaniie-modieliei-activerecord-v-svoiem-ghiemie"/>
+    <updated>2013-05-18T12:38:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/ispol'zovaniie-i-tiestirovaniie-modieliei-activerecord-v-svoiem-ghiemie</id>
+    <content type="html"><![CDATA[<p>Если ruby gem должен приносить с собой модель, возникнет вопрос - как же его тестировать. Разумеется, подымать для прогона тестов вашего гема базу данных, навешивать миграции и конфигурить конфиги никто не будет, поэтому есть замечательная штука - sqlite3-адаптер для ActiveRecord, работающий с базой данных прямо в памяти. Чтобы воспользоваться этим не нужно ничего особо хитрого.</p>
+
+<p>Сначала добавим зависимости в Gemfile:
+<code>ruby
+group :test do
+  # Т.к. в реальном проекте гем activerecord уже будет подключен и база данных будет своя,
+  # а не sqlite, подключаем их только для группы :test
+  gem 'activerecord'
+  gem 'sqlite3'
+end
+</code></p>
+
+<p>и подгружаем их же в spec_helper.rb:</p>
+
+<p><code>ruby
+require 'active_record'
+require 'sqlite3'
+</code></p>
+
+<p>Создаем в spec/support файл active_record.rb с примерно таким содержанием:</p>
+
+<p>``` ruby
+require 'rspec/rails/extensions/active_record/base' # Всяческие хелперы для тестирования.</p>
+
+<h1>Тут указываем, что будем использовать адаптер sqlite3 и базу данных размещаем в памяти.</h1>
+
+<p>ActiveRecord::Base.establish_connection adapter: "sqlite3", database: ":memory:"</p>
+
+<h1>Запускаем миграции из папки db/migrate или любой другой, которую укажем.</h1>
+
+<p>ActiveRecord::Migrator.up "db/migrate"</p>
+
+<h1>А это нужно, чтобы каждый тест запускался в своей транзакции, которая будет откатываться назад</h1>
+
+<p>RSpec.configure do |config|
+  config.around do |example|</p>
+
+<pre><code>ActiveRecord::Base.transaction do
+  example.run
+  raise ActiveRecord::Rollback
+end
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>В обшем-то все. Мы можем использовать наши модели на полную катушку если, конечно, не забыли их подгрузить в spec_helper.rb:
+<code>ruby
+Dir["#{File.dirname(__FILE__)}/../app/models/*.rb"].each { |f| require f }
+</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ruby On Rails и загрузка изображений на Amazon S3 Storage]]></title>
@@ -200,31 +259,6 @@ end
 </code></pre>
 
 <p>если в xml_body приходит невалидный XML с русскими буквами. Точнее, ошибку вызывает "XML: #{xml_body}" в тексте исключения. Если ее убрать (а она там и правда не нужна), то ошибка не возникает.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Stash: pull request из консоли]]></title>
-    <link href="http://unblog.ikito.ru/blog/stash-pull-requests-from-the-command-line"/>
-    <updated>2013-03-13T01:23:00+06:00</updated>
-    <id>http://unblog.ikito.ru/blog/stash-pull-requests-from-the-command-line</id>
-    <content type="html"><![CDATA[<p>Вот такой способ делать пулл-реквесты с консоли для Atlassian Stash: <a href="http://blogs.atlassian.com/2012/11/stash-pull-requests-from-the-command-line/">http://blogs.atlassian.com/2012/11/stash-pull-requests-from-the-command-line/</a></p>
-
-<p>И если кратко:</p>
-
-<pre><code>$ gem install atlassian-stash
-$ stash pull-request myBranch master @michael
-</code></pre>
-
-<p>создает pull request из ветки myBranch в master с ревьюером "michael". Или</p>
-
-<pre><code>$ stash pull-request master
-</code></pre>
-
-<p>создает pull request из текущей ветки в master. И после небольших шаманств можно будет писать:</p>
-
-<pre><code>$ git create-pull-request master
-</code></pre>
 ]]></content>
   </entry>
   
