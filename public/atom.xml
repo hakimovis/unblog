@@ -4,7 +4,7 @@
   <title><![CDATA[Unblog]]></title>
   <link href="http://unblog.ikito.ru/atom.xml" rel="self"/>
   <link href="http://unblog.ikito.ru/"/>
-  <updated>2013-05-18T12:54:35+06:00</updated>
+  <updated>2013-05-18T13:12:17+06:00</updated>
   <id>http://unblog.ikito.ru/</id>
   <author>
     <name><![CDATA[Hakimovis]]></name>
@@ -12,6 +12,74 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Добавляем генератор миграции и моделей к своему гему]]></title>
+    <link href="http://unblog.ikito.ru/blog/dobavliaiem-ghienierator-k-svoiemu-ghiemu"/>
+    <updated>2013-05-18T12:57:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/dobavliaiem-ghienierator-k-svoiemu-ghiemu</id>
+    <content type="html"><![CDATA[<p>В продолжение предыдущей темы расскажу как научить свой гем использовать генератор rails для добавления своей модели в проект:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rails generate install_my_gem
+</span><span class='line'>
+</span><span class='line'>      create  db/migrate/20120724092434_create_my_models.rb
+</span><span class='line'>      create  app/models/my_model.rb
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Во первых, создадим сами файлы миграции и модели. Для удобства это лучше делать в традиционных для рельсового прокта местах. Все-таки их придется тестировать. Во вторых, создадим файл install_my_gem.rb (&#8220;install_my_gem&#8221; можно заменить на название вашего генератора) в папке lig/generators/install_my_gem:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">InstallMyGemGenerator</span> <span class="o">&lt;</span> <span class="ss">Rails</span><span class="p">:</span><span class="ss">:Generators</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="n">source_root</span> <span class="ss">MyGem</span><span class="p">:</span><span class="ss">:GEM_PATH</span> <span class="c1"># В этой константе содержится путь к установленному гему</span>
+</span><span class='line'>  <span class="c1"># Все методы, объявленные ниже будут выполняться по порядку по команде rails generate install_my_gem</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">copy_migration</span>
+</span><span class='line'>    <span class="c1"># Копируем файл миграции из своего db/migrate в тот же db/migrate проекта</span>
+</span><span class='line'>    <span class="n">migration_file</span> <span class="o">=</span> <span class="s1">&#39;20120724092434_create_my_models.rb&#39;</span>
+</span><span class='line'>    <span class="n">copy_file</span> <span class="s2">&quot;db/migrate/</span><span class="si">#{</span><span class="n">migration_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;db/migrate/</span><span class="si">#{</span><span class="n">migration_file</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">copy_my_model</span>
+</span><span class='line'>    <span class="c1"># Аналогично копируем файл проекта</span>
+</span><span class='line'>    <span class="n">copy_file</span> <span class="s1">&#39;app/models/my_model.rb&#39;</span><span class="p">,</span> <span class="s1">&#39;app/models/my_model.rb&#39;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>MyGem::GEM_PATH нужно будет объявить где-нибудь в my_gem.rb:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">MyGem</span>
+</span><span class='line'>  <span class="no">GEM_PATH</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">expand_path</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="no">File</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">))</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Использование и тестирование моделей ActiveRecord в своем геме]]></title>
@@ -91,6 +159,8 @@
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Dir</span><span class="o">[</span><span class="s2">&quot;</span><span class="si">#{</span><span class="no">File</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">)</span><span class="si">}</span><span class="s2">/../app/models/*.rb&quot;</span><span class="o">].</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="nb">require</span> <span class="n">f</span> <span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
+<p>Это очень вольный перевод вот этой статьи: <a href="http://iain.nl/testing-activerecord-in-isolation">http://iain.nl/testing-activerecord-in-isolation</a></p>
 ]]></content>
   </entry>
   
@@ -570,19 +640,6 @@ ssh server.host.name /path/to/project/deploy_unblog.sh
 cd /path/to/project
 git pull
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Продолжаем бред]]></title>
-    <link href="http://unblog.ikito.ru/blog/prodolzhaiem-bried"/>
-    <updated>2013-02-28T23:47:00+06:00</updated>
-    <id>http://unblog.ikito.ru/blog/prodolzhaiem-bried</id>
-    <content type="html"><![CDATA[<p>Внимательные читатели, наверное, обратили внимание, что весь этот текст нужен только чтобы было на что смотреть, любоваться пустыми страницами нет никакого удовольствия. Поэтому, немного потока мысли.</p>
-
-<p>Во первых, как бы перенести из старого блога все посты сюда? В конце концов, их там накопилось довольно много, кое-что было даже полезным. А дамп базы данных с этими постами у меня вообще сохранился, кстати говоря? Вот будет весело.</p>
-
-<p>Во вторых. Товарищи! постоянный количественный рост и сфера нашей активности позволяет выполнить важные задания по разработке направлений прогрессивного развития. Повседневная практика показвает, что рамки и место обучения кадров требуют определения и уточнения системы массового участия. С другой стороны сложившаяся структура организации требуют определения и уточнения системы массового участия. С другой стороны дальнейшее развитие различных форм деятельности позволяет выполнить важные задания по разработке направлений прогрессивного развития. Таким образом, рамки и место обучения кадров позволяет выполнить важные задания по разработке направлений прогрессивного развития. Таким образом, сложившаяся структура организации способствует подготовке и реализации дальнейших направлений развития. Не следует, однако, забывать, что новая модель организационной деятельности требуют от нас анализа системы массового участия. С другой стороны сложившаяся структура организации требуют от нас анализа системы массового участия. Таким образом, сложившаяся структура организации позволяет выполнить важные задания по разработке позиций, занимаемых участниками в отношении поставленных задач. Равным образом дальнейшее развитие различных форм деятельности требуют от нас анализа направлений прогрессивного развития.</p>
 ]]></content>
   </entry>
   

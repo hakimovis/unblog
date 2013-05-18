@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: generator | Unblog]]></title>
+  <link href="http://unblog.ikito.ru/blog/categories/generator/atom.xml" rel="self"/>
+  <link href="http://unblog.ikito.ru/"/>
+  <updated>2013-05-18T13:12:17+06:00</updated>
+  <id>http://unblog.ikito.ru/</id>
+  <author>
+    <name><![CDATA[Hakimovis]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Добавляем генератор миграции и моделей к своему гему]]></title>
+    <link href="http://unblog.ikito.ru/blog/dobavliaiem-ghienierator-k-svoiemu-ghiemu"/>
+    <updated>2013-05-18T12:57:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/dobavliaiem-ghienierator-k-svoiemu-ghiemu</id>
+    <content type="html"><![CDATA[<p>В продолжение предыдущей темы расскажу как научить свой гем использовать генератор rails для добавления своей модели в проект:</p>
+
+<p>``` bash
+$ rails generate install_my_gem</p>
+
+<pre><code>  create  db/migrate/20120724092434_create_my_models.rb
+  create  app/models/my_model.rb
+</code></pre>
+
+<p>```</p>
+
+<p>Во первых, создадим сами файлы миграции и модели. Для удобства это лучше делать в традиционных для рельсового прокта местах. Все-таки их придется тестировать. Во вторых, создадим файл install_my_gem.rb ("install_my_gem" можно заменить на название вашего генератора) в папке lig/generators/install_my_gem:</p>
+
+<p>``` ruby
+class InstallMyGemGenerator &lt; Rails::Generators::Base
+  source_root MyGem::GEM_PATH # В этой константе содержится путь к установленному гему
+  # Все методы, объявленные ниже будут выполняться по порядку по команде rails generate install_my_gem</p>
+
+<p>  def copy_migration</p>
+
+<pre><code># Копируем файл миграции из своего db/migrate в тот же db/migrate проекта
+migration_file = '20120724092434_create_my_models.rb'
+copy_file "db/migrate/#{migration_file}", "db/migrate/#{migration_file}"
+</code></pre>
+
+<p>  end</p>
+
+<p>  def copy_my_model</p>
+
+<pre><code># Аналогично копируем файл проекта
+copy_file 'app/models/my_model.rb', 'app/models/my_model.rb'
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>MyGem::GEM_PATH нужно будет объявить где-нибудь в my_gem.rb:
+<code>ruby
+module MyGem
+  GEM_PATH = File.expand_path('..', File.dirname(__FILE__))
+  ...
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

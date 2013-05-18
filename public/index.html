@@ -11,7 +11,11 @@
   <meta name="author" content="Hakimovis">
 
   
-  <meta name="description" content="Если ruby gem должен приносить с собой модель, возникнет вопрос - как же его тестировать. Разумеется, подымать для прогона тестов вашего гема базу &hellip;">
+  <meta name="description" content="В продолжение предыдущей темы расскажу как научить свой гем использовать генератор rails для добавления своей модели в проект: 1
+2
+3
+4
+$ rails &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +70,103 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h2 class="entry-title"><a href="/blog/dobavliaiem-ghienierator-k-svoiemu-ghiemu">Добавляем генератор миграции и моделей к своему гему</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-18T12:57:00+06:00" pubdate data-updated="true">18.05.2013</time>
+        
+         | <a href="/blog/dobavliaiem-ghienierator-k-svoiemu-ghiemu#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>В продолжение предыдущей темы расскажу как научить свой гем использовать генератор rails для добавления своей модели в проект:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rails generate install_my_gem
+</span><span class='line'>
+</span><span class='line'>      create  db/migrate/20120724092434_create_my_models.rb
+</span><span class='line'>      create  app/models/my_model.rb
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Во первых, создадим сами файлы миграции и модели. Для удобства это лучше делать в традиционных для рельсового прокта местах. Все-таки их придется тестировать. Во вторых, создадим файл install_my_gem.rb (&#8220;install_my_gem&#8221; можно заменить на название вашего генератора) в папке lig/generators/install_my_gem:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">InstallMyGemGenerator</span> <span class="o">&lt;</span> <span class="ss">Rails</span><span class="p">:</span><span class="ss">:Generators</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="n">source_root</span> <span class="ss">MyGem</span><span class="p">:</span><span class="ss">:GEM_PATH</span> <span class="c1"># В этой константе содержится путь к установленному гему</span>
+</span><span class='line'>  <span class="c1"># Все методы, объявленные ниже будут выполняться по порядку по команде rails generate install_my_gem</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">copy_migration</span>
+</span><span class='line'>    <span class="c1"># Копируем файл миграции из своего db/migrate в тот же db/migrate проекта</span>
+</span><span class='line'>    <span class="n">migration_file</span> <span class="o">=</span> <span class="s1">&#39;20120724092434_create_my_models.rb&#39;</span>
+</span><span class='line'>    <span class="n">copy_file</span> <span class="s2">&quot;db/migrate/</span><span class="si">#{</span><span class="n">migration_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;db/migrate/</span><span class="si">#{</span><span class="n">migration_file</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">copy_my_model</span>
+</span><span class='line'>    <span class="c1"># Аналогично копируем файл проекта</span>
+</span><span class='line'>    <span class="n">copy_file</span> <span class="s1">&#39;app/models/my_model.rb&#39;</span><span class="p">,</span> <span class="s1">&#39;app/models/my_model.rb&#39;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>MyGem::GEM_PATH нужно будет объявить где-нибудь в my_gem.rb:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">MyGem</span>
+</span><span class='line'>  <span class="no">GEM_PATH</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">expand_path</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="no">File</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">))</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -170,6 +271,8 @@
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Dir</span><span class="o">[</span><span class="s2">&quot;</span><span class="si">#{</span><span class="no">File</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">)</span><span class="si">}</span><span class="s2">/../app/models/*.rb&quot;</span><span class="o">].</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="nb">require</span> <span class="n">f</span> <span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
+<p>Это очень вольный перевод вот этой статьи: <a href="http://iain.nl/testing-activerecord-in-isolation">http://iain.nl/testing-activerecord-in-isolation</a></p>
 </div>
   
   
@@ -632,58 +735,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h2 class="entry-title"><a href="/blog/kontsiert-robierta-iuldashieva">Концерт Роберта Юлдашева</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-28T18:28:00+06:00" pubdate data-updated="true">28.03.2013</time>
-        
-         | <a href="/blog/kontsiert-robierta-iuldashieva#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Вчера, 27 марта ездили на концерт Роберта Юлдашева и группы Курайсы в Уфимском ДК &#8220;Нефтяник&#8221;. Сказать, что концерт понравился, значит сильно поскромничать. Концерт был замечательный, музыка очень красивая, иногда заводная, иногда грустно-романтичная, иногда просто веселая.</p>
-
-<iframe width="560" height="315" src="http://www.youtube.com/embed/kyTU5lHk1Cw" frameborder="0" allowfullscreen></iframe>
-
-
-<p>Пытался снимать на телефон, но, как обычно, не позаботился о свободном месте и оно закончилось где-то в середине. В результате, самые лучшие на мой взгляд композиции я не снял, да и не хотелось смотреть на сцену через экран мобильника. Хотелось просто получать удовольствие и ни о чем не думать.</p>
-
-<iframe width="560" height="315" src="http://www.youtube.com/embed/vKxGfcADJV8" frameborder="0" allowfullscreen></iframe>
-
-
-<p>Рекомендую всем у кого будет возможность познакомиться с его творчеством. Тем более, что цены были более чем демократичные - от 300 до 1500 рублей. После концерта пытались найти его диски, но в ДК продавались чьи угодно, но не его. Я бы купил за любые (вменяемые) деньги. Кстати сказать, я до сих пор не нашел, где их можно легально купить.</p>
-
-<p><img src="http://cs10972.vk.me/u60805331/144622788/y_f9cf31cb.jpg" alt="Роберт Юлдашев и группа Курайсы" /></p>
-
-<p>И в заключение - оказалось, что не одному мне кажется, что на концертах любят включать звук погромче, так, чтобы в голове отдавалось и уши болели. В начале концерта я прямо радовался, как хорошо звуковик выставил громкость - не тихо и не громко, в самый раз. Но под конец все-таки случилось то, чего я боялся, опять перегнули с громкостью.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Старше</a>
@@ -699,6 +750,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/dobavliaiem-ghienierator-k-svoiemu-ghiemu">Добавляем генератор миграции и моделей к своему гему</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/ispol%27zovaniie-i-tiestirovaniie-modieliei-activerecord-v-svoiem-ghiemie">Использование и тестирование моделей ActiveRecord в своем геме</a>
       </li>
     
@@ -712,10 +767,6 @@
     
       <li class="post">
         <a href="/blog/staroie-obzor-fil%27ma-zhielieznoie-niebo">Старое: Обзор фильма &#8220;Железное небо&#8221;</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/staroie-i-ieshchie-nieskol%27ko-ssylok">Старое: и еще несколько ссылок</a>
       </li>
     
   </ul>

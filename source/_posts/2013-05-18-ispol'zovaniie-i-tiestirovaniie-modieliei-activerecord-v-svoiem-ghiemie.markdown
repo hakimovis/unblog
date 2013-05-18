@@ -51,3 +51,5 @@ end
 ``` ruby
 Dir["#{File.dirname(__FILE__)}/../app/models/*.rb"].each { |f| require f }
 ```
+
+Это очень вольный перевод вот этой статьи: [http://iain.nl/testing-activerecord-in-isolation](http://iain.nl/testing-activerecord-in-isolation)
