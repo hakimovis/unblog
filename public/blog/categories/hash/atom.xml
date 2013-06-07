@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: hash | Unblog]]></title>
+  <link href="http://unblog.ikito.ru/blog/categories/hash/atom.xml" rel="self"/>
+  <link href="http://unblog.ikito.ru/"/>
+  <updated>2013-06-07T14:14:28+06:00</updated>
+  <id>http://unblog.ikito.ru/</id>
+  <author>
+    <name><![CDATA[Hakimovis]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Плагин для Sublime Text 2 для автозамены старого стиля хэшей на новый]]></title>
+    <link href="http://unblog.ikito.ru/blog/plaghin-dlia-sublime-text-2-dlia-avtozamieny-starogho-stilia-kheshiei-na-novyi"/>
+    <updated>2013-06-07T14:06:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/plaghin-dlia-sublime-text-2-dlia-avtozamieny-starogho-stilia-kheshiei-na-novyi</id>
+    <content type="html"><![CDATA[<p>Вот такой просненький плагин для Sublime Text 2 помогает заменять старый стиль хэшей Ruby {:foo => 'bar'} на новый {foo: 'bar'}</p>
+
+<p>``` python
+import sublime, sublime_plugin
+import re</p>
+
+<p>class RubyNewHashStyle(sublime_plugin.TextCommand):</p>
+
+<pre><code>def run(self, edit):
+    selection = self.view.sel()[0]
+    code_block = self.view.substr(selection)
+    result = re.sub(r':([a-z\d_]+) =&gt;', r'\1:', code_block)
+    self.view.replace(edit, selection, result)
+</code></pre>
+
+<p>```</p>
+
+<p>Чтобы повесить его на хоткей, в Preferences, Key Bindings - User вставляем:
+<code>python
+[
+ { "keys": ["ctrl+shift+h"], "command": "ruby_new_hash_style" }
+]
+</code></p>
+
+<p>Теперь можно просто выделить фрагмент кода с описанием хэша, нажать ctrl+shift+h и он заменится на новый:</p>
+
+<p><code>ruby
+  item = {:title =&gt; 'Зонтик', :status =&gt; 'Новый', :price =&gt; '400', :order =&gt; 'В наличии'}
+  # Заменится на:
+  item = {title: 'Зонтик', status: 'Новый', price: '400', order: 'В наличии'}
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

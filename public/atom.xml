@@ -4,7 +4,7 @@
   <title><![CDATA[Unblog]]></title>
   <link href="http://unblog.ikito.ru/atom.xml" rel="self"/>
   <link href="http://unblog.ikito.ru/"/>
-  <updated>2013-05-18T13:12:17+06:00</updated>
+  <updated>2013-06-07T14:14:28+06:00</updated>
   <id>http://unblog.ikito.ru/</id>
   <author>
     <name><![CDATA[Hakimovis]]></name>
@@ -12,6 +12,58 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Плагин для Sublime Text 2 для автозамены старого стиля хэшей на новый]]></title>
+    <link href="http://unblog.ikito.ru/blog/plaghin-dlia-sublime-text-2-dlia-avtozamieny-starogho-stilia-kheshiei-na-novyi"/>
+    <updated>2013-06-07T14:06:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/plaghin-dlia-sublime-text-2-dlia-avtozamieny-starogho-stilia-kheshiei-na-novyi</id>
+    <content type="html"><![CDATA[<p>Вот такой просненький плагин для Sublime Text 2 помогает заменять старый стиль хэшей Ruby {:foo => &#8216;bar&#8217;} на новый {foo: &#8216;bar&#8217;}</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">sublime</span><span class="o">,</span> <span class="nn">sublime_plugin</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">re</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">RubyNewHashStyle</span><span class="p">(</span><span class="n">sublime_plugin</span><span class="o">.</span><span class="n">TextCommand</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edit</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">selection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">sel</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+</span><span class='line'>        <span class="n">code_block</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">substr</span><span class="p">(</span><span class="n">selection</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">r&#39;:([a-z\d_]+) =&gt;&#39;</span><span class="p">,</span> <span class="s">r&#39;\1:&#39;</span><span class="p">,</span> <span class="n">code_block</span><span class="p">)</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">edit</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Чтобы повесить его на хоткей, в Preferences, Key Bindings - User вставляем:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="p">[</span>
+</span><span class='line'> <span class="p">{</span> <span class="s">&quot;keys&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;ctrl+shift+h&quot;</span><span class="p">],</span> <span class="s">&quot;command&quot;</span><span class="p">:</span> <span class="s">&quot;ruby_new_hash_style&quot;</span> <span class="p">}</span>
+</span><span class='line'><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Теперь можно просто выделить фрагмент кода с описанием хэша, нажать ctrl+shift+h и он заменится на новый:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">item</span> <span class="o">=</span> <span class="p">{</span><span class="ss">:title</span> <span class="o">=&gt;</span> <span class="s1">&#39;Зонтик&#39;</span><span class="p">,</span> <span class="ss">:status</span> <span class="o">=&gt;</span> <span class="s1">&#39;Новый&#39;</span><span class="p">,</span> <span class="ss">:price</span> <span class="o">=&gt;</span> <span class="s1">&#39;400&#39;</span><span class="p">,</span> <span class="ss">:order</span> <span class="o">=&gt;</span> <span class="s1">&#39;В наличии&#39;</span><span class="p">}</span>
+</span><span class='line'>  <span class="c1"># Заменится на:</span>
+</span><span class='line'>  <span class="n">item</span> <span class="o">=</span> <span class="p">{</span><span class="ss">title</span><span class="p">:</span> <span class="s1">&#39;Зонтик&#39;</span><span class="p">,</span> <span class="ss">status</span><span class="p">:</span> <span class="s1">&#39;Новый&#39;</span><span class="p">,</span> <span class="ss">price</span><span class="p">:</span> <span class="s1">&#39;400&#39;</span><span class="p">,</span> <span class="ss">order</span><span class="p">:</span> <span class="s1">&#39;В наличии&#39;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Добавляем генератор миграции и моделей к своему гему]]></title>
@@ -608,37 +660,6 @@ irb(main):007:1&gt;   puts "exception #{e.inspect}"
 irb(main):008:1&gt; end
 exception #&lt;InterruptCaught: InterruptCaught&gt;
 =&gt; nil
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Про деплой с Github на сервер]]></title>
-    <link href="http://unblog.ikito.ru/blog/pro-dieploi-s-github-na-siervier"/>
-    <updated>2013-03-01T14:07:00+06:00</updated>
-    <id>http://unblog.ikito.ru/blog/pro-dieploi-s-github-na-siervier</id>
-    <content type="html"><![CDATA[<p>На Habrahabr есть статья, где презентуется <a href="http://habrahabr.ru/post/171195/">скрипт для легкой настройки деплоя через гитхаб на сервер</a>. На всякий случай, запомним.</p>
-
-<p>Сам я пользуюсь простым как мыло способом:</p>
-
-<pre><code>#!/bin/sh
-echo "--- Generating static pages"
-bundle exec rake generate
-echo "--- Indexing changes"
-git add -A
-echo "--- Making commit: $1"
-git commit -m"deploy $1"
-echo "--- Pushing to master"
-git push origin master
-echo "--- Executing remote pull"
-ssh server.host.name /path/to/project/deploy_unblog.sh
-</code></pre>
-
-<p>И сам deploy_unblog.sh на сервере:</p>
-
-<pre><code>#!/bin/bash
-cd /path/to/project
-git pull
 </code></pre>
 ]]></content>
   </entry>

@@ -11,11 +11,7 @@
   <meta name="author" content="Hakimovis">
 
   
-  <meta name="description" content="В продолжение предыдущей темы расскажу как научить свой гем использовать генератор rails для добавления своей модели в проект: 1
-2
-3
-4
-$ rails &hellip;">
+  <meta name="description" content="Вот такой просненький плагин для Sublime Text 2 помогает заменять старый стиль хэшей Ruby {:foo => &#8216;bar&#8217;} на новый {foo: &#8216;bar&#8217 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -70,6 +66,87 @@ $ rails &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h2 class="entry-title"><a href="/blog/plaghin-dlia-sublime-text-2-dlia-avtozamieny-starogho-stilia-kheshiei-na-novyi">Плагин для Sublime Text 2 для автозамены старого стиля хэшей на новый</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-07T14:06:00+06:00" pubdate data-updated="true">07.06.2013</time>
+        
+         | <a href="/blog/plaghin-dlia-sublime-text-2-dlia-avtozamieny-starogho-stilia-kheshiei-na-novyi#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Вот такой просненький плагин для Sublime Text 2 помогает заменять старый стиль хэшей Ruby {:foo => &#8216;bar&#8217;} на новый {foo: &#8216;bar&#8217;}</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">sublime</span><span class="o">,</span> <span class="nn">sublime_plugin</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">re</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">RubyNewHashStyle</span><span class="p">(</span><span class="n">sublime_plugin</span><span class="o">.</span><span class="n">TextCommand</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edit</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">selection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">sel</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+</span><span class='line'>        <span class="n">code_block</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">substr</span><span class="p">(</span><span class="n">selection</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">r&#39;:([a-z\d_]+) =&gt;&#39;</span><span class="p">,</span> <span class="s">r&#39;\1:&#39;</span><span class="p">,</span> <span class="n">code_block</span><span class="p">)</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">edit</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Чтобы повесить его на хоткей, в Preferences, Key Bindings - User вставляем:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="p">[</span>
+</span><span class='line'> <span class="p">{</span> <span class="s">&quot;keys&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;ctrl+shift+h&quot;</span><span class="p">],</span> <span class="s">&quot;command&quot;</span><span class="p">:</span> <span class="s">&quot;ruby_new_hash_style&quot;</span> <span class="p">}</span>
+</span><span class='line'><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Теперь можно просто выделить фрагмент кода с описанием хэша, нажать ctrl+shift+h и он заменится на новый:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">item</span> <span class="o">=</span> <span class="p">{</span><span class="ss">:title</span> <span class="o">=&gt;</span> <span class="s1">&#39;Зонтик&#39;</span><span class="p">,</span> <span class="ss">:status</span> <span class="o">=&gt;</span> <span class="s1">&#39;Новый&#39;</span><span class="p">,</span> <span class="ss">:price</span> <span class="o">=&gt;</span> <span class="s1">&#39;400&#39;</span><span class="p">,</span> <span class="ss">:order</span> <span class="o">=&gt;</span> <span class="s1">&#39;В наличии&#39;</span><span class="p">}</span>
+</span><span class='line'>  <span class="c1"># Заменится на:</span>
+</span><span class='line'>  <span class="n">item</span> <span class="o">=</span> <span class="p">{</span><span class="ss">title</span><span class="p">:</span> <span class="s1">&#39;Зонтик&#39;</span><span class="p">,</span> <span class="ss">status</span><span class="p">:</span> <span class="s1">&#39;Новый&#39;</span><span class="p">,</span> <span class="ss">price</span><span class="p">:</span> <span class="s1">&#39;400&#39;</span><span class="p">,</span> <span class="ss">order</span><span class="p">:</span> <span class="s1">&#39;В наличии&#39;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -689,52 +766,6 @@ $ rails &hellip;">
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h2 class="entry-title"><a href="/blog/staroie-nieskol%27ko-ssylok-pro-ruby">Старое: несколько ссылок про Ruby</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-19T10:57:00+06:00" pubdate data-updated="true">19.04.2013</time>
-        
-         | <a href="/blog/staroie-nieskol%27ko-ssylok-pro-ruby#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Несколько ссылок, касающихся Ruby и рельсов из старого unblog.ikito.ru.</p>
-
-<ul>
-<li>Презентация про отличия ruby1.9 от ruby1.8.6 <a href="http://slideshow.rubyforge.org/ruby19.html">http://slideshow.rubyforge.org/ruby19.html</a></li>
-<li>Небольшое, но понятное руководство по созданию DSL на Ruby <a href="http://habrahabr.ru/post/48754/">http://habrahabr.ru/post/48754</a></li>
-<li>Про деплой рельсов <a href="http://linux.vsevteme.ru/2010/08/17/blog/nastroyka-rails-servera-na-ubuntu-10-04-server-edition">http://linux.vsevteme.ru</a></li>
-<li>Интерактивный учебник по руби <a href="https://github.com/edgecase/ruby_koans">https://github.com/edgecase/ruby_koans</a></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Старше</a>
@@ -750,6 +781,10 @@ $ rails &hellip;">
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/plaghin-dlia-sublime-text-2-dlia-avtozamieny-starogho-stilia-kheshiei-na-novyi">Плагин для Sublime Text 2 для автозамены старого стиля хэшей на новый</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/dobavliaiem-ghienierator-k-svoiemu-ghiemu">Добавляем генератор миграции и моделей к своему гему</a>
       </li>
     
@@ -763,10 +798,6 @@ $ rails &hellip;">
     
       <li class="post">
         <a href="/blog/ieshchie-odin-sposob-dieploia-s-pomoshch%27iu-git">Еще один способ деплоя с помощью Git</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/staroie-obzor-fil%27ma-zhielieznoie-niebo">Старое: Обзор фильма &#8220;Железное небо&#8221;</a>
       </li>
     
   </ul>

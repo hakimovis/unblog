@@ -11,7 +11,7 @@
   <meta name="author" content="Hakimovis">
 
   
-  <meta name="description" content="Вчера, 27 марта ездили на концерт Роберта Юлдашева и группы Курайсы в Уфимском ДК &#8220;Нефтяник&#8221;. Сказать, что концерт понравился, значит &hellip;">
+  <meta name="description" content="Несколько ссылок, касающихся Ruby и рельсов из старого unblog.ikito.ru. Презентация про отличия ruby1.9 от ruby1.8.6 http://slideshow.rubyforge.org/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,52 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h2 class="entry-title"><a href="/blog/staroie-nieskol%27ko-ssylok-pro-ruby">Старое: несколько ссылок про Ruby</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-19T10:57:00+06:00" pubdate data-updated="true">19.04.2013</time>
+        
+         | <a href="/blog/staroie-nieskol%27ko-ssylok-pro-ruby#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Несколько ссылок, касающихся Ruby и рельсов из старого unblog.ikito.ru.</p>
+
+<ul>
+<li>Презентация про отличия ruby1.9 от ruby1.8.6 <a href="http://slideshow.rubyforge.org/ruby19.html">http://slideshow.rubyforge.org/ruby19.html</a></li>
+<li>Небольшое, но понятное руководство по созданию DSL на Ruby <a href="http://habrahabr.ru/post/48754/">http://habrahabr.ru/post/48754</a></li>
+<li>Про деплой рельсов <a href="http://linux.vsevteme.ru/2010/08/17/blog/nastroyka-rails-servera-na-ubuntu-10-04-server-edition">http://linux.vsevteme.ru</a></li>
+<li>Интерактивный учебник по руби <a href="https://github.com/edgecase/ruby_koans">https://github.com/edgecase/ruby_koans</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -553,66 +599,6 @@ exception #&lt;InterruptCaught: InterruptCaught&gt;
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h2 class="entry-title"><a href="/blog/pro-dieploi-s-github-na-siervier">Про деплой с Github на сервер</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-01T14:07:00+06:00" pubdate data-updated="true">01.03.2013</time>
-        
-         | <a href="/blog/pro-dieploi-s-github-na-siervier#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>На Habrahabr есть статья, где презентуется <a href="http://habrahabr.ru/post/171195/">скрипт для легкой настройки деплоя через гитхаб на сервер</a>. На всякий случай, запомним.</p>
-
-<p>Сам я пользуюсь простым как мыло способом:</p>
-
-<pre><code>#!/bin/sh
-echo "--- Generating static pages"
-bundle exec rake generate
-echo "--- Indexing changes"
-git add -A
-echo "--- Making commit: $1"
-git commit -m"deploy $1"
-echo "--- Pushing to master"
-git push origin master
-echo "--- Executing remote pull"
-ssh server.host.name /path/to/project/deploy_unblog.sh
-</code></pre>
-
-<p>И сам deploy_unblog.sh на сервере:</p>
-
-<pre><code>#!/bin/bash
-cd /path/to/project
-git pull
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Старше</a>
@@ -630,6 +616,10 @@ git pull
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/plaghin-dlia-sublime-text-2-dlia-avtozamieny-starogho-stilia-kheshiei-na-novyi">Плагин для Sublime Text 2 для автозамены старого стиля хэшей на новый</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/dobavliaiem-ghienierator-k-svoiemu-ghiemu">Добавляем генератор миграции и моделей к своему гему</a>
       </li>
     
@@ -643,10 +633,6 @@ git pull
     
       <li class="post">
         <a href="/blog/ieshchie-odin-sposob-dieploia-s-pomoshch%27iu-git">Еще один способ деплоя с помощью Git</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/staroie-obzor-fil%27ma-zhielieznoie-niebo">Старое: Обзор фильма &#8220;Железное небо&#8221;</a>
       </li>
     
   </ul>

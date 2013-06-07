@@ -11,7 +11,7 @@
   <meta name="author" content="Hakimovis">
 
   
-  <meta name="description" content="Внимательные читатели, наверное, обратили внимание, что весь этот текст нужен только чтобы было на что смотреть, любоваться пустыми страницами нет &hellip;">
+  <meta name="description" content="На Habrahabr есть статья, где презентуется скрипт для легкой настройки деплоя через гитхаб на сервер. На всякий случай, запомним. Сам я пользуюсь &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,66 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h2 class="entry-title"><a href="/blog/pro-dieploi-s-github-na-siervier">Про деплой с Github на сервер</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-01T14:07:00+06:00" pubdate data-updated="true">01.03.2013</time>
+        
+         | <a href="/blog/pro-dieploi-s-github-na-siervier#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>На Habrahabr есть статья, где презентуется <a href="http://habrahabr.ru/post/171195/">скрипт для легкой настройки деплоя через гитхаб на сервер</a>. На всякий случай, запомним.</p>
+
+<p>Сам я пользуюсь простым как мыло способом:</p>
+
+<pre><code>#!/bin/sh
+echo "--- Generating static pages"
+bundle exec rake generate
+echo "--- Indexing changes"
+git add -A
+echo "--- Making commit: $1"
+git commit -m"deploy $1"
+echo "--- Pushing to master"
+git push origin master
+echo "--- Executing remote pull"
+ssh server.host.name /path/to/project/deploy_unblog.sh
+</code></pre>
+
+<p>И сам deploy_unblog.sh на сервере:</p>
+
+<pre><code>#!/bin/bash
+cd /path/to/project
+git pull
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -175,6 +235,10 @@ Invalid gemspec in [/Users/hakimovis/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/plaghin-dlia-sublime-text-2-dlia-avtozamieny-starogho-stilia-kheshiei-na-novyi">Плагин для Sublime Text 2 для автозамены старого стиля хэшей на новый</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/dobavliaiem-ghienierator-k-svoiemu-ghiemu">Добавляем генератор миграции и моделей к своему гему</a>
       </li>
     
@@ -188,10 +252,6 @@ Invalid gemspec in [/Users/hakimovis/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.
     
       <li class="post">
         <a href="/blog/ieshchie-odin-sposob-dieploia-s-pomoshch%27iu-git">Еще один способ деплоя с помощью Git</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/staroie-obzor-fil%27ma-zhielieznoie-niebo">Старое: Обзор фильма &#8220;Железное небо&#8221;</a>
       </li>
     
   </ul>
