@@ -4,7 +4,7 @@
   <title><![CDATA[Unblog]]></title>
   <link href="http://unblog.ikito.ru/atom.xml" rel="self"/>
   <link href="http://unblog.ikito.ru/"/>
-  <updated>2013-06-07T14:14:28+06:00</updated>
+  <updated>2013-06-13T03:08:58+06:00</updated>
   <id>http://unblog.ikito.ru/</id>
   <author>
     <name><![CDATA[Hakimovis]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Стайлгайды Ruby на Github]]></title>
+    <link href="http://unblog.ikito.ru/blog/stailghaidy-ruby-na-github"/>
+    <updated>2013-06-13T03:02:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/stailghaidy-ruby-na-github</id>
+    <content type="html"><![CDATA[<p>Вполне разумные стайлгайды для языка Ruby, которые используются разработчиками Github: <a href="https://github.com/styleguide/ruby">https://github.com/styleguide/ruby</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Плагин для Sublime Text 2 для автозамены старого стиля хэшей на новый]]></title>
@@ -637,29 +646,6 @@ $ stash pull-request myBranch master @michael
 <p>создает pull request из текущей ветки в master. И после небольших шаманств можно будет писать:</p>
 
 <pre><code>$ git create-pull-request master
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Интересное]]></title>
-    <link href="http://unblog.ikito.ru/blog/something-strange"/>
-    <updated>2013-03-12T17:47:00+06:00</updated>
-    <id>http://unblog.ikito.ru/blog/something-strange</id>
-    <content type="html"><![CDATA[<p>Интересный паттерн чтобы пометить, что исключения принадлежат к определенной группе. Выглядит шаманством, но работает.</p>
-
-<pre><code>irb(main):001:0&gt; module SomeException; end
-=&gt; nil
-irb(main):002:0&gt; class InterruptCaught      &lt; SystemExit;          include SomeException end
-=&gt; InterruptCaught
-irb(main):003:0&gt;
-irb(main):004:0* begin
-irb(main):005:1*   raise InterruptCaught
-irb(main):006:1&gt; rescue SomeException =&gt; e
-irb(main):007:1&gt;   puts "exception #{e.inspect}"
-irb(main):008:1&gt; end
-exception #&lt;InterruptCaught: InterruptCaught&gt;
-=&gt; nil
 </code></pre>
 ]]></content>
   </entry>

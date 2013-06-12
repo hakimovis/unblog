@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: styleguide | Unblog]]></title>
+  <link href="http://unblog.ikito.ru/blog/categories/styleguide/atom.xml" rel="self"/>
+  <link href="http://unblog.ikito.ru/"/>
+  <updated>2013-06-13T03:08:58+06:00</updated>
+  <id>http://unblog.ikito.ru/</id>
+  <author>
+    <name><![CDATA[Hakimovis]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Стайлгайды Ruby на Github]]></title>
+    <link href="http://unblog.ikito.ru/blog/stailghaidy-ruby-na-github"/>
+    <updated>2013-06-13T03:02:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/stailghaidy-ruby-na-github</id>
+    <content type="html"><![CDATA[<p>Вполне разумные стайлгайды для языка Ruby, которые используются разработчиками Github: <a href="https://github.com/styleguide/ruby">https://github.com/styleguide/ruby</a></p>
+]]></content>
+  </entry>
+  
+</feed>
