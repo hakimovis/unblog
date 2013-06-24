@@ -4,7 +4,7 @@
   <title><![CDATA[Unblog]]></title>
   <link href="http://unblog.ikito.ru/atom.xml" rel="self"/>
   <link href="http://unblog.ikito.ru/"/>
-  <updated>2013-06-13T03:08:58+06:00</updated>
+  <updated>2013-06-24T12:31:55+06:00</updated>
   <id>http://unblog.ikito.ru/</id>
   <author>
     <name><![CDATA[Hakimovis]]></name>
@@ -12,6 +12,91 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Тестирование Rake-тасков]]></title>
+    <link href="http://unblog.ikito.ru/blog/tiestirovaniie-rake-taskov"/>
+    <updated>2013-06-24T12:23:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/tiestirovaniie-rake-taskov</id>
+    <content type="html"><![CDATA[<p>Вот тут <a href="http://robots.thoughtbot.com/post/11957424161/test-rake-tasks-like-a-boss">http://robots.thoughtbot.com</a> подсмотрел более-менее красивый способ тестирования rake-тасков с помощью rspec. Сначала создадим вспомогательный файл:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># spec/support/shared_contexts/rake.rb</span>
+</span><span class='line'><span class="nb">require</span> <span class="s2">&quot;rake&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">shared_context</span> <span class="s2">&quot;rake&quot;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">let</span><span class="p">(</span><span class="ss">:rake</span><span class="p">)</span>      <span class="p">{</span> <span class="ss">Rake</span><span class="p">:</span><span class="ss">:Application</span><span class="o">.</span><span class="n">new</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">let</span><span class="p">(</span><span class="ss">:task_name</span><span class="p">)</span> <span class="p">{</span> <span class="nb">self</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">top_level_description</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">let</span><span class="p">(</span><span class="ss">:task_path</span><span class="p">)</span> <span class="p">{</span> <span class="s2">&quot;lib/tasks/</span><span class="si">#{</span><span class="n">task_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="si">}</span><span class="s2">&quot;</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">subject</span>         <span class="p">{</span> <span class="n">rake</span><span class="o">[</span><span class="n">task_name</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">loaded_files_excluding_current_rake_file</span>
+</span><span class='line'>    <span class="vg">$&quot;</span><span class="o">.</span><span class="n">reject</span> <span class="p">{</span><span class="o">|</span><span class="n">file</span><span class="o">|</span> <span class="n">file</span> <span class="o">==</span> <span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">task_path</span><span class="si">}</span><span class="s2">.rake&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_s</span> <span class="p">}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">before</span> <span class="k">do</span>
+</span><span class='line'>    <span class="no">Rake</span><span class="o">.</span><span class="n">application</span> <span class="o">=</span> <span class="n">rake</span>
+</span><span class='line'>    <span class="no">Rake</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">rake_require</span><span class="p">(</span><span class="n">task_path</span><span class="p">,</span> <span class="o">[</span><span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">to_s</span><span class="o">]</span><span class="p">,</span> <span class="n">loaded_files_excluding_current_rake_file</span><span class="p">)</span>
+</span><span class='line'>    <span class="ss">Rake</span><span class="p">:</span><span class="ss">:Task</span><span class="o">.</span><span class="n">define_task</span><span class="p">(</span><span class="ss">:environment</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">exec_rake_task</span>
+</span><span class='line'>    <span class="n">subject</span><span class="o">.</span><span class="n">invoke</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Теперь можно писать сами спеки, назвая блок describe именем rake-таска:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">describe</span> <span class="s1">&#39;world:destroy&#39;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">include_context</span> <span class="s1">&#39;rake&#39;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">it</span> <span class="s1">&#39;creates instance of WorldDestroyer and calls #destroy! method&#39;</span> <span class="k">do</span>
+</span><span class='line'>    <span class="no">WorldDestroyer</span><span class="o">.</span><span class="n">any_instance</span><span class="o">.</span><span class="n">should_receive</span><span class="p">(</span><span class="ss">:destroy!</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">exec_rake_task</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Стайлгайды Ruby на Github]]></title>
@@ -622,31 +707,6 @@ end
 </code></pre>
 
 <p>если в xml_body приходит невалидный XML с русскими буквами. Точнее, ошибку вызывает &#8220;XML: #{xml_body}&#8221; в тексте исключения. Если ее убрать (а она там и правда не нужна), то ошибка не возникает.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Stash: pull request из консоли]]></title>
-    <link href="http://unblog.ikito.ru/blog/stash-pull-requests-from-the-command-line"/>
-    <updated>2013-03-13T01:23:00+06:00</updated>
-    <id>http://unblog.ikito.ru/blog/stash-pull-requests-from-the-command-line</id>
-    <content type="html"><![CDATA[<p>Вот такой способ делать пулл-реквесты с консоли для Atlassian Stash: <a href="http://blogs.atlassian.com/2012/11/stash-pull-requests-from-the-command-line/">http://blogs.atlassian.com/2012/11/stash-pull-requests-from-the-command-line/</a></p>
-
-<p>И если кратко:</p>
-
-<pre><code>$ gem install atlassian-stash
-$ stash pull-request myBranch master @michael
-</code></pre>
-
-<p>создает pull request из ветки myBranch в master с ревьюером &#8220;michael&#8221;. Или</p>
-
-<pre><code>$ stash pull-request master
-</code></pre>
-
-<p>создает pull request из текущей ветки в master. И после небольших шаманств можно будет писать:</p>
-
-<pre><code>$ git create-pull-request master
-</code></pre>
 ]]></content>
   </entry>
   

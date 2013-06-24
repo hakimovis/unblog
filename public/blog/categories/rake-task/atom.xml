@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: rake-task | Unblog]]></title>
+  <link href="http://unblog.ikito.ru/blog/categories/rake-task/atom.xml" rel="self"/>
+  <link href="http://unblog.ikito.ru/"/>
+  <updated>2013-06-24T12:31:55+06:00</updated>
+  <id>http://unblog.ikito.ru/</id>
+  <author>
+    <name><![CDATA[Hakimovis]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Тестирование Rake-тасков]]></title>
+    <link href="http://unblog.ikito.ru/blog/tiestirovaniie-rake-taskov"/>
+    <updated>2013-06-24T12:23:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/tiestirovaniie-rake-taskov</id>
+    <content type="html"><![CDATA[<p>Вот тут <a href="http://robots.thoughtbot.com/post/11957424161/test-rake-tasks-like-a-boss">http://robots.thoughtbot.com</a> подсмотрел более-менее красивый способ тестирования rake-тасков с помощью rspec. Сначала создадим вспомогательный файл:
+``` ruby</p>
+
+<h1>spec/support/shared_contexts/rake.rb</h1>
+
+<p>require "rake"</p>
+
+<p>shared_context "rake" do
+  let(:rake)      { Rake::Application.new }
+  let(:task_name) { self.class.top_level_description }
+  let(:task_path) { "lib/tasks/#{task_name.split(":").first}" }
+  subject         { rake[task_name] }</p>
+
+<p>  def loaded_files_excluding_current_rake_file</p>
+
+<pre><code>$".reject {|file| file == Rails.root.join("#{task_path}.rake").to_s }
+</code></pre>
+
+<p>  end</p>
+
+<p>  before do</p>
+
+<pre><code>Rake.application = rake
+Rake.application.rake_require(task_path, [Rails.root.to_s], loaded_files_excluding_current_rake_file)
+Rake::Task.define_task(:environment)
+</code></pre>
+
+<p>  end</p>
+
+<p>  def exec_rake_task</p>
+
+<pre><code>subject.invoke
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>Теперь можно писать сами спеки, назвая блок describe именем rake-таска:
+``` ruby
+require 'spec_helper'</p>
+
+<p>describe 'world:destroy' do
+  include_context 'rake'</p>
+
+<p>  it 'creates instance of WorldDestroyer and calls #destroy! method' do</p>
+
+<pre><code>WorldDestroyer.any_instance.should_receive(:destroy!)
+exec_rake_task
+</code></pre>
+
+<p>  end</p>
+
+<p>end
+```</p>
+]]></content>
+  </entry>
+  
+</feed>

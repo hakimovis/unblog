@@ -11,7 +11,7 @@
   <meta name="author" content="Hakimovis">
 
   
-  <meta name="description" content="Интересный паттерн чтобы пометить, что исключения принадлежат к определенной группе. Выглядит шаманством, но работает. irb(main):001:0&gt; module &hellip;">
+  <meta name="description" content="Вот такой способ делать пулл-реквесты с консоли для Atlassian Stash: http://blogs.atlassian.com/2012/11/stash-pull-requests-from-the-command-line/ И &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,60 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h2 class="entry-title"><a href="/blog/stash-pull-requests-from-the-command-line">Stash: Pull Request из консоли</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-13T01:23:00+06:00" pubdate data-updated="true">13.03.2013</time>
+        
+         | <a href="/blog/stash-pull-requests-from-the-command-line#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Вот такой способ делать пулл-реквесты с консоли для Atlassian Stash: <a href="http://blogs.atlassian.com/2012/11/stash-pull-requests-from-the-command-line/">http://blogs.atlassian.com/2012/11/stash-pull-requests-from-the-command-line/</a></p>
+
+<p>И если кратко:</p>
+
+<pre><code>$ gem install atlassian-stash
+$ stash pull-request myBranch master @michael
+</code></pre>
+
+<p>создает pull request из ветки myBranch в master с ревьюером &#8220;michael&#8221;. Или</p>
+
+<pre><code>$ stash pull-request master
+</code></pre>
+
+<p>создает pull request из текущей ветки в master. И после небольших шаманств можно будет писать:</p>
+
+<pre><code>$ git create-pull-request master
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -287,6 +341,10 @@ Invalid gemspec in [/Users/hakimovis/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/tiestirovaniie-rake-taskov">Тестирование Rake-тасков</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/stailghaidy-ruby-na-github">Стайлгайды Ruby на Github</a>
       </li>
     
@@ -300,10 +358,6 @@ Invalid gemspec in [/Users/hakimovis/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.
     
       <li class="post">
         <a href="/blog/ispol%27zovaniie-i-tiestirovaniie-modieliei-activerecord-v-svoiem-ghiemie">Использование и тестирование моделей ActiveRecord в своем геме</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/ruby-on-rails-i-zaghruzka-izobrazhienii-na-amazon-s3-storage">Ruby On Rails и загрузка изображений на Amazon S3 Storage</a>
       </li>
     
   </ul>
