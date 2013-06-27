@@ -1,124 +1,132 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
+        <loc>http://unblog.ikito.ru/blog/lorem-ipsum</loc>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
+    </url>
+    <url>
+        <loc>http://unblog.ikito.ru/blog/aenean-posuere</loc>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
+    </url>
+    <url>
         <loc>http://unblog.ikito.ru/blog/probnyi-kamien%27</loc>
-        <lastmod>2013-02-28T23:32:50+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>http://unblog.ikito.ru/blog/prodolzhaiem-bried</loc>
-        <lastmod>2013-03-01T00:58:21+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>http://unblog.ikito.ru/blog/pro-dieploi-s-github-na-siervier</loc>
-        <lastmod>2013-04-19T11:21:56+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>http://unblog.ikito.ru/blog/something-strange</loc>
-        <lastmod>2013-03-12T17:51:30+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>http://unblog.ikito.ru/blog/stash-pull-requests-from-the-command-line</loc>
-        <lastmod>2013-03-13T01:36:19+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>
             http://unblog.ikito.ru/blog/strannaia-probliema-s-iskliuchieniiem-encoding-compatibilityerror
         </loc>
-        <lastmod>2013-03-14T01:04:32+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>http://unblog.ikito.ru/blog/uznaitie-bundler-luchshie</loc>
-        <lastmod>2013-03-15T22:55:43+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>http://unblog.ikito.ru/blog/kontsiert-iuldashieva-i-kuraisy</loc>
-        <lastmod>2013-03-20T14:16:21+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>http://unblog.ikito.ru/blog/trieilier-mul%27tfil%27ma-ku-kin-dza-dza</loc>
-        <lastmod>2013-03-20T14:28:30+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>http://unblog.ikito.ru/blog/udalieniie-dublikatov-po-dvum-poliam</loc>
-        <lastmod>2013-03-25T16:28:13+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>http://unblog.ikito.ru/blog/dumai-kak-git</loc>
-        <lastmod>2013-03-25T16:38:42+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>http://unblog.ikito.ru/blog/kontsiert-robierta-iuldashieva</loc>
-        <lastmod>2013-03-28T18:53:41+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>http://unblog.ikito.ru/blog/staroie-nieskol%27ko-ssylok-pro-ruby</loc>
-        <lastmod>2013-04-19T11:22:19+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>http://unblog.ikito.ru/blog/staroie-istoriia-pro-noski</loc>
-        <lastmod>2013-04-19T11:08:17+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>http://unblog.ikito.ru/blog/staroie-kitaitsy-i-kirpichi</loc>
-        <lastmod>2013-04-19T11:10:56+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>http://unblog.ikito.ru/blog/staroie-khoroshii-tielievizor</loc>
-        <lastmod>2013-04-19T11:16:23+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>http://unblog.ikito.ru/blog/staroie-i-ieshchie-nieskol%27ko-ssylok</loc>
-        <lastmod>2013-04-19T11:22:09+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>http://unblog.ikito.ru/blog/staroie-obzor-fil%27ma-zhielieznoie-niebo</loc>
-        <lastmod>2013-04-19T11:22:27+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>http://unblog.ikito.ru/blog/ieshchie-odin-sposob-dieploia-s-pomoshch%27iu-git</loc>
-        <lastmod>2013-05-07T13:29:39+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>
             http://unblog.ikito.ru/blog/ruby-on-rails-i-zaghruzka-izobrazhienii-na-amazon-s3-storage
         </loc>
-        <lastmod>2013-05-13T00:29:54+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>
             http://unblog.ikito.ru/blog/ispol%27zovaniie-i-tiestirovaniie-modieliei-activerecord-v-svoiem-ghiemie
         </loc>
-        <lastmod>2013-05-18T12:56:13+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>http://unblog.ikito.ru/blog/dobavliaiem-ghienierator-k-svoiemu-ghiemu</loc>
-        <lastmod>2013-05-18T13:11:41+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>
             http://unblog.ikito.ru/blog/plaghin-dlia-sublime-text-2-dlia-avtozamieny-starogho-stilia-kheshiei-na-novyi
         </loc>
-        <lastmod>2013-06-07T14:12:40+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>http://unblog.ikito.ru/blog/stailghaidy-ruby-na-github</loc>
-        <lastmod>2013-06-13T03:05:08+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>http://unblog.ikito.ru/blog/tiestirovaniie-rake-taskov</loc>
-        <lastmod>2013-06-24T12:30:43+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>http://unblog.ikito.ru/blog/stoit-posmotriet%27</loc>
-        <lastmod>2013-06-27T10:59:16+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>http://unblog.ikito.ru/blog/archives/</loc>
-        <lastmod>2013-06-27T10:59:16+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>http://unblog.ikito.ru/</loc>
-        <lastmod>2013-06-27T10:59:16+06:00</lastmod>
+        <lastmod>2013-06-27T11:27:20+06:00</lastmod>
     </url>
     <url>
         <loc>http://unblog.ikito.ru/robots.txt</loc>

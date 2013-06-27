@@ -4,8 +4,6 @@
 <!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
-  <meta name='yandex-verification' content='488cc353f829f8cf' />
-
   <meta charset="utf-8">
   <title>Unblog</title>
   <meta name="author" content="Hakimovis">
@@ -29,14 +27,35 @@ if xml_document.errors.present? raise ServiceError.new("Invalid XML: #{ &hellip;
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Unblog" type="application/atom+xml">
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Arvo:400,400italic,700,700italic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Merienda:700" rel="stylesheet" type="text/css">
 
   
 
 </head>
 
-<body   >
+<body>
+  <div id="navigation">
+    <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:unblog.ikito.ru" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  </div>
   <header role="banner"><hgroup>
   <h1><a href="/">Unblog</a></h1>
   
@@ -45,27 +64,10 @@ if xml_document.errors.present? raise ServiceError.new("Invalid XML: #{ &hellip;
 </hgroup>
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:unblog.ikito.ru" />
-    <input class="search" type="text" name="q" results="0" placeholder="Гуглить"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/blog/archives">Содержание</a></li>
-  <li><a href="/">Записи</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
+  <div id="body"  >
+    <div id="main">
+      <div id="content">
+        <div class="blog-index">
   
   
   
@@ -73,7 +75,7 @@ if xml_document.errors.present? raise ServiceError.new("Invalid XML: #{ &hellip;
       
   <header>
     
-      <h2 class="entry-title"><a href="/blog/strannaia-probliema-s-iskliuchieniiem-encoding-compatibilityerror">Странная проблема с исключением Encoding::CompatibilityError</a></h1>
+      <h1 class="entry-title"><a href="/blog/strannaia-probliema-s-iskliuchieniiem-encoding-compatibilityerror">Странная проблема с исключением Encoding::CompatibilityError</a></h1>
     
     
       <p class="meta">
@@ -124,7 +126,7 @@ end
       
   <header>
     
-      <h2 class="entry-title"><a href="/blog/stash-pull-requests-from-the-command-line">Stash: Pull Request из консоли</a></h1>
+      <h1 class="entry-title"><a href="/blog/stash-pull-requests-from-the-command-line">Stash: Pull Request из консоли</a></h1>
     
     
       <p class="meta">
@@ -178,7 +180,7 @@ $ stash pull-request myBranch master @michael
       
   <header>
     
-      <h2 class="entry-title"><a href="/blog/something-strange">Интересное</a></h1>
+      <h1 class="entry-title"><a href="/blog/something-strange">Интересное</a></h1>
     
     
       <p class="meta">
@@ -230,7 +232,7 @@ exception #&lt;InterruptCaught: InterruptCaught&gt;
       
   <header>
     
-      <h2 class="entry-title"><a href="/blog/pro-dieploi-s-github-na-siervier">Про деплой с Github на сервер</a></h1>
+      <h1 class="entry-title"><a href="/blog/pro-dieploi-s-github-na-siervier">Про деплой с Github на сервер</a></h1>
     
     
       <p class="meta">
@@ -290,7 +292,7 @@ git pull
       
   <header>
     
-      <h2 class="entry-title"><a href="/blog/prodolzhaiem-bried">Продолжаем бред</a></h1>
+      <h1 class="entry-title"><a href="/blog/prodolzhaiem-bried">Продолжаем бред</a></h1>
     
     
       <p class="meta">
@@ -332,7 +334,7 @@ git pull
       
   <header>
     
-      <h2 class="entry-title"><a href="/blog/probnyi-kamien%27">Пробный камень</a></h1>
+      <h1 class="entry-title"><a href="/blog/probnyi-kamien%27">Пробный камень</a></h1>
     
     
       <p class="meta">
@@ -378,18 +380,134 @@ Invalid gemspec in [/Users/hakimovis/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/aenean-posuere">Aenean Posuere</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-02T06:29:00+06:00" pubdate data-updated="true">02.10.2012</time>
+        
+         | <a href="/blog/aenean-posuere#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Aenean posuere</h2>
+
+<p>odio eget imperdiet ullamcorper, nulla libero auctor dui, at adipiscing tortor neque nec lacus. Donec <a href="http://foo.com">ac mi luctus</a> nisi vestibulum scelerisque. Integer congue metus in nisi venenatis sit amet sagittis tortor sodales. Phasellus lobortis sollicitudin porttitor. Integer vel enim eu nunc laoreet pharetra eget nec nibh. Nam <a href="http://github.com">orci quam</a>, facilisis a accumsan vel, ultricies at felis. Nullam erat ipsum, tempor a viverra id, pulvinar non odio. Suspendisse eu turpis ligula, quis mattis dolor. Ut pellentesque mattis ipsum in ornare. Nullam non metus lacus. Vivamus sed euismod mi. Sed sed tellus dui, molestie dignissim turpis.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/aenean-posuere">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/lorem-ipsum">Lorem Ipsum</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-01T17:42:00+06:00" pubdate data-updated="true">01.10.2012</time>
+        
+         | <a href="/blog/lorem-ipsum#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Lorem ipsum dolor</h2>
+
+<p>sit amet, consectetur adipiscing elit. Aenean tincidunt, orci id placerat semper, nibh elit cursus velit, quis porta quam tellus sed orci. In porttitor volutpat eros, et hendrerit nunc pulvinar a. Donec</p>
+
+<blockquote><p>malesuada pulvinar dui, vitae egestas nunc dignissim eu. Donec auctor velit ac erat</p></blockquote>
+
+
+<p> porta commodo. Curabitur consequat nulla eget ipsum malesuada id tempor urna porttitor. Phasellus eu mauris odio. Vivamus eget lectus nec massa tempus pulvinar at ac libero. Aliquam sodales enim sit amet risus posuere sed porttitor felis venenatis. Pellentesque malesuada gravida ligula luctus lacinia.</p>
+
+<h2>Donec auctor</h2>
+
+<p>nisl vel fringilla varius, lectus dui faucibus est, sed fermentum neque nisl eu lectus. Vestibulum id arcu dui, nec tristique mauris. Duis gravida augue a arcu sagittis id aliquet velit dignissim. Nulla</p>
+
+<h3>interdum</h3>
+
+<p><img src="http://placekitten.com/890/280"></p>
+
+<p>lacinia dui, vel auctor leo vulputate eget. Donec at urna quam. Praesent ac ante mauris, non tempus urna. Donec vitae ligula iaculis dui aliquet imperdiet ut a sem. Nulla eu nulla felis. Integer fermentum laoreet fringilla. Nunc vel sem rhoncus arcu consectetur scelerisque. Sed elementum tempor est in vehicula.</p>
+
+<h3>Vivamus</h3>
+
+<p>ac massa nunc, at facilisis nunc. Vestibulum rhoncus velit in dui tincidunt ac sollicitudin nisi auctor. Aenean sapien leo, vestibulum non sollicitudin vitae, dignissim nec lacus. Pellentesque dapibus lectus bibendum turpis malesuada sodales. Praesent a leo quam, in pellentesque est.</p>
+
+<h2>Praesent tristique</h2>
+
+<p>molestie felis, at interdum orci rutrum vel. Sed et leo vel nunc dictum lacinia ullamcorper a velit. Vestibulum purus est, ornare sit amet eleifend eget, mollis non leo. Fusce mollis, dui at consequat hendrerit, lectus sapien pharetra quam, sit amet pharetra diam elit vitae augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam pulvinar laoreet leo, vel rutrum nibh convallis sed. Curabitur laoreet posuere dui quis blandit. Curabitur sed lacus neque, vel fringilla est. Vestibulum sit amet ligula eget sapien ultricies scelerisque. Donec dictum porta auctor. Donec placerat rutrum condimentum. Aliquam fermentum semper pulvinar. Proin nisi est, ultrices vitae suscipit quis, ultrices vel justo.</p>
+
+<h2>Curabitur sem</h2>
+
+<p>ligula, vestibulum eget ultricies vitae, aliquam eu turpis. Mauris eleifend lacinia mi, a elementum turpis consectetur vel. Ut commodo metus et felis tempor vitae pharetra turpis euismod. Duis purus nunc, molestie ornare suscipit in, porta id neque. Cras pellentesque faucibus malesuada. Fusce porttitor, metus at vestibulum varius, nulla nisi lacinia nisi, at fermentum arcu risus nec ante. Aenean consequat volutpat leo nec tempus. Integer elementum felis a tortor congue facilisis. Donec dictum vulputate pulvinar. Pellentesque porttitor bibendum rutrum. Donec sed gravida justo. Duis imperdiet quam eu libero adipiscing non facilisis est tempus. Proin nec tellus libero. Aliquam tincidunt, ligula id auctor semper, lorem metus rutrum elit, eget iaculis turpis justo at velit. Sed faucibus, urna id consectetur consequat, nisl erat pretium diam, eget molestie lacus erat ac arcu.</p>
+
+<h2>Suspendisse potenti</h2>
+
+<p>Nunc turpis augue, blandit quis euismod ac, eleifend eget enim. Nulla rutrum tellus id magna lobortis fermentum. Aliquam pretium vulputate erat, in mattis justo gravida vel. Aliquam erat volutpat. Nunc sem orci, adipiscing ultrices sagittis at, fringilla nec ipsum. Integer ultrices volutpat convallis. Quisque vehicula auctor posuere. Vivamus non diam ut nisi posuere rhoncus. Suspendisse non tellus tortor. Vivamus id tellus sed mauris pulvinar rhoncus.</p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
-    <a href="/blog/archives">Содержание</a>
+    <a href="/blog/archives">Blog Archives</a>
     
-    <a class="next" href="/blog/page/2/">Новее &rarr;</a>
+    <a class="next" href="/blog/page/2/">Newer &rarr;</a>
     
   </div>
 </div>
 <aside class="sidebar">
   
     <section>
-  <h2>В предыдущих сериях</h1>
+  <h1>Recent Posts</h1>
   <ul id="recent_posts">
     
       <li class="post">
@@ -417,12 +535,10 @@ Invalid gemspec in [/Users/hakimovis/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.
 
 
 <section>
-
 <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/hakimovis" data-widget-id="350118652802117632">Tweets by @hakimovis</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
- </section>
-
+</section>
 
 
 
@@ -431,15 +547,15 @@ Invalid gemspec in [/Users/hakimovis/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.
   
 </aside>
 
+      </div>
     </div>
-  </div>
-  <footer role="contentinfo"><p>
+    <footer role="contentinfo"><p>
   Copyright &copy; 2013 - Hakimovis -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>. Design by <a href="http://octopressthemes.com">Octopress Themes</a></span>
 </p>
 
 </footer>
-  
+    
 
 <script type="text/javascript">
       var disqus_shortname = 'unblog-ikito';
@@ -472,40 +588,8 @@ Invalid gemspec in [/Users/hakimovis/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.
 
 
 
-<!-- Yandex.Metrika informer -->
-<a href="http://metrika.yandex.ru/stat/?id=11385481&amp;from=informer"
-target="_blank" rel="nofollow"><img src="//bs.yandex.ru/informer/11385481/3_0_FFFFFFFF_FFFFFFFF_0_pageviews"
-style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" onclick="try{Ya.Metrika.informer({i:this,id:11385481,lang:'ru'});return false}catch(e){}"/></a>
-<!-- /Yandex.Metrika informer -->
-
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-(function (d, w, c) {
-    (w[c] = w[c] || []).push(function() {
-        try {
-            w.yaCounter11385481 = new Ya.Metrika({id:11385481,
-                    webvisor:true,
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true});
-        } catch(e) { }
-    });
-
-    var n = d.getElementsByTagName("script")[0],
-        s = d.createElement("script"),
-        f = function () { n.parentNode.insertBefore(s, n); };
-    s.type = "text/javascript";
-    s.async = true;
-    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
-
-    if (w.opera == "[object Opera]") {
-        d.addEventListener("DOMContentLoaded", f, false);
-    } else { f(); }
-})(document, window, "yandex_metrika_callbacks");
-</script>
-<noscript><div><img src="//mc.yandex.ru/watch/11385481" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
 
 
+  </div>
 </body>
 </html>
