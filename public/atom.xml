@@ -4,7 +4,7 @@
   <title><![CDATA[Unblog]]></title>
   <link href="http://unblog.ikito.ru/atom.xml" rel="self"/>
   <link href="http://unblog.ikito.ru/"/>
-  <updated>2013-06-27T10:57:32+06:00</updated>
+  <updated>2013-06-27T10:59:37+06:00</updated>
   <id>http://unblog.ikito.ru/</id>
   <author>
     <name><![CDATA[Hakimovis]]></name>
@@ -18,14 +18,18 @@
     <link href="http://unblog.ikito.ru/blog/stoit-posmotriet%27"/>
     <updated>2013-06-27T10:55:00+06:00</updated>
     <id>http://unblog.ikito.ru/blog/stoit-posmotriet&#8217;</id>
-    <content type="html"><![CDATA[<p>Просто список хороших фильмов и сериалов, которые можно посмотреть для хорошего настроения:
-* Фильм &#8220;Башмачник&#8221;
-* Дживс и Вустер
-* Отель Вавилон
-* Воздействие
-* Лицедеи
-* Смерть в раю или Death In Paradise
-* Kingdom | Кингдом</p>
+    <content type="html"><![CDATA[<p>Просто список хороших фильмов и сериалов, которые можно посмотреть для хорошего настроения:</p>
+
+<ul>
+<li>Фильм &#8220;Башмачник&#8221;</li>
+<li>Дживс и Вустер</li>
+<li>Отель Вавилон</li>
+<li>Воздействие</li>
+<li>Лицедеи</li>
+<li>Смерть в раю или Death In Paradise</li>
+<li>Kingdom | Кингдом</li>
+</ul>
+
 ]]></content>
   </entry>
   
