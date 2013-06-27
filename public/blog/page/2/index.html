@@ -11,7 +11,7 @@
   <meta name="author" content="Hakimovis">
 
   
-  <meta name="description" content="&#8220;Кирпич — лучшее средство в аварийной ситуации. К такому выводу пришли работники общественного транспорта в Китае. Теперь все автобусы &hellip;">
+  <meta name="description" content="Телевизор за 24 млн.руб, естественно, отзывов от счастливых пользователей куча - http://market.yandex.ru Добрые люди еще аккустику к нему рекомендуют &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,48 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h2 class="entry-title"><a href="/blog/staroie-khoroshii-tielievizor">Старое: хороший телевизор</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-19T11:10:00+06:00" pubdate data-updated="true">19.04.2013</time>
+        
+         | <a href="/blog/staroie-khoroshii-tielievizor#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Телевизор за 24 млн.руб, естественно, отзывов от счастливых пользователей куча - <a href="http://market.yandex.ru/forums/?modelid=6989432&amp;hid=90639">http://market.yandex.ru</a></p>
+
+<p>Добрые люди еще аккустику к нему рекомендуют - <a href="http://pult.ru/product/47685.htm">http://pult.ru/product/47685.htm</a></p>
+
+<p>И бесперебойник. Мало ли. <a href="http://www.citilink.ru/catalog/computer_peripherals/powersafe/ups/578784/">http://www.citilink.ru</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -539,57 +581,6 @@ No examples found.
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h2 class="entry-title"><a href="/blog/strannaia-probliema-s-iskliuchieniiem-encoding-compatibilityerror">Странная проблема с исключением Encoding::CompatibilityError</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-14T00:59:00+06:00" pubdate data-updated="true">14.03.2013</time>
-        
-         | <a href="/blog/strannaia-probliema-s-iskliuchieniiem-encoding-compatibilityerror#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Странная штука. Вот такой код:</p>
-
-<pre><code>xml_document = Nokogiri::XML(xml_body.strip)
-if xml_document.errors.present?
-  raise ServiceError.new("Invalid XML: #{xml_document.errors.map(&amp;:to_s)}. XML: #{xml_body}")
-end
-</code></pre>
-
-<p>Вызывает ошибку</p>
-
-<pre><code>Encoding::CompatibilityError (incompatible character encodings: UTF-8 and ASCII-8BIT)
-</code></pre>
-
-<p>если в xml_body приходит невалидный XML с русскими буквами. Точнее, ошибку вызывает &#8220;XML: #{xml_body}&#8221; в тексте исключения. Если ее убрать (а она там и правда не нужна), то ошибка не возникает.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Старше</a>
@@ -607,6 +598,10 @@ end
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/stoit-posmotriet%27">Стоит посмотреть</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/tiestirovaniie-rake-taskov">Тестирование Rake-тасков</a>
       </li>
     
@@ -620,10 +615,6 @@ end
     
       <li class="post">
         <a href="/blog/dobavliaiem-ghienierator-k-svoiemu-ghiemu">Добавляем генератор миграции и моделей к своему гему</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/ispol%27zovaniie-i-tiestirovaniie-modieliei-activerecord-v-svoiem-ghiemie">Использование и тестирование моделей ActiveRecord в своем геме</a>
       </li>
     
   </ul>

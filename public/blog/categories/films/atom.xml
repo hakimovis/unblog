@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: films | Unblog]]></title>
+  <link href="http://unblog.ikito.ru/blog/categories/films/atom.xml" rel="self"/>
+  <link href="http://unblog.ikito.ru/"/>
+  <updated>2013-06-27T10:57:32+06:00</updated>
+  <id>http://unblog.ikito.ru/</id>
+  <author>
+    <name><![CDATA[Hakimovis]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Стоит посмотреть]]></title>
+    <link href="http://unblog.ikito.ru/blog/stoit-posmotriet%27"/>
+    <updated>2013-06-27T10:55:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/stoit-posmotriet'</id>
+    <content type="html"><![CDATA[<p>Просто список хороших фильмов и сериалов, которые можно посмотреть для хорошего настроения:
+* Фильм "Башмачник"
+* Дживс и Вустер
+* Отель Вавилон
+* Воздействие
+* Лицедеи
+* Смерть в раю или Death In Paradise
+* Kingdom | Кингдом</p>
+]]></content>
+  </entry>
+  
+</feed>
