@@ -9,7 +9,7 @@
   <meta name="author" content="Hakimovis">
 
   
-  <meta name="description" content="Телевизор за 24 млн.руб, естественно, отзывов от счастливых пользователей куча - http://market.yandex.ru Добрые люди еще аккустику к нему рекомендуют &hellip;">
+  <meta name="description" content="Всякие полезные советы по редактору Sublime Text 2 http://whiletruecode.com Гайд по git-у. Бобук одобряе! http://rogerdudler.github.com/git-guide/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +68,50 @@
       <div id="content">
         <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/staroie-i-ieshchie-nieskol%27ko-ssylok">Старое: и еще несколько ссылок</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-19T11:16:00+06:00" pubdate data-updated="true">19.04.2013</time>
+        
+         | <a href="/blog/staroie-i-ieshchie-nieskol%27ko-ssylok#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Всякие полезные советы по редактору Sublime Text 2 <a href="http://whiletruecode.com/post/7-handy-text-manipulation-tricks-sublime-text-2">http://whiletruecode.com</a></p>
+
+<p>Гайд по git-у. Бобук одобряе! <a href="http://rogerdudler.github.com/git-guide/">http://rogerdudler.github.com/git-guide/</a></p>
+
+<p>Просто игрушка - можно посмотреть как перезагружалась какая-нибудь старенькая ОС <a href="http://www.therestartpage.com/">http://www.therestartpage.com</a></p>
+
+<p>Забавный сервис, добавляешь небольшой код к себе на сайт и можешь вешать со всех сторон всякие украшательства - <a href="http://makeuptor.com">http://makeuptor.com</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -491,98 +535,6 @@ DETAIL:  Key (user_id, name)=(1, foo) is duplicated.
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/uznaitie-bundler-luchshie">Узнайте Bundler лучше</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-15T22:27:00+06:00" pubdate data-updated="true">15.03.2013</time>
-        
-         | <a href="/blog/uznaitie-bundler-luchshie#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Статья про bundler, много интересного: <a href="http://habrahabr.ru/company/engineyard/blog/172807/">http://habrahabr.ru/company/engineyard/blog/172807/</a></p>
-
-<p>Вкратце:<br/>
-<strong>bundle outdated</strong> показывает список гемов, которые можно обновить.<br/>
-<strong>bundle show</strong> показывает путь, куда установлен гем.<br/>
-<strong>bundle open</strong> открывает код гема в редакторе:</p>
-
-<pre><code>$ bundle open json
-To open a bundled gem, set $EDITOR or $BUNDLER_EDITOR
-$ export EDITOR=vim
-$ bundle open json
-</code></pre>
-
-<p><strong>bundle prestine</strong> восстанавливает код указанного гема, если мы его подправляли редактором (используя bundle open)<br/>
-<strong>bundle show &#8211;path</strong> показывает список путей, где установлены все гемы проекта. Вроде, так можно найти файлы, где определяются интересные нам классы:</p>
-
-<pre><code>grep -R ActionDispatch::RemoteIp `bundle show --paths`
-</code></pre>
-
-<p><strong>bundle init</strong> создает пустой Gemfile<br/>
-Гемы можно брать из локального репозитория:</p>
-
-<pre><code>$ echo "gem 'rack', :github =&gt; 'rack/rack', :branch =&gt; 'master'" &gt;&gt; Gemfile
-$ bundle config local.rack ~/sw/gems/rack
-$ bundle show rack
-/Users/andre/sw/gems/rack
-</code></pre>
-
-<p>В bundler 1.2 прямо в Gemfile можно объявить версию ruby. Если текущая версия не будет совпадать, получим исключение:</p>
-
-<pre><code>ruby '1.9.3'
-</code></pre>
-
-<p>Можно построить визуальную схему зависимостей гемов:</p>
-
-<pre><code>$ brew install graphviz
-$ gem install ruby-graphviz
-$ bundle viz
-</code></pre>
-
-<p><strong>bundle console</strong> запустит ruby-консоль, но со всеми загруженными гемами, указанными в Gemfile. Удобно, если нам не нужен гем rails.</p>
-
-<p>Создание заготовки для своего гема, установка его в систему и публикация на rubygems.org:</p>
-
-<pre><code>bundle gem my\_super\_gem
-rake install
-rake release
-</code></pre>
-
-<p>Вот так можно запускать rake-таски без полного написания bundle exec rspec spec:</p>
-
-<pre><code>$ bundle binstubs rspec-core
-$ bin/rspec spec
-No examples found.
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -600,6 +552,10 @@ No examples found.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/url-quote-pod-rukoi">URL quote под рукой</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/stoit-posmotriet%27">Стоит посмотреть</a>
       </li>
     
@@ -613,10 +569,6 @@ No examples found.
     
       <li class="post">
         <a href="/blog/plaghin-dlia-sublime-text-2-dlia-avtozamieny-starogho-stilia-kheshiei-na-novyi">Плагин для Sublime Text 2 для автозамены старого стиля хэшей на новый</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/dobavliaiem-ghienierator-k-svoiemu-ghiemu">Добавляем генератор миграции и моделей к своему гему</a>
       </li>
     
   </ul>

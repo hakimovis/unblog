@@ -4,7 +4,7 @@
   <title><![CDATA[Unblog]]></title>
   <link href="http://unblog.ikito.ru/atom.xml" rel="self"/>
   <link href="http://unblog.ikito.ru/"/>
-  <updated>2013-07-11T10:55:44+06:00</updated>
+  <updated>2013-08-08T13:32:59+06:00</updated>
   <id>http://unblog.ikito.ru/</id>
   <author>
     <name><![CDATA[Hakimovis]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[URL quote под рукой]]></title>
+    <link href="http://unblog.ikito.ru/blog/url-quote-pod-rukoi"/>
+    <updated>2013-08-08T13:25:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/url-quote-pod-rukoi</id>
+    <content type="html"><![CDATA[<p>Плагин для Sublime Text 3 для быстрого URL quote (превращение &#8220;строка&#8221; в &#8220;%D1%81%D1%82%D1%80%D0%BE%D0%BA%D0%B0&#8221;).
+Здесь используется urllib.parse.quote из python3. Для python2 надо использовать что-то другое.</p>
+
+<p>Tools -> New Plugin &#8230;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">sublime</span><span class="o">,</span> <span class="nn">sublime_plugin</span>
+</span><span class='line'><span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">quote</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">UrlQuoteString</span><span class="p">(</span><span class="n">sublime_plugin</span><span class="o">.</span><span class="n">TextCommand</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edit</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">selection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">sel</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+</span><span class='line'>        <span class="n">string_to_quote</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">substr</span><span class="p">(</span><span class="n">selection</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">result</span> <span class="o">=</span> <span class="n">quote</span><span class="p">(</span><span class="n">string_to_quote</span><span class="p">)</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">edit</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Сохраняем как url_quote_string.py и назначаем кнопки ctrl+shift+q: Preferences -> Key Bindings - User</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="p">[</span>
+</span><span class='line'>    <span class="p">{</span> <span class="s">&quot;keys&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;ctrl+shift+q&quot;</span><span class="p">],</span> <span class="s">&quot;command&quot;</span><span class="p">:</span> <span class="s">&quot;url_quote_string&quot;</span> <span class="p">}</span>
+</span><span class='line'><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Должно работать.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Стоит посмотреть]]></title>
@@ -642,69 +688,6 @@ DETAIL:  Key (user_id, name)=(1, foo) is duplicated.
 <p><img src="http://dkneftyanik-ufa.ru/images/afisha/yuldashev_0313.jpg" alt="афиша концерта" /></p>
 
 <p>Upd: купили 3 билета на 15 ряд!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Узнайте bundler лучше]]></title>
-    <link href="http://unblog.ikito.ru/blog/uznaitie-bundler-luchshie"/>
-    <updated>2013-03-15T22:27:00+06:00</updated>
-    <id>http://unblog.ikito.ru/blog/uznaitie-bundler-luchshie</id>
-    <content type="html"><![CDATA[<p>Статья про bundler, много интересного: <a href="http://habrahabr.ru/company/engineyard/blog/172807/">http://habrahabr.ru/company/engineyard/blog/172807/</a></p>
-
-<p>Вкратце:<br/>
-<strong>bundle outdated</strong> показывает список гемов, которые можно обновить.<br/>
-<strong>bundle show</strong> показывает путь, куда установлен гем.<br/>
-<strong>bundle open</strong> открывает код гема в редакторе:</p>
-
-<pre><code>$ bundle open json
-To open a bundled gem, set $EDITOR or $BUNDLER_EDITOR
-$ export EDITOR=vim
-$ bundle open json
-</code></pre>
-
-<p><strong>bundle prestine</strong> восстанавливает код указанного гема, если мы его подправляли редактором (используя bundle open)<br/>
-<strong>bundle show &#8211;path</strong> показывает список путей, где установлены все гемы проекта. Вроде, так можно найти файлы, где определяются интересные нам классы:</p>
-
-<pre><code>grep -R ActionDispatch::RemoteIp `bundle show --paths`
-</code></pre>
-
-<p><strong>bundle init</strong> создает пустой Gemfile<br/>
-Гемы можно брать из локального репозитория:</p>
-
-<pre><code>$ echo "gem 'rack', :github =&gt; 'rack/rack', :branch =&gt; 'master'" &gt;&gt; Gemfile
-$ bundle config local.rack ~/sw/gems/rack
-$ bundle show rack
-/Users/andre/sw/gems/rack
-</code></pre>
-
-<p>В bundler 1.2 прямо в Gemfile можно объявить версию ruby. Если текущая версия не будет совпадать, получим исключение:</p>
-
-<pre><code>ruby '1.9.3'
-</code></pre>
-
-<p>Можно построить визуальную схему зависимостей гемов:</p>
-
-<pre><code>$ brew install graphviz
-$ gem install ruby-graphviz
-$ bundle viz
-</code></pre>
-
-<p><strong>bundle console</strong> запустит ruby-консоль, но со всеми загруженными гемами, указанными в Gemfile. Удобно, если нам не нужен гем rails.</p>
-
-<p>Создание заготовки для своего гема, установка его в систему и публикация на rubygems.org:</p>
-
-<pre><code>bundle gem my\_super\_gem
-rake install
-rake release
-</code></pre>
-
-<p>Вот так можно запускать rake-таски без полного написания bundle exec rspec spec:</p>
-
-<pre><code>$ bundle binstubs rspec-core
-$ bin/rspec spec
-No examples found.
-</code></pre>
 ]]></content>
   </entry>
   

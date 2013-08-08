@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: quote | Unblog]]></title>
+  <link href="http://unblog.ikito.ru/blog/categories/quote/atom.xml" rel="self"/>
+  <link href="http://unblog.ikito.ru/"/>
+  <updated>2013-08-08T13:32:59+06:00</updated>
+  <id>http://unblog.ikito.ru/</id>
+  <author>
+    <name><![CDATA[Hakimovis]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[URL quote под рукой]]></title>
+    <link href="http://unblog.ikito.ru/blog/url-quote-pod-rukoi"/>
+    <updated>2013-08-08T13:25:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/url-quote-pod-rukoi</id>
+    <content type="html"><![CDATA[<p>Плагин для Sublime Text 3 для быстрого URL quote (превращение "строка" в "%D1%81%D1%82%D1%80%D0%BE%D0%BA%D0%B0").
+Здесь используется urllib.parse.quote из python3. Для python2 надо использовать что-то другое.</p>
+
+<p>Tools -> New Plugin ...</p>
+
+<p>``` python
+import sublime, sublime_plugin
+from urllib.parse import quote</p>
+
+<p>class UrlQuoteString(sublime_plugin.TextCommand):</p>
+
+<pre><code>def run(self, edit):
+    selection = self.view.sel()[0]
+    string_to_quote = self.view.substr(selection)
+    result = quote(string_to_quote)
+    self.view.replace(edit, selection, result)
+</code></pre>
+
+<p>```</p>
+
+<p>Сохраняем как url_quote_string.py и назначаем кнопки ctrl+shift+q: Preferences -> Key Bindings - User
+``` python
+[</p>
+
+<pre><code>{ "keys": ["ctrl+shift+q"], "command": "url_quote_string" }
+</code></pre>
+
+<p>]</p>
+
+<p>```</p>
+
+<p>Должно работать.</p>
+]]></content>
+  </entry>
+  
+</feed>

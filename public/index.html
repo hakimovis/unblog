@@ -9,9 +9,8 @@
   <meta name="author" content="Hakimovis">
 
   
-  <meta name="description" content="Просто список хороших фильмов и сериалов, которые можно посмотреть для хорошего настроения: Фильм &#8220;Башмачник&#8221;
-Дживс и Вустер
-Отель &hellip;">
+  <meta name="description" content="Плагин для Sublime Text 3 для быстрого URL quote (превращение &#8220;строка&#8221; в &#8220;%D1%81%D1%82%D1%80%D0%BE%D0%BA%D0%B0&#8221;).
+Здесь &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -70,6 +69,81 @@
       <div id="content">
         <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/url-quote-pod-rukoi">URL Quote под рукой</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-08T13:25:00+06:00" pubdate data-updated="true">08.08.2013</time>
+        
+         | <a href="/blog/url-quote-pod-rukoi#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Плагин для Sublime Text 3 для быстрого URL quote (превращение &#8220;строка&#8221; в &#8220;%D1%81%D1%82%D1%80%D0%BE%D0%BA%D0%B0&#8221;).
+Здесь используется urllib.parse.quote из python3. Для python2 надо использовать что-то другое.</p>
+
+<p>Tools -> New Plugin &#8230;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">sublime</span><span class="o">,</span> <span class="nn">sublime_plugin</span>
+</span><span class='line'><span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">quote</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">UrlQuoteString</span><span class="p">(</span><span class="n">sublime_plugin</span><span class="o">.</span><span class="n">TextCommand</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edit</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">selection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">sel</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+</span><span class='line'>        <span class="n">string_to_quote</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">substr</span><span class="p">(</span><span class="n">selection</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">result</span> <span class="o">=</span> <span class="n">quote</span><span class="p">(</span><span class="n">string_to_quote</span><span class="p">)</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">edit</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Сохраняем как url_quote_string.py и назначаем кнопки ctrl+shift+q: Preferences -> Key Bindings - User</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="p">[</span>
+</span><span class='line'>    <span class="p">{</span> <span class="s">&quot;keys&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;ctrl+shift+q&quot;</span><span class="p">],</span> <span class="s">&quot;command&quot;</span><span class="p">:</span> <span class="s">&quot;url_quote_string&quot;</span> <span class="p">}</span>
+</span><span class='line'><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Должно работать.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -788,50 +862,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/staroie-i-ieshchie-nieskol%27ko-ssylok">Старое: и еще несколько ссылок</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-19T11:16:00+06:00" pubdate data-updated="true">19.04.2013</time>
-        
-         | <a href="/blog/staroie-i-ieshchie-nieskol%27ko-ssylok#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Всякие полезные советы по редактору Sublime Text 2 <a href="http://whiletruecode.com/post/7-handy-text-manipulation-tricks-sublime-text-2">http://whiletruecode.com</a></p>
-
-<p>Гайд по git-у. Бобук одобряе! <a href="http://rogerdudler.github.com/git-guide/">http://rogerdudler.github.com/git-guide/</a></p>
-
-<p>Просто игрушка - можно посмотреть как перезагружалась какая-нибудь старенькая ОС <a href="http://www.therestartpage.com/">http://www.therestartpage.com</a></p>
-
-<p>Забавный сервис, добавляешь небольшой код к себе на сайт и можешь вешать со всех сторон всякие украшательства - <a href="http://makeuptor.com">http://makeuptor.com</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -847,6 +877,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/url-quote-pod-rukoi">URL quote под рукой</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/stoit-posmotriet%27">Стоит посмотреть</a>
       </li>
     
@@ -860,10 +894,6 @@
     
       <li class="post">
         <a href="/blog/plaghin-dlia-sublime-text-2-dlia-avtozamieny-starogho-stilia-kheshiei-na-novyi">Плагин для Sublime Text 2 для автозамены старого стиля хэшей на новый</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/dobavliaiem-ghienierator-k-svoiemu-ghiemu">Добавляем генератор миграции и моделей к своему гему</a>
       </li>
     
   </ul>
