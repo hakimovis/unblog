@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | Unblog]]></title>
   <link href="http://unblog.ikito.ru/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://unblog.ikito.ru/"/>
-  <updated>2013-08-08T13:34:40+06:00</updated>
+  <updated>2013-10-29T15:54:23+06:00</updated>
   <id>http://unblog.ikito.ru/</id>
   <author>
     <name><![CDATA[Hakimovis]]></name>
@@ -12,6 +12,60 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Поиск методов объекта]]></title>
+    <link href="http://unblog.ikito.ru/blog/poisk-mietodov-obiekta"/>
+    <updated>2013-10-29T15:41:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/poisk-mietodov-obiekta</id>
+    <content type="html"><![CDATA[<p>Часто бывает нужно посмотреть, какие методы есть у объекта. Для этого существует простой метод:</p>
+
+<p>```</p>
+
+<blockquote><p>object = 1
+object.methods.sort
+=> [:!, :!=, :!~, :%, :&amp;, :*, :**, :+, :+@, :-, :-@, :/, :&lt;, :&lt;&lt;, :&lt;=, :&lt;=>, :==, :===, :=~, :>, :>=, :>>, :[], :<sup>,</sup> :<strong>id</strong>, :<strong>send</strong>, :`, :abs, :abs2, :acts_like?, :ago, :angle, :arg, :as_json, :between?, :binding_n, :blank?, :breakpoint, :byte, :bytes, :capture, :ceil, :chr, :class, :class_eval, :clone, :coerce, :conj, :conjugate, :day, :days, :debugger, :deep_dup, :define_singleton_method, :denominator, :display, :div, :divmod, :downto, :dup, :duplicable?, :enable_warnings, :encode_json, :enum_for, :eql?, :equal?, :even?, :exabyte, :exabytes, :extend, :fdiv, :find_methods, :floor, :fortnight, :fortnights, :freeze, :from_now, :frozen?, :gcd, :gcdlcm, :gem, :gigabyte, :gigabytes, :hash, :hour, :hours, :html_safe?, :i, :imag, :imaginary, :in?, :initialize_clone, :initialize_dup, :inspect, :instance_eval, :instance_exec, :instance_of?, :instance_values, :instance_variable_defined?, :instance_variable_get, :instance_variable_names, :instance_variable_set, :instance_variables, :integer?, :is_a?, :is_haml?, :kilobyte, :kilobytes, :kind_of?, :lcm, :load, :load_dependency, :magnitude, :megabyte, :megabytes, :method, :methods, :minute, :minutes, :modulo, :month, :months, :multiple_of?, :next, :nil?, :nonzero?, :numerator, :object_id, :odd?, :ord, :ordinal, :ordinalize, :petabyte, :petabytes, :phase, :polar, :pred, :presence, :present?, :pretty_inspect, :pretty_print, :pretty_print_cycle, :pretty_print_inspect, :pretty_print_instance_variables, :private_methods, :protected_methods, :psych_to_yaml, :psych_y, :public_method, :public_methods, :public_send, :quietly, :quo, :rationalize, :real, :real?, :rect, :rectangular, :remainder, :require, :require_dependency, :require_or_load, :respond_to?, :respond_to_missing?, :round, :second, :seconds, :send, :silence, :silence_stderr, :silence_stream, :silence_warnings, :since, :singleton_class, :singleton_method_added, :singleton_methods, :size, :step, :succ, :suppress, :suppress_warnings, :taint, :tainted?, :tap, :terabyte, :terabytes, :times, :to_bn, :to_c, :to_d, :to_default_s, :to_enum, :to_f, :to_formatted_s, :to_i, :to_int, :to_json, :to_param, :to_query, :to_r, :to_ruby, :to_s, :to_v8, :to_yaml, :to_yaml_properties, :truncate, :trust, :try, :try!, :uniq_methods, :unloadable, :untaint, :until, :untrust, :untrusted?, :upto, :week, :weeks, :with_options, :with_warnings, :year, :years, :zero?, :|, :~]
+```</p></blockquote>
+
+<p>Среди такой каши из общих для всех классов методов и методов самого объекта трудно найти то, что нас заинтересует, правда? Методы вроде <code>!, :!=, :!~, :&lt;, :&lt;=, is_a?, :is_haml?, :kind_of?, :load</code> и куча других есть у каждого объекта, а нам надо именно специфичные для нашего объекта методы. Логично, что их надо отсеять. И лучше это делать для всей ruby-консоли.</p>
+
+<p>Для этого открываем файл <code>.irbrc</code>, который обычно находится в домашней папке и добавляем туда следующее:</p>
+
+<p>``` ruby</p>
+
+<h1>For methods introspection</h1>
+
+<p>class Object
+  def uniq_methods</p>
+
+<pre><code>(self.methods - Class.methods).sort
+</code></pre>
+
+<p>  end</p>
+
+<p>  def find_methods(pattern)</p>
+
+<pre><code>(self.methods.find_all {|m| m.to_s.include?(pattern.to_s)}).sort
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>Теперь, для любого объекта будут доступны два метода: <code>uniq_methods</code> и <code>find_methods</code>:</p>
+
+<p>``` ruby</p>
+
+<blockquote><p>Date.today.uniq_methods
+=> [:+, :-, :&lt;&lt;, :>>, :acts_like_date?, :advance, :ago, :ajd, :amjd, :asctime, :at_beginning_of_day, :at_beginning_of_month, :at_beginning_of_quarter, :at_beginning_of_week, :at_beginning_of_year, :at_end_of_day, :at_end_of_month, :at_end_of_quarter, :at_end_of_week, :at_end_of_year, :at_midnight, :beginning_of_day, :beginning_of_month, :beginning_of_quarter, :beginning_of_week, :beginning_of_year, :between?, :change, :compare_with_coercion, :compare_without_coercion, :ctime, :cwday, :cweek, :cwyear, :day, :day_fraction, :days_ago, :days_since, :days_to_week_start, :default_inspect, :downto, :end_of_day, :end_of_month, :end_of_quarter, :end_of_week, :end_of_year, ...]</p>
+
+<p>Date.today.find_methods 'year'
+=> [:at_beginning_of_year, :at_end_of_year, :beginning_of_year, :cwyear, :end_of_year, :last_year, :next_year, :prev_year, :year, :years_ago, :years_since]
+```</p></blockquote>
+
+<p>Первый метод вернет методы, которые есть только у этого объекта, без общих для всех классов. Вторым методом удобно искать методы по словам. Например, выше мы нашли все методы, содержащие слово year.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Стайлгайды Ruby на Github]]></title>
@@ -170,94 +224,6 @@ Dir["#{File.dirname(__FILE__)}/../app/models/*.rb"].each { |f| require f }
 </code></p>
 
 <p>Это очень вольный перевод вот этой статьи: <a href="http://iain.nl/testing-activerecord-in-isolation">http://iain.nl/testing-activerecord-in-isolation</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ruby On Rails и загрузка изображений на Amazon S3 Storage]]></title>
-    <link href="http://unblog.ikito.ru/blog/ruby-on-rails-i-zaghruzka-izobrazhienii-na-amazon-s3-storage"/>
-    <updated>2013-05-12T23:23:00+06:00</updated>
-    <id>http://unblog.ikito.ru/blog/ruby-on-rails-i-zaghruzka-izobrazhienii-na-amazon-s3-storage</id>
-    <content type="html"><![CDATA[<p>Даже не подозревал, что прикрутить аплоад картинок на амазоновый S3 окажется так просто. Добавляем гемы в Gemfile:</p>
-
-<p>``` ruby</p>
-
-<pre><code>gem 'paperclip'
-gem 'aws-sdk'
-</code></pre>
-
-<p>```</p>
-
-<p>Делаем миграцию:</p>
-
-<p>``` ruby
-class CreatePhotos &lt; ActiveRecord::Migration
-  def self.up</p>
-
-<pre><code>create_table :photos do |t|
-  t.boolean :enabled, null: false, default: true
-  t.timestamps
-end
-add_attachment :photos, :image
-</code></pre>
-
-<p>  end</p>
-
-<p>  def self.down</p>
-
-<pre><code>drop_table :photos
-</code></pre>
-
-<p>  end
-end
-```</p>
-
-<p>Тут у модели Photo будет только два поля - image и enabled (КО). Теперь модель:
-``` ruby
-class Photo &lt; ActiveRecord::Base
-  attr_accessible :enabled, :image
-  has_attached_file(</p>
-
-<pre><code>:image,
-styles: {medium: "500x500&gt;", small: "50x50&gt;"},
-storage: :s3,
-s3_credentials: "#{Rails.root}/config/s3.yml",
-bucket: 'bucket_name',
-s3_protocol: 'https',
-s3_host_name: 's3-eu-west-1.amazonaws.com'
-</code></pre>
-
-<p>  )
-end
-```</p>
-
-<p>Тут все в принципе ясно. Изображение будет храниться еще в двух размерах - medium (500x500) и small (50x50). Пришлось немного почесать голову над последними двумя опциями, без них Амазон будет ругаться XML-кой с просьбой указать endpoint. В s3.yml пишем свои ключи отсюда <a href="https://portal.aws.amazon.com/gp/aws/securityCredentials#account_identifiers">portal.aws.amazon.com</a> (не забывая добавить этот конфиг в .gitignore):</p>
-
-<p><code>
-access_key_id: *****
-secret_access_key: ******
-</code></p>
-
-<p>Вот и вся магия. Теперь в форме загрузки будем писать так:</p>
-
-<p>``` haml
-= form_for @photo, url: photos_path, html: {id: "photo_form", multipart: true} do |f|
-  = f.file_field :image
-  = f.check_box :enabled
-  .actions</p>
-
-<pre><code>= f.submit 'Сохранить'
-</code></pre>
-
-<p>```</p>
-
-<p>И чтобы показать нашу картинку в среднем размере со ссылкой на оригинал в шаблонах пишем:</p>
-
-<p><code>haml
-%a{href: @photo.image.url}= image_tag @photo.image.url :medium
-</code></p>
-
-<p>Ну не радость ли?</p>
 ]]></content>
   </entry>
   

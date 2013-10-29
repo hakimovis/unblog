@@ -1,0 +1,343 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Поиск методов объекта - Unblog</title>
+  <meta name="author" content="Hakimovis">
+
+  
+  <meta name="description" content="Часто бывает нужно посмотреть, какие методы есть у объекта. Для этого существует простой метод: 1
+2
+3
+&gt; object = 1
+&gt; object.methods.sort
+=&gt &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://unblog.ikito.ru/blog/poisk-mietodov-obiekta">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Unblog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=Arvo:400,400italic,700,700italic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Merienda:700" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body>
+  <div id="navigation">
+    <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:unblog.ikito.ru" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  </div>
+  <header role="banner"><hgroup>
+  <h1><a href="/">Unblog</a></h1>
+  
+    <h2>Блог ни о чем</h2>
+  
+</hgroup>
+
+</header>
+  <div id="body"  >
+    <div id="main">
+      <div id="content">
+        <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Поиск методов объекта</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-29T15:41:00+06:00" pubdate data-updated="true">29.10.2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Часто бывает нужно посмотреть, какие методы есть у объекта. Для этого существует простой метод:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; object = 1
+</span><span class='line'>&gt; object.methods.sort
+</span><span class='line'>=&gt; [:!, :!=, :!~, :%, :&, :*, :**, :+, :+@, :-, :-@, :/, :&lt;, :&lt;&lt;, :&lt;=, :&lt;=&gt;, :==, :===, :=~, :&gt;, :&gt;=, :&gt;&gt;, :[], :^, :__id__, :__send__, :`, :abs, :abs2, :acts_like?, :ago, :angle, :arg, :as_json, :between?, :binding_n, :blank?, :breakpoint, :byte, :bytes, :capture, :ceil, :chr, :class, :class_eval, :clone, :coerce, :conj, :conjugate, :day, :days, :debugger, :deep_dup, :define_singleton_method, :denominator, :display, :div, :divmod, :downto, :dup, :duplicable?, :enable_warnings, :encode_json, :enum_for, :eql?, :equal?, :even?, :exabyte, :exabytes, :extend, :fdiv, :find_methods, :floor, :fortnight, :fortnights, :freeze, :from_now, :frozen?, :gcd, :gcdlcm, :gem, :gigabyte, :gigabytes, :hash, :hour, :hours, :html_safe?, :i, :imag, :imaginary, :in?, :initialize_clone, :initialize_dup, :inspect, :instance_eval, :instance_exec, :instance_of?, :instance_values, :instance_variable_defined?, :instance_variable_get, :instance_variable_names, :instance_variable_set, :instance_variables, :integer?, :is_a?, :is_haml?, :kilobyte, :kilobytes, :kind_of?, :lcm, :load, :load_dependency, :magnitude, :megabyte, :megabytes, :method, :methods, :minute, :minutes, :modulo, :month, :months, :multiple_of?, :next, :nil?, :nonzero?, :numerator, :object_id, :odd?, :ord, :ordinal, :ordinalize, :petabyte, :petabytes, :phase, :polar, :pred, :presence, :present?, :pretty_inspect, :pretty_print, :pretty_print_cycle, :pretty_print_inspect, :pretty_print_instance_variables, :private_methods, :protected_methods, :psych_to_yaml, :psych_y, :public_method, :public_methods, :public_send, :quietly, :quo, :rationalize, :real, :real?, :rect, :rectangular, :remainder, :require, :require_dependency, :require_or_load, :respond_to?, :respond_to_missing?, :round, :second, :seconds, :send, :silence, :silence_stderr, :silence_stream, :silence_warnings, :since, :singleton_class, :singleton_method_added, :singleton_methods, :size, :step, :succ, :suppress, :suppress_warnings, :taint, :tainted?, :tap, :terabyte, :terabytes, :times, :to_bn, :to_c, :to_d, :to_default_s, :to_enum, :to_f, :to_formatted_s, :to_i, :to_int, :to_json, :to_param, :to_query, :to_r, :to_ruby, :to_s, :to_v8, :to_yaml, :to_yaml_properties, :truncate, :trust, :try, :try!, :uniq_methods, :unloadable, :untaint, :until, :untrust, :untrusted?, :upto, :week, :weeks, :with_options, :with_warnings, :year, :years, :zero?, :|, :~]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Среди такой каши из общих для всех классов методов и методов самого объекта трудно найти то, что нас заинтересует, правда? Методы вроде <code>!, :!=, :!~, :&lt;, :&lt;=, is_a?, :is_haml?, :kind_of?, :load</code> и куча других есть у каждого объекта, а нам надо именно специфичные для нашего объекта методы. Логично, что их надо отсеять. И лучше это делать для всей ruby-консоли.</p>
+
+<p>Для этого открываем файл <code>.irbrc</code>, который обычно находится в домашней папке и добавляем туда следующее:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># For methods introspection</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Object</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">uniq_methods</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">self</span><span class="o">.</span><span class="n">methods</span> <span class="o">-</span> <span class="no">Class</span><span class="o">.</span><span class="n">methods</span><span class="p">)</span><span class="o">.</span><span class="n">sort</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">find_methods</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">self</span><span class="o">.</span><span class="n">methods</span><span class="o">.</span><span class="n">find_all</span> <span class="p">{</span><span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="n">m</span><span class="o">.</span><span class="n">to_s</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">pattern</span><span class="o">.</span><span class="n">to_s</span><span class="p">)})</span><span class="o">.</span><span class="n">sort</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Теперь, для любого объекта будут доступны два метода: <code>uniq_methods</code> и <code>find_methods</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;</span> <span class="no">Date</span><span class="o">.</span><span class="n">today</span><span class="o">.</span><span class="n">uniq_methods</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:+</span><span class="p">,</span> <span class="ss">:-</span><span class="p">,</span> <span class="ss">:&lt;&lt;</span><span class="p">,</span> <span class="ss">:&gt;&gt;</span><span class="p">,</span> <span class="ss">:acts_like_date?</span><span class="p">,</span> <span class="ss">:advance</span><span class="p">,</span> <span class="ss">:ago</span><span class="p">,</span> <span class="ss">:ajd</span><span class="p">,</span> <span class="ss">:amjd</span><span class="p">,</span> <span class="ss">:asctime</span><span class="p">,</span> <span class="ss">:at_beginning_of_day</span><span class="p">,</span> <span class="ss">:at_beginning_of_month</span><span class="p">,</span> <span class="ss">:at_beginning_of_quarter</span><span class="p">,</span> <span class="ss">:at_beginning_of_week</span><span class="p">,</span> <span class="ss">:at_beginning_of_year</span><span class="p">,</span> <span class="ss">:at_end_of_day</span><span class="p">,</span> <span class="ss">:at_end_of_month</span><span class="p">,</span> <span class="ss">:at_end_of_quarter</span><span class="p">,</span> <span class="ss">:at_end_of_week</span><span class="p">,</span> <span class="ss">:at_end_of_year</span><span class="p">,</span> <span class="ss">:at_midnight</span><span class="p">,</span> <span class="ss">:beginning_of_day</span><span class="p">,</span> <span class="ss">:beginning_of_month</span><span class="p">,</span> <span class="ss">:beginning_of_quarter</span><span class="p">,</span> <span class="ss">:beginning_of_week</span><span class="p">,</span> <span class="ss">:beginning_of_year</span><span class="p">,</span> <span class="ss">:between?</span><span class="p">,</span> <span class="ss">:change</span><span class="p">,</span> <span class="ss">:compare_with_coercion</span><span class="p">,</span> <span class="ss">:compare_without_coercion</span><span class="p">,</span> <span class="ss">:ctime</span><span class="p">,</span> <span class="ss">:cwday</span><span class="p">,</span> <span class="ss">:cweek</span><span class="p">,</span> <span class="ss">:cwyear</span><span class="p">,</span> <span class="ss">:day</span><span class="p">,</span> <span class="ss">:day_fraction</span><span class="p">,</span> <span class="ss">:days_ago</span><span class="p">,</span> <span class="ss">:days_since</span><span class="p">,</span> <span class="ss">:days_to_week_start</span><span class="p">,</span> <span class="ss">:default_inspect</span><span class="p">,</span> <span class="ss">:downto</span><span class="p">,</span> <span class="ss">:end_of_day</span><span class="p">,</span> <span class="ss">:end_of_month</span><span class="p">,</span> <span class="ss">:end_of_quarter</span><span class="p">,</span> <span class="ss">:end_of_week</span><span class="p">,</span> <span class="ss">:end_of_year</span><span class="p">,</span> <span class="o">.</span><span class="n">.</span><span class="o">.]</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&gt;</span> <span class="no">Date</span><span class="o">.</span><span class="n">today</span><span class="o">.</span><span class="n">find_methods</span> <span class="s1">&#39;year&#39;</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:at_beginning_of_year</span><span class="p">,</span> <span class="ss">:at_end_of_year</span><span class="p">,</span> <span class="ss">:beginning_of_year</span><span class="p">,</span> <span class="ss">:cwyear</span><span class="p">,</span> <span class="ss">:end_of_year</span><span class="p">,</span> <span class="ss">:last_year</span><span class="p">,</span> <span class="ss">:next_year</span><span class="p">,</span> <span class="ss">:prev_year</span><span class="p">,</span> <span class="ss">:year</span><span class="p">,</span> <span class="ss">:years_ago</span><span class="p">,</span> <span class="ss">:years_since</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Первый метод вернет методы, которые есть только у этого объекта, без общих для всех классов. Вторым методом удобно искать методы по словам. Например, выше мы нашли все методы, содержащие слово year.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Hakimovis</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-29T15:41:00+06:00" pubdate data-updated="true">29.10.2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/code-introspection/'>code-introspection</a>, <a class='category' href='/blog/categories/methods/'>methods</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://unblog.ikito.ru/blog/poisk-mietodov-obiekta" data-via="hakimovis" data-counturl="http://unblog.ikito.ru/blog/poisk-mietodov-obiekta" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/url-quote-pod-rukoi" title="Previous Post: URL quote под рукой">&laquo; URL quote под рукой</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/poisk-mietodov-obiekta">Поиск методов объекта</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/url-quote-pod-rukoi">URL quote под рукой</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/stoit-posmotriet%27">Стоит посмотреть</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/tiestirovaniie-rake-taskov">Тестирование Rake-тасков</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/stailghaidy-ruby-na-github">Стайлгайды Ruby на Github</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/hakimovis" data-widget-id="350118652802117632">Tweets by @hakimovis</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+      </div>
+    </div>
+    <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Hakimovis -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>. Design by <a href="http://octopressthemes.com">Octopress Themes</a></span>
+</p>
+
+</footer>
+    
+
+<script type="text/javascript">
+      var disqus_shortname = 'unblog-ikito';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://unblog.ikito.ru/blog/poisk-mietodov-obiekta';
+        var disqus_url = 'http://unblog.ikito.ru/blog/poisk-mietodov-obiekta';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+  </div>
+  <!-- Yandex.Metrika informer -->
+<a href="http://metrika.yandex.ru/stat/?id=11385481&amp;from=informer"
+target="_blank" rel="nofollow"><img src="//bs.yandex.ru/informer/11385481/3_0_FFFFFFFF_FFFFFFFF_0_pageviews"
+style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" onclick="try{Ya.Metrika.informer({i:this,id:11385481,lang:'ru'});return false}catch(e){}"/></a>
+<!-- /Yandex.Metrika informer -->
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+            w.yaCounter11385481 = new Ya.Metrika({id:11385481,
+                    webvisor:true,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true});
+        } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+})(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="//mc.yandex.ru/watch/11385481" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+</body>
+</html>

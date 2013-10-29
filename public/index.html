@@ -9,8 +9,12 @@
   <meta name="author" content="Hakimovis">
 
   
-  <meta name="description" content="Плагин для Sublime Text 3 для быстрого URL quote (превращение &#8220;строка&#8221; в &#8220;%D1%81%D1%82%D1%80%D0%BE%D0%BA%D0%B0&#8221;).
-Здесь &hellip;">
+  <meta name="description" content="Часто бывает нужно посмотреть, какие методы есть у объекта. Для этого существует простой метод: 1
+2
+3
+&gt; object = 1
+&gt; object.methods.sort
+=&gt &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +73,96 @@
       <div id="content">
         <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/poisk-mietodov-obiekta">Поиск методов объекта</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-29T15:41:00+06:00" pubdate data-updated="true">29.10.2013</time>
+        
+         | <a href="/blog/poisk-mietodov-obiekta#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Часто бывает нужно посмотреть, какие методы есть у объекта. Для этого существует простой метод:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; object = 1
+</span><span class='line'>&gt; object.methods.sort
+</span><span class='line'>=&gt; [:!, :!=, :!~, :%, :&, :*, :**, :+, :+@, :-, :-@, :/, :&lt;, :&lt;&lt;, :&lt;=, :&lt;=&gt;, :==, :===, :=~, :&gt;, :&gt;=, :&gt;&gt;, :[], :^, :__id__, :__send__, :`, :abs, :abs2, :acts_like?, :ago, :angle, :arg, :as_json, :between?, :binding_n, :blank?, :breakpoint, :byte, :bytes, :capture, :ceil, :chr, :class, :class_eval, :clone, :coerce, :conj, :conjugate, :day, :days, :debugger, :deep_dup, :define_singleton_method, :denominator, :display, :div, :divmod, :downto, :dup, :duplicable?, :enable_warnings, :encode_json, :enum_for, :eql?, :equal?, :even?, :exabyte, :exabytes, :extend, :fdiv, :find_methods, :floor, :fortnight, :fortnights, :freeze, :from_now, :frozen?, :gcd, :gcdlcm, :gem, :gigabyte, :gigabytes, :hash, :hour, :hours, :html_safe?, :i, :imag, :imaginary, :in?, :initialize_clone, :initialize_dup, :inspect, :instance_eval, :instance_exec, :instance_of?, :instance_values, :instance_variable_defined?, :instance_variable_get, :instance_variable_names, :instance_variable_set, :instance_variables, :integer?, :is_a?, :is_haml?, :kilobyte, :kilobytes, :kind_of?, :lcm, :load, :load_dependency, :magnitude, :megabyte, :megabytes, :method, :methods, :minute, :minutes, :modulo, :month, :months, :multiple_of?, :next, :nil?, :nonzero?, :numerator, :object_id, :odd?, :ord, :ordinal, :ordinalize, :petabyte, :petabytes, :phase, :polar, :pred, :presence, :present?, :pretty_inspect, :pretty_print, :pretty_print_cycle, :pretty_print_inspect, :pretty_print_instance_variables, :private_methods, :protected_methods, :psych_to_yaml, :psych_y, :public_method, :public_methods, :public_send, :quietly, :quo, :rationalize, :real, :real?, :rect, :rectangular, :remainder, :require, :require_dependency, :require_or_load, :respond_to?, :respond_to_missing?, :round, :second, :seconds, :send, :silence, :silence_stderr, :silence_stream, :silence_warnings, :since, :singleton_class, :singleton_method_added, :singleton_methods, :size, :step, :succ, :suppress, :suppress_warnings, :taint, :tainted?, :tap, :terabyte, :terabytes, :times, :to_bn, :to_c, :to_d, :to_default_s, :to_enum, :to_f, :to_formatted_s, :to_i, :to_int, :to_json, :to_param, :to_query, :to_r, :to_ruby, :to_s, :to_v8, :to_yaml, :to_yaml_properties, :truncate, :trust, :try, :try!, :uniq_methods, :unloadable, :untaint, :until, :untrust, :untrusted?, :upto, :week, :weeks, :with_options, :with_warnings, :year, :years, :zero?, :|, :~]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Среди такой каши из общих для всех классов методов и методов самого объекта трудно найти то, что нас заинтересует, правда? Методы вроде <code>!, :!=, :!~, :&lt;, :&lt;=, is_a?, :is_haml?, :kind_of?, :load</code> и куча других есть у каждого объекта, а нам надо именно специфичные для нашего объекта методы. Логично, что их надо отсеять. И лучше это делать для всей ruby-консоли.</p>
+
+<p>Для этого открываем файл <code>.irbrc</code>, который обычно находится в домашней папке и добавляем туда следующее:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># For methods introspection</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Object</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">uniq_methods</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">self</span><span class="o">.</span><span class="n">methods</span> <span class="o">-</span> <span class="no">Class</span><span class="o">.</span><span class="n">methods</span><span class="p">)</span><span class="o">.</span><span class="n">sort</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">find_methods</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">self</span><span class="o">.</span><span class="n">methods</span><span class="o">.</span><span class="n">find_all</span> <span class="p">{</span><span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="n">m</span><span class="o">.</span><span class="n">to_s</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">pattern</span><span class="o">.</span><span class="n">to_s</span><span class="p">)})</span><span class="o">.</span><span class="n">sort</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Теперь, для любого объекта будут доступны два метода: <code>uniq_methods</code> и <code>find_methods</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;</span> <span class="no">Date</span><span class="o">.</span><span class="n">today</span><span class="o">.</span><span class="n">uniq_methods</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:+</span><span class="p">,</span> <span class="ss">:-</span><span class="p">,</span> <span class="ss">:&lt;&lt;</span><span class="p">,</span> <span class="ss">:&gt;&gt;</span><span class="p">,</span> <span class="ss">:acts_like_date?</span><span class="p">,</span> <span class="ss">:advance</span><span class="p">,</span> <span class="ss">:ago</span><span class="p">,</span> <span class="ss">:ajd</span><span class="p">,</span> <span class="ss">:amjd</span><span class="p">,</span> <span class="ss">:asctime</span><span class="p">,</span> <span class="ss">:at_beginning_of_day</span><span class="p">,</span> <span class="ss">:at_beginning_of_month</span><span class="p">,</span> <span class="ss">:at_beginning_of_quarter</span><span class="p">,</span> <span class="ss">:at_beginning_of_week</span><span class="p">,</span> <span class="ss">:at_beginning_of_year</span><span class="p">,</span> <span class="ss">:at_end_of_day</span><span class="p">,</span> <span class="ss">:at_end_of_month</span><span class="p">,</span> <span class="ss">:at_end_of_quarter</span><span class="p">,</span> <span class="ss">:at_end_of_week</span><span class="p">,</span> <span class="ss">:at_end_of_year</span><span class="p">,</span> <span class="ss">:at_midnight</span><span class="p">,</span> <span class="ss">:beginning_of_day</span><span class="p">,</span> <span class="ss">:beginning_of_month</span><span class="p">,</span> <span class="ss">:beginning_of_quarter</span><span class="p">,</span> <span class="ss">:beginning_of_week</span><span class="p">,</span> <span class="ss">:beginning_of_year</span><span class="p">,</span> <span class="ss">:between?</span><span class="p">,</span> <span class="ss">:change</span><span class="p">,</span> <span class="ss">:compare_with_coercion</span><span class="p">,</span> <span class="ss">:compare_without_coercion</span><span class="p">,</span> <span class="ss">:ctime</span><span class="p">,</span> <span class="ss">:cwday</span><span class="p">,</span> <span class="ss">:cweek</span><span class="p">,</span> <span class="ss">:cwyear</span><span class="p">,</span> <span class="ss">:day</span><span class="p">,</span> <span class="ss">:day_fraction</span><span class="p">,</span> <span class="ss">:days_ago</span><span class="p">,</span> <span class="ss">:days_since</span><span class="p">,</span> <span class="ss">:days_to_week_start</span><span class="p">,</span> <span class="ss">:default_inspect</span><span class="p">,</span> <span class="ss">:downto</span><span class="p">,</span> <span class="ss">:end_of_day</span><span class="p">,</span> <span class="ss">:end_of_month</span><span class="p">,</span> <span class="ss">:end_of_quarter</span><span class="p">,</span> <span class="ss">:end_of_week</span><span class="p">,</span> <span class="ss">:end_of_year</span><span class="p">,</span> <span class="o">.</span><span class="n">.</span><span class="o">.]</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&gt;</span> <span class="no">Date</span><span class="o">.</span><span class="n">today</span><span class="o">.</span><span class="n">find_methods</span> <span class="s1">&#39;year&#39;</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:at_beginning_of_year</span><span class="p">,</span> <span class="ss">:at_end_of_year</span><span class="p">,</span> <span class="ss">:beginning_of_year</span><span class="p">,</span> <span class="ss">:cwyear</span><span class="p">,</span> <span class="ss">:end_of_year</span><span class="p">,</span> <span class="ss">:last_year</span><span class="p">,</span> <span class="ss">:next_year</span><span class="p">,</span> <span class="ss">:prev_year</span><span class="p">,</span> <span class="ss">:year</span><span class="p">,</span> <span class="ss">:years_ago</span><span class="p">,</span> <span class="ss">:years_since</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Первый метод вернет методы, которые есть только у этого объекта, без общих для всех классов. Вторым методом удобно искать методы по словам. Например, выше мы нашли все методы, содержащие слово year.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -812,56 +906,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/staroie-obzor-fil%27ma-zhielieznoie-niebo">Старое: Обзор фильма &#8220;Железное небо&#8221;</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-19T11:19:00+06:00" pubdate data-updated="true">19.04.2013</time>
-        
-         | <a href="/blog/staroie-obzor-fil%27ma-zhielieznoie-niebo#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>В конце 45-го года, не пожелавший сдаваться вождь Германии решился на отчаянный шаг - с помощью всех тайных знаний Третьего Рейха отправить на луну своих солдат, чтобы в безопасности набраться сил и одним мощным ударом еще раз завершить Вторую Мировую Войну. И вот, в 2018 году план Фюрера уже близок к успешному завершению, к Земле летит настоящий космический флот и супер-оружие уже готово открыть огонь. Противостоять внезапному вторжению будут силы всей планеты.</p>
-
-<p>По моему, странно, что в России фильм &#8220;Железное небо&#8221; не вызвал никакого шума. Казалось бы, все ему предвещало успех - оригинальный сюжет, вирусные трейлеры, тщательно и до мелочей проработанный сценарий, костюмы и дизайн - и тем не менее, в нашей стране он прошел как-то тихо и незаметно. Критики по всему миру так и не пришли к единому мнению по поводу &#8220;Железного неба&#8221; и до сих пор можно найти лишь несколько хороших рецензий на русском языке. Постараюсь исправить это положение и познакомить вас с этим фильмом.</p>
-
-<p>Итак, &#8220;Железное небо&#8221; разрабатывался совместными усилиями студий Финляндии, Австралии и Германии в течение 6 лет. Примечательно, что сами съемки начались только через три с лишним года после начала работы над проектом, и уже после выхода двух трейлеров. Съемки с актерами заняли всего месяц с небольшим. При этом, работа над сюжетом и разработка дизайнов занимали два года, еще год делалась постобработка, сцены компьютерной графики, монтаж и так далее.</p>
-
-<p>Ходит слух, что этот фильм полностью снимался на деньги фанатов, что не совсем верно. На самом деле, деньги, собранные от продажи сувениров, всякой атрибутики и просто пожертвования составили 1.3 миллиона долларов из почти десяти миллионов бюджета. Тем не менее, эти деньги позволили проекту существовать до появления спонсоров.</p>
-
-<p>Что же получилось в итоге? А получилась, добротная, оригинальная научно-фантастическая комедия. &#8220;Железное небо&#8221;, на мой взгляд, полностью оправдало ожидания фанатов. Сюжетная линия динамичная, без заметных провисаний, без заметных ляпов, которые часто допускаются в фильмах о космосе. Очень много времени занимают сцены, полностью нарисованные на компьютере.</p>
-
-<p>Стоит отметить, что фильм снимала та же команда, что и пародию на &#8220;Стар Трек&#8221; - &#8220;Звездная развалина&#8221;. Поэтому, фильму присущ дух пародии на все подряд - от типичных персонажей до клишированных сцен, которые встречаются в каждом уважающем себя фильме. Кроме этого, в полтора часа уместились практически все сюжеты - политика, теория заговора, альтернативная история, космическая опера, женщины в латексе, сумасшедший ученый, американский пафос, НЛО, генная инженерия, стимпанк и многое другое. Концовка фильма добавляет сверху налет философской идеи и в меру грустные размышления о судьбе планеты и природе человека.</p>
-
-<p>В итоге, фильм у меня оставил только хорошие впечатления и желание посмотреть его на большом экране. Так что, если увидите, что он идет в вашем кинотеатре, покупайте билеты не задумываясь.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -877,6 +921,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/poisk-mietodov-obiekta">Поиск методов объекта</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/url-quote-pod-rukoi">URL quote под рукой</a>
       </li>
     
@@ -890,10 +938,6 @@
     
       <li class="post">
         <a href="/blog/stailghaidy-ruby-na-github">Стайлгайды Ruby на Github</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/plaghin-dlia-sublime-text-2-dlia-avtozamieny-starogho-stilia-kheshiei-na-novyi">Плагин для Sublime Text 2 для автозамены старого стиля хэшей на новый</a>
       </li>
     
   </ul>
