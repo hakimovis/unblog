@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | Unblog]]></title>
   <link href="http://unblog.ikito.ru/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://unblog.ikito.ru/"/>
-  <updated>2013-10-29T15:54:23+06:00</updated>
+  <updated>2014-04-29T14:44:22+06:00</updated>
   <id>http://unblog.ikito.ru/</id>
   <author>
     <name><![CDATA[Hakimovis]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Поддержка Unicode в консоли Ruby для MacOS]]></title>
+    <link href="http://unblog.ikito.ru/blog/irb-unicode-support"/>
+    <updated>2014-04-29T14:33:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/irb-unicode-support</id>
+    <content type="html"><![CDATA[<p>Если в консоли Ruby при вводе русских букв выводится что-то вроде <code>&gt;&gt; \U+FFD1\U+FFD0\U+FFB5\U+FFD1\U+FFD1</code> нужно установить readline:</p>
+
+<p><code>
+$ brew update &amp;&amp; brew install readline
+</code></p>
+
+<p>И пересобрать версию Ruby с указанием того, что используем новый readline:</p>
+
+<p><code>
+CONFIGURE_OPTS=--with-readline-dir=`brew --prefix readline` rbenv install 1.9.3-p374
+</code></p>
+
+<p>Вместо 1.9.3-p374 нужно указать свою версию.</p>
+
+<p>Взято <a href="https://coderwall.com/p/wdm-_q">отсюда</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Поиск методов объекта]]></title>
@@ -163,67 +186,6 @@ module MyGem
   GEM_PATH = File.expand_path('..', File.dirname(__FILE__))
   ...
 </code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Использование и тестирование моделей ActiveRecord в своем геме]]></title>
-    <link href="http://unblog.ikito.ru/blog/ispol%27zovaniie-i-tiestirovaniie-modieliei-activerecord-v-svoiem-ghiemie"/>
-    <updated>2013-05-18T12:38:00+06:00</updated>
-    <id>http://unblog.ikito.ru/blog/ispol'zovaniie-i-tiestirovaniie-modieliei-activerecord-v-svoiem-ghiemie</id>
-    <content type="html"><![CDATA[<p>Если ruby gem должен приносить с собой модель, возникнет вопрос - как же его тестировать. Разумеется, подымать для прогона тестов вашего гема базу данных, навешивать миграции и конфигурить конфиги никто не будет, поэтому есть замечательная штука - sqlite3-адаптер для ActiveRecord, работающий с базой данных прямо в памяти. Чтобы воспользоваться этим не нужно ничего особо хитрого.</p>
-
-<p>Сначала добавим зависимости в Gemfile:
-<code>ruby
-group :test do
-  # Т.к. в реальном проекте гем activerecord уже будет подключен и база данных будет своя,
-  # а не sqlite, подключаем их только для группы :test
-  gem 'activerecord'
-  gem 'sqlite3'
-end
-</code></p>
-
-<p>и подгружаем их же в spec_helper.rb:</p>
-
-<p><code>ruby
-require 'active_record'
-require 'sqlite3'
-</code></p>
-
-<p>Создаем в spec/support файл active_record.rb с примерно таким содержанием:</p>
-
-<p>``` ruby
-require 'rspec/rails/extensions/active_record/base' # Всяческие хелперы для тестирования.</p>
-
-<h1>Тут указываем, что будем использовать адаптер sqlite3 и базу данных размещаем в памяти.</h1>
-
-<p>ActiveRecord::Base.establish_connection adapter: "sqlite3", database: ":memory:"</p>
-
-<h1>Запускаем миграции из папки db/migrate или любой другой, которую укажем.</h1>
-
-<p>ActiveRecord::Migrator.up "db/migrate"</p>
-
-<h1>А это нужно, чтобы каждый тест запускался в своей транзакции, которая будет откатываться назад</h1>
-
-<p>RSpec.configure do |config|
-  config.around do |example|</p>
-
-<pre><code>ActiveRecord::Base.transaction do
-  example.run
-  raise ActiveRecord::Rollback
-end
-</code></pre>
-
-<p>  end
-end
-```</p>
-
-<p>В обшем-то все. Мы можем использовать наши модели на полную катушку если, конечно, не забыли их подгрузить в spec_helper.rb:
-<code>ruby
-Dir["#{File.dirname(__FILE__)}/../app/models/*.rb"].each { |f| require f }
-</code></p>
-
-<p>Это очень вольный перевод вот этой статьи: <a href="http://iain.nl/testing-activerecord-in-isolation">http://iain.nl/testing-activerecord-in-isolation</a></p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Unblog]]></title>
   <link href="http://unblog.ikito.ru/atom.xml" rel="self"/>
   <link href="http://unblog.ikito.ru/"/>
-  <updated>2013-10-29T15:54:23+06:00</updated>
+  <updated>2014-04-29T14:44:22+06:00</updated>
   <id>http://unblog.ikito.ru/</id>
   <author>
     <name><![CDATA[Hakimovis]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Поддержка Unicode в консоли Ruby для MacOS]]></title>
+    <link href="http://unblog.ikito.ru/blog/irb-unicode-support"/>
+    <updated>2014-04-29T14:33:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/irb-unicode-support</id>
+    <content type="html"><![CDATA[<p>Если в консоли Ruby при вводе русских букв выводится что-то вроде <code>&gt;&gt; \U+FFD1\U+FFD0\U+FFB5\U+FFD1\U+FFD1</code> нужно установить readline:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ brew update && brew install readline</span></code></pre></td></tr></table></div></figure>
+
+
+<p>И пересобрать версию Ruby с указанием того, что используем новый readline:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CONFIGURE_OPTS=--with-readline-dir=`brew --prefix readline` rbenv install 1.9.3-p374</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Вместо 1.9.3-p374 нужно указать свою версию.</p>
+
+<p>Взято <a href="https://coderwall.com/p/wdm-_q">отсюда</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Поиск методов объекта]]></title>
@@ -716,26 +739,6 @@ DETAIL:  Key (user_id, name)=(1, foo) is duplicated.
 </code></pre>
 
 <p>Делается выборка каждого первого id из групп name + user_id. Их мы как раз оставляем, а удаляем все, которые не попали в выборку.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Трейлер мультфильма Ку! Кин-дза-дза]]></title>
-    <link href="http://unblog.ikito.ru/blog/trieilier-mul%27tfil%27ma-ku-kin-dza-dza"/>
-    <updated>2013-03-20T14:07:00+06:00</updated>
-    <id>http://unblog.ikito.ru/blog/trieilier-mul&#8217;tfil&#8217;ma-ku-kin-dza-dza</id>
-    <content type="html"><![CDATA[<p>Трейлер мультфильма <a href="https://www.youtube.com/watch?feature=player_embedded&amp;v=kBY-u3HD8Lw">&#8220;Ку! Кин-дза-дза&#8221;</a></p>
-
-<iframe width="560" height="315" src="http://www.youtube.com/embed/kBY-u3HD8Lw" frameborder="0" allowfullscreen></iframe>
-
-
-<p>И блог ЖЖ одного из <a href="http://alexandreev.livejournal.com/tag/%D0%9A%D0%B8%D0%BD-%D0%94%D0%B7%D0%B0-%D0%94%D0%B7%D0%B0%21">художников</a>, работающих над фильмом.</p>
-
-<p><img src="http://www.ljplus.ru/img4/a/l/alexandreev/_kdd-018.jpg" alt="арт" /></p>
-
-<p>Официальный сайт мультфильма <a href="http://kindzadza-dza.ru/">тут</a>. Приятно сделан, кстати, хоть и не люблю сайты со звуком и избытком анимации.</p>
-
-<p>Если не ошибаюсь (могу и ошибаться), 11 апреля его начнут показывать в кинотеатрах. Заранее боюсь разочароваться, но сходить надо.</p>
 ]]></content>
   </entry>
   

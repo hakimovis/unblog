@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: rbenv | Unblog]]></title>
+  <link href="http://unblog.ikito.ru/blog/categories/rbenv/atom.xml" rel="self"/>
+  <link href="http://unblog.ikito.ru/"/>
+  <updated>2014-04-29T14:44:22+06:00</updated>
+  <id>http://unblog.ikito.ru/</id>
+  <author>
+    <name><![CDATA[Hakimovis]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Поддержка Unicode в консоли Ruby для MacOS]]></title>
+    <link href="http://unblog.ikito.ru/blog/irb-unicode-support"/>
+    <updated>2014-04-29T14:33:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/irb-unicode-support</id>
+    <content type="html"><![CDATA[<p>Если в консоли Ruby при вводе русских букв выводится что-то вроде <code>&gt;&gt; \U+FFD1\U+FFD0\U+FFB5\U+FFD1\U+FFD1</code> нужно установить readline:</p>
+
+<p><code>
+$ brew update &amp;&amp; brew install readline
+</code></p>
+
+<p>И пересобрать версию Ruby с указанием того, что используем новый readline:</p>
+
+<p><code>
+CONFIGURE_OPTS=--with-readline-dir=`brew --prefix readline` rbenv install 1.9.3-p374
+</code></p>
+
+<p>Вместо 1.9.3-p374 нужно указать свою версию.</p>
+
+<p>Взято <a href="https://coderwall.com/p/wdm-_q">отсюда</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>

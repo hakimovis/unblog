@@ -9,12 +9,8 @@
   <meta name="author" content="Hakimovis">
 
   
-  <meta name="description" content="Часто бывает нужно посмотреть, какие методы есть у объекта. Для этого существует простой метод: 1
-2
-3
-&gt; object = 1
-&gt; object.methods.sort
-=&gt &hellip;">
+  <meta name="description" content="Если в консоли Ruby при вводе русских букв выводится что-то вроде &gt;&gt; \U+FFD1\U+FFD0\U+FFB5\U+FFD1\U+FFD1 нужно установить readline: 1
+$ brew &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -73,6 +69,58 @@
       <div id="content">
         <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/irb-unicode-support">Поддержка Unicode в консоли Ruby для MacOS</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-29T14:33:00+06:00" pubdate data-updated="true">29.04.2014</time>
+        
+         | <a href="/blog/irb-unicode-support#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Если в консоли Ruby при вводе русских букв выводится что-то вроде <code>&gt;&gt; \U+FFD1\U+FFD0\U+FFB5\U+FFD1\U+FFD1</code> нужно установить readline:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ brew update && brew install readline</span></code></pre></td></tr></table></div></figure>
+
+
+<p>И пересобрать версию Ruby с указанием того, что используем новый readline:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CONFIGURE_OPTS=--with-readline-dir=`brew --prefix readline` rbenv install 1.9.3-p374</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Вместо 1.9.3-p374 нужно указать свою версию.</p>
+
+<p>Взято <a href="https://coderwall.com/p/wdm-_q">отсюда</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -868,44 +916,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/ieshchie-odin-sposob-dieploia-s-pomoshch%27iu-git">Еще один способ деплоя с помощью Git</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-07T13:27:00+06:00" pubdate data-updated="true">07.05.2013</time>
-        
-         | <a href="/blog/ieshchie-odin-sposob-dieploia-s-pomoshch%27iu-git#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Собственно, <a href="http://habrahabr.ru/post/178965/">сабж на хабре</a>. Надо будет попробовать соорудить такой же хук для этого бложика.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -921,6 +931,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/irb-unicode-support">Поддержка Unicode в консоли Ruby для MacOS</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/poisk-mietodov-obiekta">Поиск методов объекта</a>
       </li>
     
@@ -934,10 +948,6 @@
     
       <li class="post">
         <a href="/blog/tiestirovaniie-rake-taskov">Тестирование Rake-тасков</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/stailghaidy-ruby-na-github">Стайлгайды Ruby на Github</a>
       </li>
     
   </ul>
@@ -960,7 +970,7 @@
       </div>
     </div>
     <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Hakimovis -
+  Copyright &copy; 2014 - Hakimovis -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>. Design by <a href="http://octopressthemes.com">Octopress Themes</a></span>
 </p>
 
