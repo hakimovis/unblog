@@ -4,7 +4,7 @@
   <title><![CDATA[Category: plugin | Unblog]]></title>
   <link href="http://unblog.ikito.ru/blog/categories/plugin/atom.xml" rel="self"/>
   <link href="http://unblog.ikito.ru/"/>
-  <updated>2014-04-29T14:46:07+06:00</updated>
+  <updated>2014-06-11T16:50:53+06:00</updated>
   <id>http://unblog.ikito.ru/</id>
   <author>
     <name><![CDATA[Hakimovis]]></name>
@@ -12,6 +12,32 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Простой grep для SublimeText]]></title>
+    <link href="http://unblog.ikito.ru/blog/prostoi-grep-dlia-sublimetext"/>
+    <updated>2014-06-11T16:47:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/prostoi-grep-dlia-sublimetext</id>
+    <content type="html"><![CDATA[<p>Чтобы легко выделять куски текста в логах с одним и тем же тегом (например, request guid) можно использовать простой плагин:</p>
+
+<p>``` python
+import sublime, sublime_plugin</p>
+
+<p>class GrepCommand(sublime_plugin.TextCommand):</p>
+
+<pre><code>def run(self, edit):
+    selected_text = self.view.substr(self.view.selection[0])
+    regexp = r"^(.*){0}(.*)$".format(selected_text)
+    lines = self.view.find_all(regexp)
+    self.view.sel().clear()
+    for line in lines: self.view.sel().add(line)
+</code></pre>
+
+<p>```</p>
+
+<p>Сохраняем его как grep.py, назначаем сочетание клавиш ctrl+shift+g, выделяем тег, жмем это сочетание и получаем выделенными все строки, содержащие этот тег.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[URL quote под рукой]]></title>

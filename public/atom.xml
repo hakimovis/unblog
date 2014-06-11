@@ -4,7 +4,7 @@
   <title><![CDATA[Unblog]]></title>
   <link href="http://unblog.ikito.ru/atom.xml" rel="self"/>
   <link href="http://unblog.ikito.ru/"/>
-  <updated>2014-04-29T14:46:07+06:00</updated>
+  <updated>2014-06-11T16:50:53+06:00</updated>
   <id>http://unblog.ikito.ru/</id>
   <author>
     <name><![CDATA[Hakimovis]]></name>
@@ -12,6 +12,38 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Простой grep для SublimeText]]></title>
+    <link href="http://unblog.ikito.ru/blog/prostoi-grep-dlia-sublimetext"/>
+    <updated>2014-06-11T16:47:00+06:00</updated>
+    <id>http://unblog.ikito.ru/blog/prostoi-grep-dlia-sublimetext</id>
+    <content type="html"><![CDATA[<p>Чтобы легко выделять куски текста в логах с одним и тем же тегом (например, request guid) можно использовать простой плагин:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">sublime</span><span class="o">,</span> <span class="nn">sublime_plugin</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">GrepCommand</span><span class="p">(</span><span class="n">sublime_plugin</span><span class="o">.</span><span class="n">TextCommand</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edit</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">selected_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">substr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">selection</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span><span class='line'>        <span class="n">regexp</span> <span class="o">=</span> <span class="s">r&quot;^(.*){0}(.*)$&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">selected_text</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">lines</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="n">regexp</span><span class="p">)</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">sel</span><span class="p">()</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+</span><span class='line'>        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">sel</span><span class="p">()</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Сохраняем его как grep.py, назначаем сочетание клавиш ctrl+shift+g, выделяем тег, жмем это сочетание и получаем выделенными все строки, содержащие этот тег.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Поддержка Unicode в консоли Ruby для MacOS]]></title>
@@ -716,29 +748,6 @@
 <blockquote><p>Когда вы только начинаете работать с Git, что-нибудь очень простое, вроде команды merge, может показаться ужасно сложным. Может оказаться, что вам потребуется очень много времени для того, чтобы изучить все фичи Git, и чувствовать себя при этом достаточно уверенно. (Автору этих строк потребовалось около года или двух).
 В один момент, когда некоторые люди достигнут особого просветления в Git, они стремятся делать заявления вроде “Git становится легче, когда ты поймешь X” — но к сожалению это никак не помогает тем, кто только начинает осваивать Git.
 Моя цель помочь тебе, Дорогой Читатель, понять о чем говорят те зазнайки</p></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Удаление дубликатов по двум полям]]></title>
-    <link href="http://unblog.ikito.ru/blog/udalieniie-dublikatov-po-dvum-poliam"/>
-    <updated>2013-03-25T16:16:00+06:00</updated>
-    <id>http://unblog.ikito.ru/blog/udalieniie-dublikatov-po-dvum-poliam</id>
-    <content type="html"><![CDATA[<p>Если забыть вовремя добавить составной уникальный индекс в таблицу, там обязательно образуются дубликаты, после которых добавить такой индекс уже будет нельзя. Например, для таблицы favorites добавляем уникальный индекс на поля user_id и name. Получим подобное:</p>
-
-<pre><code>PG::Error: ERROR:  could not create unique index "index_favorites_on_user_id_and_name"
-DETAIL:  Key (user_id, name)=(1, foo) is duplicated.
-: CREATE UNIQUE INDEX "index_favorites_on_user_id_and_name" ON "favorites" ("user_id", "name")
-</code></pre>
-
-<p>Чтобы все-таки добавить этот индекс, придется руками удалить дубликаты. Скорее всего, удалять их все не стоит, оставим только по одному. Это делается примерно таким запросом:</p>
-
-<pre><code>DELETE FROM favorites WHERE id NOT IN (
-  SELECT MIN(id) FROM favorites GROUP BY (name, user_id)
-);
-</code></pre>
-
-<p>Делается выборка каждого первого id из групп name + user_id. Их мы как раз оставляем, а удаляем все, которые не попали в выборку.</p>
 ]]></content>
   </entry>
   

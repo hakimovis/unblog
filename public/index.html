@@ -9,8 +9,16 @@
   <meta name="author" content="Hakimovis">
 
   
-  <meta name="description" content="Если в консоли Ruby при вводе русских букв выводится что-то вроде &gt;&gt; \U+FFD1\U+FFD0\U+FFB5\U+FFD1\U+FFD1 нужно установить readline: 1
-$ brew &hellip;">
+  <meta name="description" content="Чтобы легко выделять куски текста в логах с одним и тем же тегом (например, request guid) можно использовать простой плагин: 1
+2
+3
+4
+5
+6
+7
+8
+9
+import &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +77,67 @@ $ brew &hellip;">
       <div id="content">
         <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/prostoi-grep-dlia-sublimetext">Простой Grep для SublimeText</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-11T16:47:00+06:00" pubdate data-updated="true">11.06.2014</time>
+        
+         | <a href="/blog/prostoi-grep-dlia-sublimetext#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Чтобы легко выделять куски текста в логах с одним и тем же тегом (например, request guid) можно использовать простой плагин:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">sublime</span><span class="o">,</span> <span class="nn">sublime_plugin</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">GrepCommand</span><span class="p">(</span><span class="n">sublime_plugin</span><span class="o">.</span><span class="n">TextCommand</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edit</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">selected_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">substr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">selection</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span><span class='line'>        <span class="n">regexp</span> <span class="o">=</span> <span class="s">r&quot;^(.*){0}(.*)$&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">selected_text</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">lines</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="n">regexp</span><span class="p">)</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">sel</span><span class="p">()</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+</span><span class='line'>        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">sel</span><span class="p">()</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Сохраняем его как grep.py, назначаем сочетание клавиш ctrl+shift+g, выделяем тег, жмем это сочетание и получаем выделенными все строки, содержащие этот тег.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -778,144 +847,6 @@ $ brew &hellip;">
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/ruby-on-rails-i-zaghruzka-izobrazhienii-na-amazon-s3-storage">Ruby on Rails и загрузка изображений на Amazon S3 Storage</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-12T23:23:00+06:00" pubdate data-updated="true">12.05.2013</time>
-        
-         | <a href="/blog/ruby-on-rails-i-zaghruzka-izobrazhienii-na-amazon-s3-storage#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Даже не подозревал, что прикрутить аплоад картинок на амазоновый S3 окажется так просто. Добавляем гемы в Gemfile:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;paperclip&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;aws-sdk&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Делаем миграцию:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">CreatePhotos</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Migration</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">up</span>
-</span><span class='line'>    <span class="n">create_table</span> <span class="ss">:photos</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
-</span><span class='line'>      <span class="n">t</span><span class="o">.</span><span class="n">boolean</span> <span class="ss">:enabled</span><span class="p">,</span> <span class="ss">null</span><span class="p">:</span> <span class="kp">false</span><span class="p">,</span> <span class="ss">default</span><span class="p">:</span> <span class="kp">true</span>
-</span><span class='line'>      <span class="n">t</span><span class="o">.</span><span class="n">timestamps</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>    <span class="n">add_attachment</span> <span class="ss">:photos</span><span class="p">,</span> <span class="ss">:image</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">down</span>
-</span><span class='line'>    <span class="n">drop_table</span> <span class="ss">:photos</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Тут у модели Photo будет только два поля - image и enabled (КО). Теперь модель:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Photo</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
-</span><span class='line'>  <span class="n">attr_accessible</span> <span class="ss">:enabled</span><span class="p">,</span> <span class="ss">:image</span>
-</span><span class='line'>  <span class="n">has_attached_file</span><span class="p">(</span>
-</span><span class='line'>    <span class="ss">:image</span><span class="p">,</span>
-</span><span class='line'>    <span class="ss">styles</span><span class="p">:</span> <span class="p">{</span><span class="ss">medium</span><span class="p">:</span> <span class="s2">&quot;500x500&gt;&quot;</span><span class="p">,</span> <span class="ss">small</span><span class="p">:</span> <span class="s2">&quot;50x50&gt;&quot;</span><span class="p">},</span>
-</span><span class='line'>    <span class="ss">storage</span><span class="p">:</span> <span class="ss">:s3</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">s3_credentials</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="si">}</span><span class="s2">/config/s3.yml&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="ss">bucket</span><span class="p">:</span> <span class="s1">&#39;bucket_name&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">s3_protocol</span><span class="p">:</span> <span class="s1">&#39;https&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">s3_host_name</span><span class="p">:</span> <span class="s1">&#39;s3-eu-west-1.amazonaws.com&#39;</span>
-</span><span class='line'>  <span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Тут все в принципе ясно. Изображение будет храниться еще в двух размерах - medium (500x500) и small (50x50). Пришлось немного почесать голову над последними двумя опциями, без них Амазон будет ругаться XML-кой с просьбой указать endpoint. В s3.yml пишем свои ключи отсюда <a href="https://portal.aws.amazon.com/gp/aws/securityCredentials#account_identifiers">portal.aws.amazon.com</a> (не забывая добавить этот конфиг в .gitignore):</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">access_key_id</span><span class="p">:</span> <span class="o">*****</span>
-</span><span class='line'><span class="n">secret_access_key</span><span class="p">:</span> <span class="o">******</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Вот и вся магия. Теперь в форме загрузки будем писать так:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='haml'><span class='line'><span class="p">=</span> <span class="n">form_for</span> <span class="vi">@photo</span><span class="p">,</span> <span class="ss">url</span><span class="p">:</span> <span class="n">photos_path</span><span class="p">,</span> <span class="ss">html</span><span class="p">:</span> <span class="p">{</span><span class="nb">id</span><span class="p">:</span> <span class="s2">&quot;photo_form&quot;</span><span class="p">,</span> <span class="ss">multipart</span><span class="p">:</span> <span class="kp">true</span><span class="p">}</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
-</span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">file_field</span> <span class="ss">:image</span>
-</span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">check_box</span> <span class="ss">:enabled</span>
-</span><span class='line'>  <span class="nc">.actions</span>
-</span><span class='line'>    <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">submit</span> <span class="s1">&#39;Сохранить&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>И чтобы показать нашу картинку в среднем размере со ссылкой на оригинал в шаблонах пишем:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='haml'><span class='line'><span class="nt">%a</span><span class="p">{</span><span class="ss">href</span><span class="p">:</span> <span class="vi">@photo</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">url</span><span class="p">}=</span> <span class="n">image_tag</span> <span class="vi">@photo</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">url</span> <span class="ss">:medium</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Ну не радость ли?</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -931,6 +862,10 @@ $ brew &hellip;">
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/prostoi-grep-dlia-sublimetext">Простой grep для SublimeText</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/irb-unicode-support">Поддержка Unicode в консоли Ruby для MacOS</a>
       </li>
     
@@ -944,10 +879,6 @@ $ brew &hellip;">
     
       <li class="post">
         <a href="/blog/stoit-posmotriet%27">Стоит посмотреть</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/tiestirovaniie-rake-taskov">Тестирование Rake-тасков</a>
       </li>
     
   </ul>

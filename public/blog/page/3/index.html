@@ -9,7 +9,7 @@
   <meta name="author" content="Hakimovis">
 
   
-  <meta name="description" content="Трейлер мультфильма &#8220;Ку! Кин-дза-дза&#8221; И блог ЖЖ одного из художников, работающих над фильмом. Официальный сайт мультфильма тут. Приятно &hellip;">
+  <meta name="description" content="Если забыть вовремя добавить составной уникальный индекс в таблицу, там обязательно образуются дубликаты, после которых добавить такой индекс уже &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +68,58 @@
       <div id="content">
         <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/udalieniie-dublikatov-po-dvum-poliam">Удаление дубликатов по двум полям</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-25T16:16:00+06:00" pubdate data-updated="true">25.03.2013</time>
+        
+         | <a href="/blog/udalieniie-dublikatov-po-dvum-poliam#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Если забыть вовремя добавить составной уникальный индекс в таблицу, там обязательно образуются дубликаты, после которых добавить такой индекс уже будет нельзя. Например, для таблицы favorites добавляем уникальный индекс на поля user_id и name. Получим подобное:</p>
+
+<pre><code>PG::Error: ERROR:  could not create unique index "index_favorites_on_user_id_and_name"
+DETAIL:  Key (user_id, name)=(1, foo) is duplicated.
+: CREATE UNIQUE INDEX "index_favorites_on_user_id_and_name" ON "favorites" ("user_id", "name")
+</code></pre>
+
+<p>Чтобы все-таки добавить этот индекс, придется руками удалить дубликаты. Скорее всего, удалять их все не стоит, оставим только по одному. Это делается примерно таким запросом:</p>
+
+<pre><code>DELETE FROM favorites WHERE id NOT IN (
+  SELECT MIN(id) FROM favorites GROUP BY (name, user_id)
+);
+</code></pre>
+
+<p>Делается выборка каждого первого id из групп name + user_id. Их мы как раз оставляем, а удаляем все, которые не попали в выборку.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -562,51 +614,6 @@ Invalid gemspec in [/Users/hakimovis/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/aenean-posuere">Aenean Posuere</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-10-02T06:29:00+06:00" pubdate data-updated="true">02.10.2012</time>
-        
-         | <a href="/blog/aenean-posuere#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Aenean posuere</h2>
-
-<p>odio eget imperdiet ullamcorper, nulla libero auctor dui, at adipiscing tortor neque nec lacus. Donec <a href="http://foo.com">ac mi luctus</a> nisi vestibulum scelerisque. Integer congue metus in nisi venenatis sit amet sagittis tortor sodales. Phasellus lobortis sollicitudin porttitor. Integer vel enim eu nunc laoreet pharetra eget nec nibh. Nam <a href="http://github.com">orci quam</a>, facilisis a accumsan vel, ultricies at felis. Nullam erat ipsum, tempor a viverra id, pulvinar non odio. Suspendisse eu turpis ligula, quis mattis dolor. Ut pellentesque mattis ipsum in ornare. Nullam non metus lacus. Vivamus sed euismod mi. Sed sed tellus dui, molestie dignissim turpis.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/aenean-posuere">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -624,6 +631,10 @@ Invalid gemspec in [/Users/hakimovis/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/prostoi-grep-dlia-sublimetext">Простой grep для SublimeText</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/irb-unicode-support">Поддержка Unicode в консоли Ruby для MacOS</a>
       </li>
     
@@ -637,10 +648,6 @@ Invalid gemspec in [/Users/hakimovis/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.
     
       <li class="post">
         <a href="/blog/stoit-posmotriet%27">Стоит посмотреть</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/tiestirovaniie-rake-taskov">Тестирование Rake-тасков</a>
       </li>
     
   </ul>
