@@ -9,10 +9,7 @@
   <meta name="author" content="Hakimovis">
 
   
-  <meta name="description" content="Даже не подозревал, что прикрутить аплоад картинок на амазоновый S3 окажется так просто. Добавляем гемы в Gemfile: 1
-2
-gem &#39;paperclip&#39;
-gem &# &hellip;">
+  <meta name="description" content="Если ruby gem должен приносить с собой модель, возникнет вопрос - как же его тестировать. Разумеется, подымать для прогона тестов вашего гема базу &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,6 +68,118 @@ gem &# &hellip;">
       <div id="content">
         <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/ispol%27zovaniie-i-tiestirovaniie-modieliei-activerecord-v-svoiem-ghiemie">Использование и тестирование моделей ActiveRecord в своем геме</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-18T12:38:00+06:00" pubdate data-updated="true">18.05.2013</time>
+        
+         | <a href="/blog/ispol%27zovaniie-i-tiestirovaniie-modieliei-activerecord-v-svoiem-ghiemie#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Если ruby gem должен приносить с собой модель, возникнет вопрос - как же его тестировать. Разумеется, подымать для прогона тестов вашего гема базу данных, навешивать миграции и конфигурить конфиги никто не будет, поэтому есть замечательная штука - sqlite3-адаптер для ActiveRecord, работающий с базой данных прямо в памяти. Чтобы воспользоваться этим не нужно ничего особо хитрого.</p>
+
+<p>Сначала добавим зависимости в Gemfile:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">group</span> <span class="ss">:test</span> <span class="k">do</span>
+</span><span class='line'>  <span class="c1"># Т.к. в реальном проекте гем activerecord уже будет подключен и база данных будет своя,</span>
+</span><span class='line'>  <span class="c1"># а не sqlite, подключаем их только для группы :test</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;activerecord&#39;</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;sqlite3&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>и подгружаем их же в spec_helper.rb:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;active_record&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;sqlite3&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Создаем в spec/support файл active_record.rb с примерно таким содержанием:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;rspec/rails/extensions/active_record/base&#39;</span> <span class="c1"># Всяческие хелперы для тестирования.</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Тут указываем, что будем использовать адаптер sqlite3 и базу данных размещаем в памяти.</span>
+</span><span class='line'><span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span><span class="o">.</span><span class="n">establish_connection</span> <span class="ss">adapter</span><span class="p">:</span> <span class="s2">&quot;sqlite3&quot;</span><span class="p">,</span> <span class="ss">database</span><span class="p">:</span> <span class="s2">&quot;:memory:&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Запускаем миграции из папки db/migrate или любой другой, которую укажем.</span>
+</span><span class='line'><span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Migrator</span><span class="o">.</span><span class="n">up</span> <span class="s2">&quot;db/migrate&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># А это нужно, чтобы каждый тест запускался в своей транзакции, которая будет откатываться назад</span>
+</span><span class='line'><span class="no">RSpec</span><span class="o">.</span><span class="n">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">around</span> <span class="k">do</span> <span class="o">|</span><span class="n">example</span><span class="o">|</span>
+</span><span class='line'>    <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span><span class="o">.</span><span class="n">transaction</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">example</span><span class="o">.</span><span class="n">run</span>
+</span><span class='line'>      <span class="k">raise</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Rollback</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>В обшем-то все. Мы можем использовать наши модели на полную катушку если, конечно, не забыли их подгрузить в spec_helper.rb:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Dir</span><span class="o">[</span><span class="s2">&quot;</span><span class="si">#{</span><span class="no">File</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">)</span><span class="si">}</span><span class="s2">/../app/models/*.rb&quot;</span><span class="o">].</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="nb">require</span> <span class="n">f</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Это очень вольный перевод вот этой статьи: <a href="http://iain.nl/testing-activerecord-in-isolation">http://iain.nl/testing-activerecord-in-isolation</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -579,48 +688,6 @@ gem &# &hellip;">
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/dumai-kak-git">Думай как Git</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-25T16:34:00+06:00" pubdate data-updated="true">25.03.2013</time>
-        
-         | <a href="/blog/dumai-kak-git#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Перевод книги <a href="http://think-like-a-git.net/">Think like a Git</a> на русский язык <a href="http://git.geekjob.ru/">http://git.geekjob.ru/</a> от хабрапользователя <a href="http://habrahabr.ru/users/Gangsta/">Gangsta</a>:</p>
-
-<blockquote><p>Когда вы только начинаете работать с Git, что-нибудь очень простое, вроде команды merge, может показаться ужасно сложным. Может оказаться, что вам потребуется очень много времени для того, чтобы изучить все фичи Git, и чувствовать себя при этом достаточно уверенно. (Автору этих строк потребовалось около года или двух).
-В один момент, когда некоторые люди достигнут особого просветления в Git, они стремятся делать заявления вроде “Git становится легче, когда ты поймешь X” — но к сожалению это никак не помогает тем, кто только начинает осваивать Git.
-Моя цель помочь тебе, Дорогой Читатель, понять о чем говорят те зазнайки</p></blockquote>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -638,6 +705,10 @@ gem &# &hellip;">
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/ruby-code-introspection">Ruby code introspection</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/prostoi-grep-dlia-sublimetext">Простой grep для SublimeText</a>
       </li>
     
@@ -651,10 +722,6 @@ gem &# &hellip;">
     
       <li class="post">
         <a href="/blog/url-quote-pod-rukoi">URL quote под рукой</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/stoit-posmotriet%27">Стоит посмотреть</a>
       </li>
     
   </ul>

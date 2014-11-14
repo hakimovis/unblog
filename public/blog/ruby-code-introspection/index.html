@@ -1,0 +1,345 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ruby code introspection - Unblog</title>
+  <meta name="author" content="Hakimovis">
+
+  
+  <meta name="description" content="В языке Ruby есть возможность получить метод объекта как объект: 1
+2
+&gt; Math.method(:sin)
+=&gt; #&lt;Method: Math.sin&gt; Этот объект можно &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://unblog.ikito.ru/blog/ruby-code-introspection">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Unblog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=Arvo:400,400italic,700,700italic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Merienda:700" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body>
+  <div id="navigation">
+    <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:unblog.ikito.ru" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  </div>
+  <header role="banner"><hgroup>
+  <h1><a href="/">Unblog</a></h1>
+  
+    <h2>Блог ни о чем</h2>
+  
+</hgroup>
+
+</header>
+  <div id="body"  >
+    <div id="main">
+      <div id="content">
+        <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Ruby Code Introspection</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-14T12:00:00+05:00" pubdate data-updated="true">14.11.2014</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>В языке Ruby есть возможность получить метод объекта как объект:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;</span> <span class="no">Math</span><span class="o">.</span><span class="n">method</span><span class="p">(</span><span class="ss">:sin</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="c1">#&lt;Method: Math.sin&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Этот объект можно передавать в другие методы как блок:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;</span> <span class="n">sin_method</span> <span class="o">=</span> <span class="no">Math</span><span class="o">.</span><span class="n">method</span><span class="p">(</span><span class="ss">:sin</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="c1">#&lt;Method: Math.sin&gt;</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sin_method</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="mi">0</span><span class="o">.</span><span class="mi">8414709848078965</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">9092974268256817</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">1411200080598672</span><span class="p">,</span> <span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">7568024953079282</span><span class="p">,</span> <span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">9589242746631385</span><span class="p">,</span> <span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">27941549819892586</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">6569865987187891</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">9893582466233818</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">4121184852417566</span><span class="p">,</span> <span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">5440211108893699</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Также, у метода можно получить название класса или модуля, где он был определен и путь к нему:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;</span> <span class="no">Task</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">method</span><span class="p">(</span><span class="ss">:valid?</span><span class="p">)</span><span class="o">.</span><span class="n">owner</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Validations</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="no">Task</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">method</span><span class="p">(</span><span class="ss">:valid?</span><span class="p">)</span><span class="o">.</span><span class="n">source_location</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="s2">&quot;/usr/local/lib/ruby/gems/2.1.0/gems/activerecord-4.2.0.beta2/lib/active_record/validations.rb&quot;</span><span class="p">,</span> <span class="mi">55</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>С помощью гема <a href="https://github.com/banister/method_source">method_source</a> можно даже получить исходный код метода:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;</span> <span class="nb">puts</span> <span class="no">Task</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">method</span><span class="p">(</span><span class="ss">:valid?</span><span class="p">)</span><span class="o">.</span><span class="n">source</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">valid?</span><span class="p">(</span><span class="n">context</span> <span class="o">=</span> <span class="kp">nil</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">context</span> <span class="o">||=</span> <span class="p">(</span><span class="n">new_record?</span> <span class="p">?</span> <span class="ss">:create</span> <span class="p">:</span> <span class="ss">:update</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">output</span> <span class="o">=</span> <span class="k">super</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">errors</span><span class="o">.</span><span class="n">empty?</span> <span class="o">&amp;&amp;</span> <span class="n">output</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="kp">nil</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>С помощью метода <code>#comments</code> можно получить комментарии к методу.</p>
+
+<p><a href="http://www.justinweiss.com/blog/2014/11/10/fun-with-the-method-method/?utm_source=rubyweekly&amp;utm_medium=email">Источник</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Hakimovis</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-14T12:00:00+05:00" pubdate data-updated="true">14.11.2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/code-introspection/'>code-introspection</a>, <a class='category' href='/blog/categories/method/'>method</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://unblog.ikito.ru/blog/ruby-code-introspection" data-via="hakimovis" data-counturl="http://unblog.ikito.ru/blog/ruby-code-introspection" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/prostoi-grep-dlia-sublimetext" title="Previous Post: Простой grep для SublimeText">&laquo; Простой grep для SublimeText</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/ruby-code-introspection">Ruby code introspection</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/prostoi-grep-dlia-sublimetext">Простой grep для SublimeText</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/irb-unicode-support">Поддержка Unicode в консоли Ruby для MacOS</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/poisk-mietodov-obiekta">Поиск методов объекта</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/url-quote-pod-rukoi">URL quote под рукой</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/hakimovis" data-widget-id="350118652802117632">Tweets by @hakimovis</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+      </div>
+    </div>
+    <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Hakimovis -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>. Design by <a href="http://octopressthemes.com">Octopress Themes</a></span>
+</p>
+
+</footer>
+    
+
+<script type="text/javascript">
+      var disqus_shortname = 'unblog-ikito';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://unblog.ikito.ru/blog/ruby-code-introspection';
+        var disqus_url = 'http://unblog.ikito.ru/blog/ruby-code-introspection';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+  </div>
+  <!-- Yandex.Metrika informer -->
+<a href="http://metrika.yandex.ru/stat/?id=11385481&amp;from=informer"
+target="_blank" rel="nofollow"><img src="//bs.yandex.ru/informer/11385481/3_0_FFFFFFFF_FFFFFFFF_0_pageviews"
+style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" onclick="try{Ya.Metrika.informer({i:this,id:11385481,lang:'ru'});return false}catch(e){}"/></a>
+<!-- /Yandex.Metrika informer -->
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+            w.yaCounter11385481 = new Ya.Metrika({id:11385481,
+                    webvisor:true,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true});
+        } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+})(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="//mc.yandex.ru/watch/11385481" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+</body>
+</html>

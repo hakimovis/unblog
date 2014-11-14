@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: method | Unblog]]></title>
+  <link href="http://unblog.ikito.ru/blog/categories/method/atom.xml" rel="self"/>
+  <link href="http://unblog.ikito.ru/"/>
+  <updated>2014-11-14T12:12:43+05:00</updated>
+  <id>http://unblog.ikito.ru/</id>
+  <author>
+    <name><![CDATA[Hakimovis]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby code introspection]]></title>
+    <link href="http://unblog.ikito.ru/blog/ruby-code-introspection"/>
+    <updated>2014-11-14T12:00:00+05:00</updated>
+    <id>http://unblog.ikito.ru/blog/ruby-code-introspection</id>
+    <content type="html"><![CDATA[<p>В языке Ruby есть возможность получить метод объекта как объект:</p>
+
+<p>``` ruby</p>
+
+<blockquote><p>Math.method(:sin)
+=> #&lt;Method: Math.sin>
+```</p></blockquote>
+
+<p>Этот объект можно передавать в другие методы как блок:</p>
+
+<p>``` ruby</p>
+
+<blockquote><p>sin_method = Math.method(:sin)
+=> #&lt;Method: Math.sin>
+(1..10).map(&amp;sin_method)
+=> [0.8414709848078965, 0.9092974268256817, 0.1411200080598672, -0.7568024953079282, -0.9589242746631385, -0.27941549819892586, 0.6569865987187891, 0.9893582466233818, 0.4121184852417566, -0.5440211108893699]
+```</p></blockquote>
+
+<p>Также, у метода можно получить название класса или модуля, где он был определен и путь к нему:</p>
+
+<p>``` ruby</p>
+
+<blockquote><p>Task.new.method(:valid?).owner
+=> ActiveRecord::Validations
+Task.new.method(:valid?).source_location
+=> ["/usr/local/lib/ruby/gems/2.1.0/gems/activerecord-4.2.0.beta2/lib/active_record/validations.rb", 55]
+```</p></blockquote>
+
+<p>С помощью гема <a href="https://github.com/banister/method_source">method_source</a> можно даже получить исходный код метода:</p>
+
+<p>``` ruby</p>
+
+<blockquote><p>puts Task.new.method(:valid?).source</p>
+
+<pre><code>def valid?(context = nil)
+  context ||= (new_record? ? :create : :update)
+  output = super(context)
+  errors.empty? &amp;&amp; output
+end
+</code></pre>
+
+<p>=> nil
+```</p></blockquote>
+
+<p>С помощью метода <code>#comments</code> можно получить комментарии к методу.</p>
+
+<p><a href="http://www.justinweiss.com/blog/2014/11/10/fun-with-the-method-method/?utm_source=rubyweekly&amp;utm_medium=email">Источник</a></p>
+]]></content>
+  </entry>
+  
+</feed>
